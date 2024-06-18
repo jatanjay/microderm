@@ -5662,7 +5662,7 @@ OUTPUT(TCC_CALLBACK.elf elf32-littlearm)
  .debug_line    0x00008313      0x669 src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
  .debug_line    0x0000897c      0xde8 src/qs_tcc_callback.o
 
-.debug_str      0x00000000    0x90a11
+.debug_str      0x00000000    0x90a13
  .debug_str     0x00000000    0x84967 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
                               0x852fc (size before relaxing)
  .debug_str     0x00084967      0xfdf src/ASF/sam0/drivers/extint/extint_sam_d_r_h/extint.o
@@ -5689,8 +5689,8 @@ OUTPUT(TCC_CALLBACK.elf elf32-littlearm)
                               0x8572d (size before relaxing)
  .debug_str     0x0008ed6e      0xf17 src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
                               0x6ee02 (size before relaxing)
- .debug_str     0x0008fc85      0xd8c src/qs_tcc_callback.o
-                              0x8abcc (size before relaxing)
+ .debug_str     0x0008fc85      0xd8e src/qs_tcc_callback.o
+                              0x8abce (size before relaxing)
 
 .debug_frame    0x00000000      0xa1c
  .debug_frame   0x00000000       0xe8 src/ASF/sam0/drivers/sercom/sercom_interrupt.o

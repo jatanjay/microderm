@@ -29,7 +29,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_line   00009764  00000000  00000000  0004e024  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    00090a11  00000000  00000000  00057788  2**0
+ 13 .debug_str    00090a13  00000000  00000000  00057788  2**0
                   CONTENTS, READONLY, DEBUGGING
  14 .debug_frame  00000a1c  00000000  00000000  000e819c  2**2
                   CONTENTS, READONLY, DEBUGGING
