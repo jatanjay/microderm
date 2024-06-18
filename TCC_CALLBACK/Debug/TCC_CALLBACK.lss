@@ -29,9 +29,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_line   00009767  00000000  00000000  0004de79  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    000901b9  00000000  00000000  000575e0  2**0
+ 13 .debug_str    000901c2  00000000  00000000  000575e0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00000a1c  00000000  00000000  000e779c  2**2
+ 14 .debug_frame  00000a1c  00000000  00000000  000e77a4  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -3064,6 +3064,11 @@ const module_inst) {
     1060:	00000e3d 	.word	0x00000e3d
 
 00001064 <extint_detection_callback>:
+		const uint8_t gpio_pin)
+{
+	PortGroup *const port_base = port_get_group_from_gpio_pin(gpio_pin);
+	uint32_t pin_mask  = (1UL << (gpio_pin % 32));
+
 	return (port_base->IN.reg & pin_mask);
     1064:	4b10      	ldr	r3, [pc, #64]	; (10a8 <extint_detection_callback+0x44>)
     1066:	6a1b      	ldr	r3, [r3, #32]
@@ -3075,6 +3080,11 @@ const module_inst) {
     1072:	4191      	sbcs	r1, r2
     1074:	4a0d      	ldr	r2, [pc, #52]	; (10ac <extint_detection_callback+0x48>)
     1076:	7011      	strb	r1, [r2, #0]
+{
+	PortGroup *const port_base = port_get_group_from_gpio_pin(gpio_pin);
+	uint32_t pin_mask  = (1UL << (gpio_pin % 32));
+
+	/* Set the pin to high or low atomically based on the requested level */
 	if (level) {
     1078:	2b00      	cmp	r3, #0
     107a:	d00f      	beq.n	109c <extint_detection_callback+0x38>
@@ -3260,10 +3270,20 @@ int main(void) {
 	configure_extint_callbacks();
     1176:	4b0e      	ldr	r3, [pc, #56]	; (11b0 <main+0x9c>)
     1178:	4798      	blx	r3
+ *
+ * Enables global interrupts in the device to fire any enabled interrupt handlers.
+ */
+static inline void system_interrupt_enable_global(void)
+{
 	cpu_irq_enable();
     117a:	2201      	movs	r2, #1
     117c:	4b0d      	ldr	r3, [pc, #52]	; (11b4 <main+0xa0>)
     117e:	701a      	strb	r2, [r3, #0]
+  \details Ensures the apparent order of the explicit memory operations before
+           and after the instruction, without ensuring their completion.
+ */
+__STATIC_FORCEINLINE void __DMB(void)
+{
   __ASM volatile ("dmb 0xF":::"memory");
     1180:	f3bf 8f5f 	dmb	sy
   __ASM volatile ("cpsie i" : : : "memory");
@@ -3348,7 +3368,7 @@ int main(void) {
     1278:	0011100f                                ....
 
 0000127c <delay_values>:
-    127c:	00000001 00000003 00000005 00000014     ................
+    127c:	00000001 00000003 00000005 0000000f     ................
 
 0000128c <_init>:
     128c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
