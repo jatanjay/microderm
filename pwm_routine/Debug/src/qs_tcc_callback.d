@@ -138,6 +138,7 @@ src/qs_tcc_callback.d src/qs_tcc_callback.o: ../src/qs_tcc_callback.c \
  ../src/ASF/sam0/drivers/tcc/tcc.h \
  ../src/ASF/sam0/drivers/tcc/tcc_callback.h \
  ../src/ASF/sam0/drivers/tcc/tcc.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  ../src/config/conf_quick_start_callback.h
 
 ../src/asf.h:
@@ -423,5 +424,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/drivers/tcc/tcc_callback.h:
 
 ../src/ASF/sam0/drivers/tcc/tcc.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
 ../src/config/conf_quick_start_callback.h:
