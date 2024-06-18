@@ -296,7 +296,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xb2 src/ASF/sam0/drivers/sercom/sercom.o
  .debug_macro   0x00000000       0x10 src/ASF/sam0/drivers/sercom/sercom.o
  .debug_line    0x00000000      0xbf0 src/ASF/sam0/drivers/sercom/sercom.o
- .debug_str     0x00000000    0x85459 src/ASF/sam0/drivers/sercom/sercom.o
+ .debug_str     0x00000000    0x85461 src/ASF/sam0/drivers/sercom/sercom.o
  .comment       0x00000000       0x5a src/ASF/sam0/drivers/sercom/sercom.o
  .debug_frame   0x00000000       0xbc src/ASF/sam0/drivers/sercom/sercom.o
  .ARM.attributes
@@ -531,7 +531,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x3e src/ASF/sam0/utils/stdio/read.o
  .debug_macro   0x00000000      0x3df src/ASF/sam0/utils/stdio/read.o
  .debug_line    0x00000000      0x8c8 src/ASF/sam0/utils/stdio/read.o
- .debug_str     0x00000000    0x83d0d src/ASF/sam0/utils/stdio/read.o
+ .debug_str     0x00000000    0x83d15 src/ASF/sam0/utils/stdio/read.o
  .comment       0x00000000       0x5a src/ASF/sam0/utils/stdio/read.o
  .debug_frame   0x00000000       0x34 src/ASF/sam0/utils/stdio/read.o
  .ARM.attributes
@@ -767,7 +767,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x3e src/ASF/sam0/utils/stdio/write.o
  .debug_macro   0x00000000      0x3df src/ASF/sam0/utils/stdio/write.o
  .debug_line    0x00000000      0x8bc src/ASF/sam0/utils/stdio/write.o
- .debug_str     0x00000000    0x83d0e src/ASF/sam0/utils/stdio/write.o
+ .debug_str     0x00000000    0x83d16 src/ASF/sam0/utils/stdio/write.o
  .comment       0x00000000       0x5a src/ASF/sam0/utils/stdio/write.o
  .debug_frame   0x00000000       0x34 src/ASF/sam0/utils/stdio/write.o
  .ARM.attributes
@@ -1026,7 +1026,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 src/ASF/sam0/drivers/sercom/usart/usart.o
  .debug_macro   0x00000000       0x51 src/ASF/sam0/drivers/sercom/usart/usart.o
  .debug_line    0x00000000      0xd27 src/ASF/sam0/drivers/sercom/usart/usart.o
- .debug_str     0x00000000    0x86212 src/ASF/sam0/drivers/sercom/usart/usart.o
+ .debug_str     0x00000000    0x8621a src/ASF/sam0/drivers/sercom/usart/usart.o
  .comment       0x00000000       0x5a src/ASF/sam0/drivers/sercom/usart/usart.o
  .debug_frame   0x00000000       0xac src/ASF/sam0/drivers/sercom/usart/usart.o
  .ARM.attributes
@@ -1296,7 +1296,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
  .debug_macro   0x00000000       0x51 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
  .debug_line    0x00000000      0xcea src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
- .debug_str     0x00000000    0x85458 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
+ .debug_str     0x00000000    0x85460 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
  .comment       0x00000000       0x5a src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
  .debug_frame   0x00000000      0x110 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
  .ARM.attributes
@@ -3412,7 +3412,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x3df src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
  .debug_macro   0x00000000       0x2e src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
  .debug_line    0x00000000      0x9c5 src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
- .debug_str     0x00000000    0x846cc src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
+ .debug_str     0x00000000    0x846d4 src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
  .comment       0x00000000       0x5a src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
  .debug_frame   0x00000000       0x74 src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
  .ARM.attributes
@@ -4678,7 +4678,7 @@ Discarded input sections
  .debug_macro   0x00000000     0x1e52 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .debug_macro   0x00000000       0x6d src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .debug_line    0x00000000      0x627 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
- .debug_str     0x00000000    0x6dc7d src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
+ .debug_str     0x00000000    0x6dc85 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .comment       0x00000000       0x5a src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .debug_frame   0x00000000       0x30 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .ARM.attributes
@@ -4773,7 +4773,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x35 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .debug_macro   0x00000000      0x122 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .debug_line    0x00000000      0x409 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_str     0x00000000     0x73b1 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x00000000     0x73b9 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .comment       0x00000000       0x5a src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .debug_frame   0x00000000       0xa0 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .ARM.attributes
@@ -5664,35 +5664,35 @@ OUTPUT(TCC_CALLBACK.elf elf32-littlearm)
  .debug_line    0x00008313      0x669 src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
  .debug_line    0x0000897c      0xdeb src/qs_tcc_callback.o
 
-.debug_str      0x00000000    0x901c2
- .debug_str     0x00000000    0x8495f src/ASF/sam0/drivers/sercom/sercom_interrupt.o
-                              0x852f4 (size before relaxing)
- .debug_str     0x0008495f      0xfdf src/ASF/sam0/drivers/extint/extint_sam_d_r_h/extint.o
-                              0x855fc (size before relaxing)
- .debug_str     0x0008593e      0x131 src/ASF/sam0/drivers/extint/extint_callback.o
-                              0x845a9 (size before relaxing)
- .debug_str     0x00085a6f       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
-                              0x83d66 (size before relaxing)
- .debug_str     0x00085b03     0x3d2e src/ASF/sam0/boards/samd21_xplained_pro/board_init.o
-                              0x87ad0 (size before relaxing)
- .debug_str     0x00089831       0x5e src/ASF/sam0/drivers/port/port.o
-                              0x84192 (size before relaxing)
- .debug_str     0x0008988f     0x27cd src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/clock.o
-                              0x86eec (size before relaxing)
- .debug_str     0x0008c05c      0x229 src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/gclk.o
-                              0x84a29 (size before relaxing)
- .debug_str     0x0008c285      0x179 src/ASF/sam0/drivers/system/pinmux/pinmux.o
-                              0x84208 (size before relaxing)
- .debug_str     0x0008c3fe       0x47 src/ASF/sam0/drivers/system/system.o
-                              0x83e43 (size before relaxing)
- .debug_str     0x0008c445     0x2758 src/ASF/sam0/drivers/tcc/tcc.o
-                              0x87246 (size before relaxing)
- .debug_str     0x0008eb9d      0x1c9 src/ASF/sam0/drivers/tcc/tcc_callback.o
-                              0x85725 (size before relaxing)
- .debug_str     0x0008ed66      0xf17 src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
-                              0x6edfa (size before relaxing)
- .debug_str     0x0008fc7d      0x545 src/qs_tcc_callback.o
-                              0x8a2d8 (size before relaxing)
+.debug_str      0x00000000    0x90177
+ .debug_str     0x00000000    0x84967 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+                              0x852fc (size before relaxing)
+ .debug_str     0x00084967      0xfdf src/ASF/sam0/drivers/extint/extint_sam_d_r_h/extint.o
+                              0x85604 (size before relaxing)
+ .debug_str     0x00085946      0x131 src/ASF/sam0/drivers/extint/extint_callback.o
+                              0x845b1 (size before relaxing)
+ .debug_str     0x00085a77       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+                              0x83d6e (size before relaxing)
+ .debug_str     0x00085b0b     0x3d2e src/ASF/sam0/boards/samd21_xplained_pro/board_init.o
+                              0x87ad8 (size before relaxing)
+ .debug_str     0x00089839       0x5e src/ASF/sam0/drivers/port/port.o
+                              0x8419a (size before relaxing)
+ .debug_str     0x00089897     0x27cd src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/clock.o
+                              0x86ef4 (size before relaxing)
+ .debug_str     0x0008c064      0x229 src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/gclk.o
+                              0x84a31 (size before relaxing)
+ .debug_str     0x0008c28d      0x179 src/ASF/sam0/drivers/system/pinmux/pinmux.o
+                              0x84210 (size before relaxing)
+ .debug_str     0x0008c406       0x47 src/ASF/sam0/drivers/system/system.o
+                              0x83e4b (size before relaxing)
+ .debug_str     0x0008c44d     0x2758 src/ASF/sam0/drivers/tcc/tcc.o
+                              0x8724e (size before relaxing)
+ .debug_str     0x0008eba5      0x1c9 src/ASF/sam0/drivers/tcc/tcc_callback.o
+                              0x8572d (size before relaxing)
+ .debug_str     0x0008ed6e      0xf17 src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
+                              0x6ee02 (size before relaxing)
+ .debug_str     0x0008fc85      0x4f2 src/qs_tcc_callback.o
+                              0x8a2d7 (size before relaxing)
 
 .debug_frame    0x00000000      0xa1c
  .debug_frame   0x00000000       0xe8 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
