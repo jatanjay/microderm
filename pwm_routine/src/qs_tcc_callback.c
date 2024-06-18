@@ -15,7 +15,7 @@ struct tcc_module tcc_instance;
 
 static bool pwm_started = false;
 
-static const uint32_t delay_values[] = {1, 3, 5, 15};
+static const uint32_t delay_values[] = {1, 3, 5, 22};
 static const uint8_t num_delay_values = sizeof(delay_values) / sizeof(delay_values[0]);
 
 void configure_tcc_callback_delay(uint32_t delay);
