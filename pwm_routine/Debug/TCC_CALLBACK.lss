@@ -3026,7 +3026,7 @@ void extint_detection_callback(void) {
 	i = (i + CC_X) & 0xFFFF;
     1028:	4a0c      	ldr	r2, [pc, #48]	; (105c <extint_detection_callback+0x54>)
     102a:	6813      	ldr	r3, [r2, #0]
-    102c:	3358      	adds	r3, #88	; 0x58
+    102c:	334b      	adds	r3, #75	; 0x4b
     102e:	041b      	lsls	r3, r3, #16
     1030:	0c1b      	lsrs	r3, r3, #16
     1032:	6013      	str	r3, [r2, #0]
@@ -3046,7 +3046,7 @@ void extint_detection_callback(void) {
 	i = (i + CC_X) & 0xFFFF;
     1042:	4a06      	ldr	r2, [pc, #24]	; (105c <extint_detection_callback+0x54>)
     1044:	6813      	ldr	r3, [r2, #0]
-    1046:	3358      	adds	r3, #88	; 0x58
+    1046:	334b      	adds	r3, #75	; 0x4b
     1048:	041b      	lsls	r3, r3, #16
     104a:	0c1b      	lsrs	r3, r3, #16
     104c:	6013      	str	r3, [r2, #0]

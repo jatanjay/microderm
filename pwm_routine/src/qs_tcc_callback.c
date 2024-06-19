@@ -15,7 +15,7 @@ struct tcc_module tcc_instance;
 
 
 #define PWM_PERIOD 0x210 // DEC 528
-#define CC_X ((int)round(PWM_PERIOD / 6.0))
+#define CC_X ((int)round(PWM_PERIOD / 7.0))
 
 
 static bool pwm_started = false;
