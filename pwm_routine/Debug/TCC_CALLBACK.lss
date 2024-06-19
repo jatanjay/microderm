@@ -15,23 +15,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .comment      00000059  00000000  00000000  0002002c  2**0
                   CONTENTS, READONLY
-  6 .debug_info   00020dae  00000000  00000000  00020085  2**0
+  6 .debug_info   00020d40  00000000  00000000  00020085  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00002ed7  00000000  00000000  00040e33  2**0
+  7 .debug_abbrev 00002e9b  00000000  00000000  00040dc5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    00003b2f  00000000  00000000  00043d0a  2**0
+  8 .debug_loc    00003b2f  00000000  00000000  00043c60  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_aranges 00000440  00000000  00000000  00047839  2**0
+  9 .debug_aranges 00000438  00000000  00000000  0004778f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 000004d0  00000000  00000000  00047c79  2**0
+ 10 .debug_ranges 000004c8  00000000  00000000  00047bc7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  00005edb  00000000  00000000  00048149  2**0
+ 11 .debug_macro  00005edb  00000000  00000000  0004808f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   00009764  00000000  00000000  0004e024  2**0
+ 12 .debug_line   00009753  00000000  00000000  0004df6a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    00090a13  00000000  00000000  00057788  2**0
+ 13 .debug_str    000909d2  00000000  00000000  000576bd  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00000a1c  00000000  00000000  000e819c  2**2
+ 14 .debug_frame  00000a0c  00000000  00000000  000e8090  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -3022,8 +3022,8 @@ void extint_detection_callback(void) {
 	bool pin_state = port_pin_get_input_level(BUTTON_0_PIN);
 	pwm_started = pin_state;
 	port_pin_set_output_level(LED_0_PIN, pin_state);
-	static uint32_t i = 0;
-	i = (i + CC_X) & 0xFFFF;
+	static uint32_t delay = 0;
+	delay = (delay + CC_X) & 0xFFFF;
     1028:	4a0c      	ldr	r2, [pc, #48]	; (105c <extint_detection_callback+0x54>)
     102a:	6813      	ldr	r3, [r2, #0]
     102c:	334b      	adds	r3, #75	; 0x4b
@@ -3031,7 +3031,7 @@ void extint_detection_callback(void) {
     1030:	0c1b      	lsrs	r3, r3, #16
     1032:	6013      	str	r3, [r2, #0]
 	if (pin_state) {
-		pwm_callback_delay = i;
+		pwm_callback_delay = delay;
     1034:	4a0a      	ldr	r2, [pc, #40]	; (1060 <extint_detection_callback+0x58>)
     1036:	6013      	str	r3, [r2, #0]
 	}
@@ -3043,7 +3043,7 @@ void extint_detection_callback(void) {
     103c:	05d2      	lsls	r2, r2, #23
     103e:	4b06      	ldr	r3, [pc, #24]	; (1058 <extint_detection_callback+0x50>)
     1040:	615a      	str	r2, [r3, #20]
-	i = (i + CC_X) & 0xFFFF;
+	delay = (delay + CC_X) & 0xFFFF;
     1042:	4a06      	ldr	r2, [pc, #24]	; (105c <extint_detection_callback+0x54>)
     1044:	6813      	ldr	r3, [r2, #0]
     1046:	334b      	adds	r3, #75	; 0x4b
