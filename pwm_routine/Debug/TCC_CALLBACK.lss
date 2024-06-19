@@ -27,9 +27,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  11 .debug_macro  00005edb  00000000  00000000  0004808f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   00009753  00000000  00000000  0004df6a  2**0
+ 12 .debug_line   00009755  00000000  00000000  0004df6a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    000909d2  00000000  00000000  000576bd  2**0
+ 13 .debug_str    000909d1  00000000  00000000  000576bf  2**0
                   CONTENTS, READONLY, DEBUGGING
  14 .debug_frame  00000a0c  00000000  00000000  000e8090  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -3023,7 +3023,7 @@ void extint_detection_callback(void) {
 	pwm_started = pin_state;
 	port_pin_set_output_level(LED_0_PIN, pin_state);
 	static uint32_t delay = 0;
-	delay = (delay + CC_X) & 0xFFFF;
+	delay = (delay + CCx) & 0xFFFF;
     1028:	4a0c      	ldr	r2, [pc, #48]	; (105c <extint_detection_callback+0x54>)
     102a:	6813      	ldr	r3, [r2, #0]
     102c:	334b      	adds	r3, #75	; 0x4b
@@ -3043,7 +3043,7 @@ void extint_detection_callback(void) {
     103c:	05d2      	lsls	r2, r2, #23
     103e:	4b06      	ldr	r3, [pc, #24]	; (1058 <extint_detection_callback+0x50>)
     1040:	615a      	str	r2, [r3, #20]
-	delay = (delay + CC_X) & 0xFFFF;
+	delay = (delay + CCx) & 0xFFFF;
     1042:	4a06      	ldr	r2, [pc, #24]	; (105c <extint_detection_callback+0x54>)
     1044:	6813      	ldr	r3, [r2, #0]
     1046:	334b      	adds	r3, #75	; 0x4b
