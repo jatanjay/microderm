@@ -80,7 +80,7 @@ int main(void) {
   wr_packet.data_length = 1;
   wr_packet.data = wr_buffer;
   rd_packet.address = SLAVE_ADDRESS;
-  rd_packet.data_length = 2;
+  //rd_packet.data_length = 2;
   rd_packet.data = rd_buffer;
 
 
@@ -89,83 +89,109 @@ int main(void) {
     if (!port_pin_get_input_level(BUTTON_0_PIN)) {
       while (!port_pin_get_input_level(BUTTON_0_PIN)) {}
 
-      wr_buffer[0] = 0xAA;
+      //wr_buffer[0] = 0xAA;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+	  //
+      //wr_buffer[0] = 0xAC;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+//
+      //wr_buffer[0] = 0xAE;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+//
+      //wr_buffer[0] = 0xB0;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+//
+      //wr_buffer[0] = 0xB2;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+//
+      //wr_buffer[0] = 0xB4;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+//
+      //wr_buffer[0] = 0xB6;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+//
+      //wr_buffer[0] = 0xB8;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+//
+      //wr_buffer[0] = 0xBA;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+//
+      //wr_buffer[0] = 0xBC;
+      //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+      //rd_packet.data_length = 2;
+      //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+      //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+
+      wr_buffer[0] = 0xF4;
       i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
       while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
       rd_packet.data_length = 2;
       i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
       while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
 	  
-
-      wr_buffer[0] = 0xAC;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-
-      wr_buffer[0] = 0xAE;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-
-      wr_buffer[0] = 0xB0;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-
-      wr_buffer[0] = 0xB2;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-
-      wr_buffer[0] = 0xB4;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-
-      wr_buffer[0] = 0xB6;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-
-      wr_buffer[0] = 0xB8;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-
-      wr_buffer[0] = 0xBA;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-
-      wr_buffer[0] = 0xBC;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-
-      wr_buffer[0] = 0xBE;
-      i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
-      rd_packet.data_length = 2;
-      i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
-      while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+	  
+	  wr_buffer[0] = 0x2E;
+	  i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+	  while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+	  rd_packet.data_length = 2;
+	  i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+	  while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+	  
+	  delay_us(100);
+	  
+	  wr_buffer[0] = 0xF6;
+	  i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+	  while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+	  rd_packet.data_length = 2;
+	  i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+	  while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+	  
+	  //
+	  //wr_buffer[0] = 0xF7;
+	  //i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
+	  //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+	  //rd_packet.data_length = 2;
+	  //i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
+	  //while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
+	  //
+	  
     }
   }
 
