@@ -75,6 +75,7 @@ int main(void) {
   system_init();
   configure_i2c();
   configure_i2c_callbacks();
+  delay_init();
 
   wr_packet.address = SLAVE_ADDRESS;
   wr_packet.data_length = 1;
@@ -174,7 +175,7 @@ int main(void) {
 	  i2c_master_read_packet_job( & i2c_master_instance, & rd_packet);
 	  while (i2c_master_get_job_status( & i2c_master_instance) != STATUS_OK);
 	  
-	  delay_us(100);
+	  delay_ms(5);
 	  
 	  wr_buffer[0] = 0xF6;
 	  i2c_master_write_packet_job( & i2c_master_instance, & wr_packet);
