@@ -79,7 +79,7 @@ void configure_extint_channel(void);
 void configure_extint_callbacks(void);
 void extint_detection_callback(void);
 
-
+-
 // Constants
 #define PWM_PERIOD 0x210 // DEC 528
 #define CCx ((int)lround(PWM_PERIOD / 7.0))
