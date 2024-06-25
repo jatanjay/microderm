@@ -69,7 +69,7 @@
  * #define TCC_MODE_CAPTURE. No other definitions should be done by user.
  */
 
-#define  TCC_MODE_OTMX_DTI
+#define  TCC_MODE_DUAL_SLOPE
  // End of feature definitions. 
  
 
@@ -177,9 +177,9 @@ enum eTCC_Channel {
 (TCC_MODE_PATTERN_GENERATION)*/
 #ifdef TCC_MODE_PATTERN_GENERATION
 #define GLCK_SOURCE                 GCLK_GENERATOR_0
-#define TCC_PERIOD_VALUE            0x7FFF
+#define TCC_PERIOD_VALUE            0xFFFF
 #define TCC_CLOCK_DIVIDER           TCC_CLOCK_PRESCALER_DIV1
-#define TCC_MATCH_VALUE_PATTERN_GEN 0x7F
+#define TCC_MATCH_VALUE_PATTERN_GEN 0x7FFF
 #define TCC_PATTERN_PAGE_VAL        0x0F
 #define PATTERN_SIZE                4
 #endif
@@ -205,7 +205,7 @@ enum eTCC_Channel {
 #ifdef TCC_MODE_DUAL_SLOPE
 #define TCC_PERIOD_VALUE            0x3FF
 #define GLCK_SOURCE                 GCLK_GENERATOR_0
-#define TCC_CLOCK_DIVIDER           TCC_CLOCK_PRESCALER_DIV1
+#define TCC_CLOCK_DIVIDER           TCC_CLOCK_PRESCALER_DIV2
 #endif
 
 // Symbolic constants used in Counter feature (TCC_MODE_COUNTER)

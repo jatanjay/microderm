@@ -47,6 +47,8 @@
 
 struct tcc_module tcc_instance;
 enum status_code stat = STATUS_OK;
+static volatile pattern_generation_delay = TCC_MATCH_VALUE_PATTERN_GEN;
+
 
 #ifdef TCC_MODE_PATTERN_GENERATION
 /* Generic Pattern for half size Bipolar Stepper Motor */
@@ -632,48 +634,76 @@ configure_tcc();
 #endif
 
 	while (1){
-#ifdef TCC_MODE_ONESHOT
-		oneshot_operation();
-#endif
-
-#ifdef TCC_MODE_PATTERN_GENERATION
-		pattern_generation();
-#endif
-
-#ifdef TCC_MODE_SWAP
-		swap_operation();
-#endif
-
-#ifdef TCC_MODE_FAULT 
-		if (!port_pin_get_input_level(SW0_PIN)){
-			// Set fault 
-			while (port_pin_get_input_level(SW0_PIN));
-			port_pin_set_output_level(CONF_TEST_PIN_OUT, false);
-			tcStatus = tcc_get_status(&tcc_instance);
-			if (!port_pin_get_output_level(LED_0_PIN)){
-				// Turn off LED and clear alarm status..
-				tcc_clear_status(&tcc_instance,TCC_STATUS_RECOVERABLE_FAULT_OCCUR(0));
-				LED_Off(LED0_PIN);
-				
-			}else if ((tcStatus & temp)){
-				// If alarm set, drive LED.
-				LED_On(LED0_PIN);
-				port_pin_set_output_level(CONF_TEST_PIN_OUT, true);
-			}
-		} // end of common fault and capture condition
-#endif
-
-#ifdef TCC_MODE_CAPTURE
-		configure_usart();
-		configu_eic();
-		configure_evsys();
-		while (1) {
-			while(!(CONF_PWM_MODULE->INTFLAG.bit.MC1));
-			CONF_PWM_MODULE->INTFLAG.reg |= TCC_INTFLAG_MC1; // Equivalent of TCC0->INTFLAG.bit.MC1   = 1;
-			period                  = tcc_get_capture_value(&tcc_instances, 1);
-			pulse_width             = tcc_get_capture_value(&tcc_instances, 0);
-			printf("period=%ld , pulse width =%ld \r\n", period , pulse_width);
-		}
-#endif // end of while (1)
-	}
+//#ifdef TCC_MODE_ONESHOT
+		//oneshot_operation();
+//#endif
+//
+//#ifdef TCC_MODE_PATTERN_GENERATION
+//
+//// Define a variable to track pattern generation state
+//static bool pattern_generation_enabled = false;
+//
+//// Define a variable to track button state across iterations
+//static bool button_was_pressed = false;
+//
+//// Check if the button (SW0_PIN) is pressed
+//bool button_pressed = !port_pin_get_input_level(SW0_PIN); // Assuming active low
+//
+//// If the button is pressed and it wasn't pressed in the previous iteration
+//if (button_pressed && !button_was_pressed) {
+	//pattern_generation_enabled = !pattern_generation_enabled; // Toggle pattern generation state
+	//LED_Off(LED_0_PIN);
+	//pattern_generation_delay = (pattern_generation_delay + TCC_PERIOD_VALUE) & 0xFFFF;
+//}
+//
+//// If pattern generation is enabled, call the function
+//if (pattern_generation_enabled) {
+//
+	//pattern_generation();
+	//LED_On(LED_0_PIN);
+//}
+//
+//// Update the button state for the next iteration
+//button_was_pressed = button_pressed;
+//
+//#endif
+//
+//
+//
+//#ifdef TCC_MODE_SWAP
+		//swap_operation();
+//#endif
+//
+//#ifdef TCC_MODE_FAULT 
+		//if (!port_pin_get_input_level(SW0_PIN)){
+			//// Set fault 
+			//while (port_pin_get_input_level(SW0_PIN));
+			//port_pin_set_output_level(CONF_TEST_PIN_OUT, false);
+			//tcStatus = tcc_get_status(&tcc_instance);
+			//if (!port_pin_get_output_level(LED_0_PIN)){
+				//// Turn off LED and clear alarm status..
+				//tcc_clear_status(&tcc_instance,TCC_STATUS_RECOVERABLE_FAULT_OCCUR(0));
+				//LED_Off(LED0_PIN);
+				//
+			//}else if ((tcStatus & temp)){
+				//// If alarm set, drive LED.
+				//LED_On(LED0_PIN);
+				//port_pin_set_output_level(CONF_TEST_PIN_OUT, true);
+			//}
+		//} // end of common fault and capture condition
+//#endif
+//
+//#ifdef TCC_MODE_CAPTURE
+		//configure_usart();
+		//configu_eic();
+		//configure_evsys();
+		//while (1) {
+			//while(!(CONF_PWM_MODULE->INTFLAG.bit.MC1));
+			//CONF_PWM_MODULE->INTFLAG.reg |= TCC_INTFLAG_MC1; // Equivalent of TCC0->INTFLAG.bit.MC1   = 1;
+			//period                  = tcc_get_capture_value(&tcc_instances, 1);
+			//pulse_width             = tcc_get_capture_value(&tcc_instances, 0);
+			//printf("period=%ld , pulse width =%ld \r\n", period , pulse_width);
+		//}
+//#endif // end of while (1)
+	//}
 }

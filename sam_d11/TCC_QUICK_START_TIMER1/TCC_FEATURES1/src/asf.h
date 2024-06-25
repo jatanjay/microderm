@@ -114,5 +114,5 @@
 
 // From module: USART - Serial interface- SAM implementation for devices with only USART
 #include <serial.h>
-
+#include <math.h>
 #endif // ASF_H
