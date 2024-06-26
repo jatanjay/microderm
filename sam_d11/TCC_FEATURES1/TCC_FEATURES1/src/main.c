@@ -29,10 +29,6 @@ uint8_t toggle_count = 0;
 bool pwm_running = false;
 
 
-//#define start_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 6.0))
-//#define first_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 3.5))
-//#define second_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 1.5))
-
 #define start_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 1.5))
 #define first_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 3.0))
 #define second_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 7.0)) 
