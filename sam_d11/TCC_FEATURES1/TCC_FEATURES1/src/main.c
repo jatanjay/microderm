@@ -29,10 +29,13 @@ uint8_t toggle_count = 0;
 bool pwm_running = false;
 
 
-#define start_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 6.0))
-#define first_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 3.5))
-#define second_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 1.5))
+//#define start_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 6.0))
+//#define first_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 3.5))
+//#define second_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 1.5))
 
+#define start_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 1.5))
+#define first_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 3.0))
+#define second_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 7.0)) 
 
 
 static void configure_tcc(void) {
@@ -41,7 +44,7 @@ static void configure_tcc(void) {
 	config_tcc.counter.period                               = TCC_PERIOD_VALUE;
 	config_tcc.compare.match[TCC_MATCH_CAPTURE_CHANNEL_0]	= start_duty_cycle;
 
-	config_tcc.compare.wave_generation = TCC_WAVE_GENERATION_SINGLE_SLOPE_PWM;
+	config_tcc.compare.wave_generation = TCC_WAVE_GENERATION_DOUBLE_SLOPE_BOTH;
 	config_tcc.pins.enable_wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]    = true;
 	config_tcc.pins.wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]           = PIN_PA04F_TCC0_WO0;
 	config_tcc.pins.wave_out_pin_mux[TCC_MATCH_CAPTURE_CHANNEL_0]       = MUX_PA04F_TCC0_WO0;

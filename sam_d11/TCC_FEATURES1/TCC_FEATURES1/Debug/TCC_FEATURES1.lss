@@ -3086,7 +3086,7 @@ void toggle_pwm_duty_cycle(void) {
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0, second_duty_cycle);
 			LED_Off(LED_0_PIN);
 			} else if (toggle_count > 3) {
-    1026:	d815      	bhi.n	1054 <toggle_pwm_duty_cycle+0x44>
+    1026:	d814      	bhi.n	1052 <toggle_pwm_duty_cycle+0x42>
 			pwm_running = false;
 			tcc_disable(&tcc_instance);
 			//tcc_restart_counter(&tcc_instance);
@@ -3101,32 +3101,32 @@ void toggle_pwm_duty_cycle(void) {
     102e:	4b17      	ldr	r3, [pc, #92]	; (108c <toggle_pwm_duty_cycle+0x7c>)
     1030:	615a      	str	r2, [r3, #20]
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0, first_duty_cycle);
-    1032:	22a0      	movs	r2, #160	; 0xa0
+    1032:	22bb      	movs	r2, #187	; 0xbb
     1034:	2100      	movs	r1, #0
     1036:	4816      	ldr	r0, [pc, #88]	; (1090 <toggle_pwm_duty_cycle+0x80>)
     1038:	4b16      	ldr	r3, [pc, #88]	; (1094 <toggle_pwm_duty_cycle+0x84>)
     103a:	4798      	blx	r3
     103c:	e7f4      	b.n	1028 <toggle_pwm_duty_cycle+0x18>
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0, second_duty_cycle);
-    103e:	2276      	movs	r2, #118	; 0x76
-    1040:	32ff      	adds	r2, #255	; 0xff
-    1042:	2100      	movs	r1, #0
-    1044:	4812      	ldr	r0, [pc, #72]	; (1090 <toggle_pwm_duty_cycle+0x80>)
-    1046:	4b13      	ldr	r3, [pc, #76]	; (1094 <toggle_pwm_duty_cycle+0x84>)
-    1048:	4798      	blx	r3
+    103e:	2250      	movs	r2, #80	; 0x50
+    1040:	2100      	movs	r1, #0
+    1042:	4813      	ldr	r0, [pc, #76]	; (1090 <toggle_pwm_duty_cycle+0x80>)
+    1044:	4b13      	ldr	r3, [pc, #76]	; (1094 <toggle_pwm_duty_cycle+0x84>)
+    1046:	4798      	blx	r3
 		port_base->OUTSET.reg = pin_mask;
-    104a:	2280      	movs	r2, #128	; 0x80
-    104c:	0252      	lsls	r2, r2, #9
-    104e:	4b0f      	ldr	r3, [pc, #60]	; (108c <toggle_pwm_duty_cycle+0x7c>)
-    1050:	619a      	str	r2, [r3, #24]
-    1052:	e7e9      	b.n	1028 <toggle_pwm_duty_cycle+0x18>
+    1048:	2280      	movs	r2, #128	; 0x80
+    104a:	0252      	lsls	r2, r2, #9
+    104c:	4b0f      	ldr	r3, [pc, #60]	; (108c <toggle_pwm_duty_cycle+0x7c>)
+    104e:	619a      	str	r2, [r3, #24]
+    1050:	e7ea      	b.n	1028 <toggle_pwm_duty_cycle+0x18>
 			toggle_count = 0;
-    1054:	2500      	movs	r5, #0
-    1056:	4b0c      	ldr	r3, [pc, #48]	; (1088 <toggle_pwm_duty_cycle+0x78>)
-    1058:	701d      	strb	r5, [r3, #0]
+    1052:	2500      	movs	r5, #0
+    1054:	4b0c      	ldr	r3, [pc, #48]	; (1088 <toggle_pwm_duty_cycle+0x78>)
+    1056:	701d      	strb	r5, [r3, #0]
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0, start_duty_cycle);
-    105a:	4c0d      	ldr	r4, [pc, #52]	; (1090 <toggle_pwm_duty_cycle+0x80>)
-    105c:	225d      	movs	r2, #93	; 0x5d
+    1058:	4c0d      	ldr	r4, [pc, #52]	; (1090 <toggle_pwm_duty_cycle+0x80>)
+    105a:	2276      	movs	r2, #118	; 0x76
+    105c:	32ff      	adds	r2, #255	; 0xff
     105e:	2100      	movs	r1, #0
     1060:	0020      	movs	r0, r4
     1062:	4b0c      	ldr	r3, [pc, #48]	; (1094 <toggle_pwm_duty_cycle+0x84>)
@@ -3265,37 +3265,37 @@ int main(void) {
     1130:	009b      	lsls	r3, r3, #2
     1132:	6063      	str	r3, [r4, #4]
 	config_tcc.compare.match[TCC_MATCH_CAPTURE_CHANNEL_0]	= start_duty_cycle;
-    1134:	3bd4      	subs	r3, #212	; 0xd4
-    1136:	3bff      	subs	r3, #255	; 0xff
+    1134:	2376      	movs	r3, #118	; 0x76
+    1136:	33ff      	adds	r3, #255	; 0xff
     1138:	61e3      	str	r3, [r4, #28]
-	config_tcc.compare.wave_generation = TCC_WAVE_GENERATION_SINGLE_SLOPE_PWM;
-    113a:	3b5b      	subs	r3, #91	; 0x5b
-    113c:	7623      	strb	r3, [r4, #24]
+	config_tcc.compare.wave_generation = TCC_WAVE_GENERATION_DOUBLE_SLOPE_BOTH;
+    113a:	3b70      	subs	r3, #112	; 0x70
+    113c:	3bff      	subs	r3, #255	; 0xff
+    113e:	7623      	strb	r3, [r4, #24]
 	config_tcc.pins.enable_wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]    = true;
-    113e:	3396      	adds	r3, #150	; 0x96
-    1140:	54e6      	strb	r6, [r4, r3]
+    1140:	3392      	adds	r3, #146	; 0x92
+    1142:	54e6      	strb	r6, [r4, r3]
 	config_tcc.pins.wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]           = PIN_PA04F_TCC0_WO0;
-    1142:	3b94      	subs	r3, #148	; 0x94
-    1144:	65a3      	str	r3, [r4, #88]	; 0x58
+    1144:	3b94      	subs	r3, #148	; 0x94
+    1146:	65a3      	str	r3, [r4, #88]	; 0x58
 	config_tcc.pins.wave_out_pin_mux[TCC_MATCH_CAPTURE_CHANNEL_0]       = MUX_PA04F_TCC0_WO0;
-    1146:	3301      	adds	r3, #1
-    1148:	67a3      	str	r3, [r4, #120]	; 0x78
+    1148:	3301      	adds	r3, #1
+    114a:	67a3      	str	r3, [r4, #120]	; 0x78
 	stat = tcc_init(&tcc_instance, CONF_PWM_MODULE, &config_tcc);
-    114a:	0022      	movs	r2, r4
-    114c:	0029      	movs	r1, r5
-    114e:	4809      	ldr	r0, [pc, #36]	; (1174 <main+0x64>)
-    1150:	4b09      	ldr	r3, [pc, #36]	; (1178 <main+0x68>)
-    1152:	4798      	blx	r3
-    1154:	4b09      	ldr	r3, [pc, #36]	; (117c <main+0x6c>)
-    1156:	7018      	strb	r0, [r3, #0]
+    114c:	0022      	movs	r2, r4
+    114e:	0029      	movs	r1, r5
+    1150:	4808      	ldr	r0, [pc, #32]	; (1174 <main+0x64>)
+    1152:	4b09      	ldr	r3, [pc, #36]	; (1178 <main+0x68>)
+    1154:	4798      	blx	r3
+    1156:	4b09      	ldr	r3, [pc, #36]	; (117c <main+0x6c>)
+    1158:	7018      	strb	r0, [r3, #0]
     system_interrupt_enable_global();
 	configure_tcc();
 	while (1) {
 		check_button_press();
-    1158:	4c09      	ldr	r4, [pc, #36]	; (1180 <main+0x70>)
-    115a:	47a0      	blx	r4
-    115c:	e7fd      	b.n	115a <main+0x4a>
-    115e:	46c0      	nop			; (mov r8, r8)
+    115a:	4c09      	ldr	r4, [pc, #36]	; (1180 <main+0x70>)
+    115c:	47a0      	blx	r4
+    115e:	e7fd      	b.n	115c <main+0x4c>
     1160:	00000925 	.word	0x00000925
     1164:	20000000 	.word	0x20000000
     1168:	42001400 	.word	0x42001400
