@@ -3,35 +3,35 @@ TCC_FEATURES1.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00001240  00000000  00000000  00010000  2**2
+  0 .text         00001248  00000000  00000000  00010000  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .relocate     0000001c  20000000  00001240  00020000  2**2
+  1 .relocate     0000001c  20000000  00001248  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000178  2000001c  0000125c  0002001c  2**2
+  2 .bss          00000178  2000001c  00001264  0002001c  2**2
                   ALLOC
-  3 .stack        00000404  20000194  000013d4  0002001c  2**0
+  3 .stack        00000404  20000194  000013dc  0002001c  2**0
                   ALLOC
   4 .ARM.attributes 00000028  00000000  00000000  0002001c  2**0
                   CONTENTS, READONLY
   5 .comment      00000059  00000000  00000000  00020044  2**0
                   CONTENTS, READONLY
-  6 .debug_info   0002301f  00000000  00000000  0002009d  2**0
+  6 .debug_info   00023020  00000000  00000000  0002009d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00003620  00000000  00000000  000430bc  2**0
+  7 .debug_abbrev 00003620  00000000  00000000  000430bd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_aranges 000004e0  00000000  00000000  000466dc  2**0
+  8 .debug_aranges 000004e0  00000000  00000000  000466dd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_ranges 000004f8  00000000  00000000  00046bbc  2**0
+  9 .debug_ranges 000004f8  00000000  00000000  00046bbd  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_macro  00005f40  00000000  00000000  000470b4  2**0
+ 10 .debug_macro  00005f4c  00000000  00000000  000470b5  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_line   0000aab4  00000000  00000000  0004cff4  2**0
+ 11 .debug_line   0000aab6  00000000  00000000  0004d001  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_str    00079e2f  00000000  00000000  00057aa8  2**0
+ 12 .debug_str    00079e4e  00000000  00000000  00057ab7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_frame  00000b28  00000000  00000000  000d18d8  2**2
+ 13 .debug_frame  00000b28  00000000  00000000  000d1908  2**2
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    00004218  00000000  00000000  000d2400  2**0
+ 14 .debug_loc    00004218  00000000  00000000  000d2430  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -63,7 +63,7 @@ Disassembly of section .text:
       a6:	bd10      	pop	{r4, pc}
       a8:	2000001c 	.word	0x2000001c
       ac:	00000000 	.word	0x00000000
-      b0:	00001240 	.word	0x00001240
+      b0:	00001248 	.word	0x00001248
 
 000000b4 <frame_dummy>:
       b4:	4b08      	ldr	r3, [pc, #32]	; (d8 <frame_dummy+0x24>)
@@ -86,8 +86,8 @@ Disassembly of section .text:
       d6:	e7f9      	b.n	cc <frame_dummy+0x18>
       d8:	00000000 	.word	0x00000000
       dc:	20000020 	.word	0x20000020
-      e0:	00001240 	.word	0x00001240
-      e4:	00001240 	.word	0x00001240
+      e0:	00001248 	.word	0x00001248
+      e4:	00001248 	.word	0x00001248
       e8:	00000000 	.word	0x00000000
 
 000000ec <cpu_irq_enter_critical>:
@@ -942,7 +942,7 @@ enum status_code system_clock_source_enable(
      4f0:	2000      	movs	r0, #0
 }
      4f2:	4770      	bx	lr
-     4f4:	000011cc 	.word	0x000011cc
+     4f4:	000011d4 	.word	0x000011d4
      4f8:	40000800 	.word	0x40000800
      4fc:	2000004c 	.word	0x2000004c
 
@@ -2852,7 +2852,7 @@ void _tcc_interrupt_handler(
      ec0:	bdf0      	pop	{r4, r5, r6, r7, pc}
      ec2:	46c0      	nop			; (mov r8, r8)
      ec4:	200000ac 	.word	0x200000ac
-     ec8:	000011f0 	.word	0x000011f0
+     ec8:	000011f8 	.word	0x000011f8
 
 00000ecc <TCC0_Handler>:
 MREPEAT(TCC_INST_NUM, _TCC_INTERRUPT_HANDLER, 0)
@@ -2979,7 +2979,7 @@ void Dummy_Handler(void)
      f86:	4b0e      	ldr	r3, [pc, #56]	; (fc0 <Reset_Handler+0xe0>)
      f88:	4798      	blx	r3
      f8a:	e7fe      	b.n	f8a <Reset_Handler+0xaa>
-     f8c:	00001240 	.word	0x00001240
+     f8c:	00001248 	.word	0x00001248
      f90:	20000000 	.word	0x20000000
      f94:	2000001c 	.word	0x2000001c
      f98:	20000004 	.word	0x20000004
@@ -2991,8 +2991,8 @@ void Dummy_Handler(void)
      fb0:	41005000 	.word	0x41005000
      fb4:	41004800 	.word	0x41004800
      fb8:	41004000 	.word	0x41004000
-     fbc:	00001185 	.word	0x00001185
-     fc0:	00001111 	.word	0x00001111
+     fbc:	0000118d 	.word	0x0000118d
+     fc0:	00001115 	.word	0x00001115
 
 00000fc4 <is_button_pressed>:
 	return (port_base->IN.reg & pin_mask);
@@ -3082,11 +3082,11 @@ void toggle_pwm_duty_cycle(void) {
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0, first_duty_cycle);
 			} else if (toggle_count == 3) {
     1022:	2b03      	cmp	r3, #3
-    1024:	d00b      	beq.n	103e <toggle_pwm_duty_cycle+0x2e>
+    1024:	d00c      	beq.n	1040 <toggle_pwm_duty_cycle+0x30>
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0, second_duty_cycle);
 			LED_Off(LED_0_PIN);
 			} else if (toggle_count > 3) {
-    1026:	d814      	bhi.n	1052 <toggle_pwm_duty_cycle+0x42>
+    1026:	d815      	bhi.n	1054 <toggle_pwm_duty_cycle+0x44>
 			pwm_running = false;
 			tcc_disable(&tcc_instance);
 			//tcc_restart_counter(&tcc_instance);
@@ -3101,32 +3101,32 @@ void toggle_pwm_duty_cycle(void) {
     102e:	4b17      	ldr	r3, [pc, #92]	; (108c <toggle_pwm_duty_cycle+0x7c>)
     1030:	615a      	str	r2, [r3, #20]
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0, first_duty_cycle);
-    1032:	22bb      	movs	r2, #187	; 0xbb
-    1034:	2100      	movs	r1, #0
-    1036:	4816      	ldr	r0, [pc, #88]	; (1090 <toggle_pwm_duty_cycle+0x80>)
-    1038:	4b16      	ldr	r3, [pc, #88]	; (1094 <toggle_pwm_duty_cycle+0x84>)
-    103a:	4798      	blx	r3
-    103c:	e7f4      	b.n	1028 <toggle_pwm_duty_cycle+0x18>
+    1032:	2270      	movs	r2, #112	; 0x70
+    1034:	32ff      	adds	r2, #255	; 0xff
+    1036:	2100      	movs	r1, #0
+    1038:	4815      	ldr	r0, [pc, #84]	; (1090 <toggle_pwm_duty_cycle+0x80>)
+    103a:	4b16      	ldr	r3, [pc, #88]	; (1094 <toggle_pwm_duty_cycle+0x84>)
+    103c:	4798      	blx	r3
+    103e:	e7f3      	b.n	1028 <toggle_pwm_duty_cycle+0x18>
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0, second_duty_cycle);
-    103e:	2250      	movs	r2, #80	; 0x50
-    1040:	2100      	movs	r1, #0
-    1042:	4813      	ldr	r0, [pc, #76]	; (1090 <toggle_pwm_duty_cycle+0x80>)
-    1044:	4b13      	ldr	r3, [pc, #76]	; (1094 <toggle_pwm_duty_cycle+0x84>)
-    1046:	4798      	blx	r3
+    1040:	4a15      	ldr	r2, [pc, #84]	; (1098 <toggle_pwm_duty_cycle+0x88>)
+    1042:	2100      	movs	r1, #0
+    1044:	4812      	ldr	r0, [pc, #72]	; (1090 <toggle_pwm_duty_cycle+0x80>)
+    1046:	4b13      	ldr	r3, [pc, #76]	; (1094 <toggle_pwm_duty_cycle+0x84>)
+    1048:	4798      	blx	r3
 		port_base->OUTSET.reg = pin_mask;
-    1048:	2280      	movs	r2, #128	; 0x80
-    104a:	0252      	lsls	r2, r2, #9
-    104c:	4b0f      	ldr	r3, [pc, #60]	; (108c <toggle_pwm_duty_cycle+0x7c>)
-    104e:	619a      	str	r2, [r3, #24]
-    1050:	e7ea      	b.n	1028 <toggle_pwm_duty_cycle+0x18>
+    104a:	2280      	movs	r2, #128	; 0x80
+    104c:	0252      	lsls	r2, r2, #9
+    104e:	4b0f      	ldr	r3, [pc, #60]	; (108c <toggle_pwm_duty_cycle+0x7c>)
+    1050:	619a      	str	r2, [r3, #24]
+    1052:	e7e9      	b.n	1028 <toggle_pwm_duty_cycle+0x18>
 			toggle_count = 0;
-    1052:	2500      	movs	r5, #0
-    1054:	4b0c      	ldr	r3, [pc, #48]	; (1088 <toggle_pwm_duty_cycle+0x78>)
-    1056:	701d      	strb	r5, [r3, #0]
+    1054:	2500      	movs	r5, #0
+    1056:	4b0c      	ldr	r3, [pc, #48]	; (1088 <toggle_pwm_duty_cycle+0x78>)
+    1058:	701d      	strb	r5, [r3, #0]
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0, start_duty_cycle);
-    1058:	4c0d      	ldr	r4, [pc, #52]	; (1090 <toggle_pwm_duty_cycle+0x80>)
-    105a:	2276      	movs	r2, #118	; 0x76
-    105c:	32ff      	adds	r2, #255	; 0xff
+    105a:	4c0d      	ldr	r4, [pc, #52]	; (1090 <toggle_pwm_duty_cycle+0x80>)
+    105c:	22e5      	movs	r2, #229	; 0xe5
     105e:	2100      	movs	r1, #0
     1060:	0020      	movs	r0, r4
     1062:	4b0c      	ldr	r3, [pc, #48]	; (1094 <toggle_pwm_duty_cycle+0x84>)
@@ -3152,7 +3152,7 @@ void toggle_pwm_duty_cycle(void) {
 
 	/* Disbale interrupt */
 	tcc_module->INTENCLR.reg = TCC_INTENCLR_MASK;
-    1074:	4b08      	ldr	r3, [pc, #32]	; (1098 <toggle_pwm_duty_cycle+0x88>)
+    1074:	4b09      	ldr	r3, [pc, #36]	; (109c <toggle_pwm_duty_cycle+0x8c>)
     1076:	6253      	str	r3, [r2, #36]	; 0x24
 	/* Clear interrupt flag */
 	tcc_module->INTFLAG.reg = TCC_INTFLAG_MASK;
@@ -3171,206 +3171,210 @@ void toggle_pwm_duty_cycle(void) {
     108c:	41004400 	.word	0x41004400
     1090:	200000b0 	.word	0x200000b0
     1094:	00000e71 	.word	0x00000e71
-    1098:	000ff80f 	.word	0x000ff80f
+    1098:	00000342 	.word	0x00000342
+    109c:	000ff80f 	.word	0x000ff80f
 
-0000109c <check_button_press>:
+000010a0 <check_button_press>:
 void check_button_press(void) {
-    109c:	b510      	push	{r4, lr}
+    10a0:	b510      	push	{r4, lr}
 	if (is_button_pressed() & !motor_status_changed) {
-    109e:	4b15      	ldr	r3, [pc, #84]	; (10f4 <check_button_press+0x58>)
-    10a0:	4798      	blx	r3
-    10a2:	4b15      	ldr	r3, [pc, #84]	; (10f8 <check_button_press+0x5c>)
-    10a4:	781b      	ldrb	r3, [r3, #0]
-    10a6:	2b01      	cmp	r3, #1
-    10a8:	d018      	beq.n	10dc <check_button_press+0x40>
-    10aa:	2800      	cmp	r0, #0
-    10ac:	d016      	beq.n	10dc <check_button_press+0x40>
+    10a2:	4b15      	ldr	r3, [pc, #84]	; (10f8 <check_button_press+0x58>)
+    10a4:	4798      	blx	r3
+    10a6:	4b15      	ldr	r3, [pc, #84]	; (10fc <check_button_press+0x5c>)
+    10a8:	781b      	ldrb	r3, [r3, #0]
+    10aa:	2b01      	cmp	r3, #1
+    10ac:	d018      	beq.n	10e0 <check_button_press+0x40>
+    10ae:	2800      	cmp	r0, #0
+    10b0:	d016      	beq.n	10e0 <check_button_press+0x40>
 		toggle_count++;
-    10ae:	4a13      	ldr	r2, [pc, #76]	; (10fc <check_button_press+0x60>)
-    10b0:	7813      	ldrb	r3, [r2, #0]
-    10b2:	3301      	adds	r3, #1
-    10b4:	7013      	strb	r3, [r2, #0]
+    10b2:	4a13      	ldr	r2, [pc, #76]	; (1100 <check_button_press+0x60>)
+    10b4:	7813      	ldrb	r3, [r2, #0]
+    10b6:	3301      	adds	r3, #1
+    10b8:	7013      	strb	r3, [r2, #0]
 		motor_status_changed = true;
-    10b6:	2201      	movs	r2, #1
-    10b8:	4b0f      	ldr	r3, [pc, #60]	; (10f8 <check_button_press+0x5c>)
-    10ba:	701a      	strb	r2, [r3, #0]
+    10ba:	2201      	movs	r2, #1
+    10bc:	4b0f      	ldr	r3, [pc, #60]	; (10fc <check_button_press+0x5c>)
+    10be:	701a      	strb	r2, [r3, #0]
 		if (!pwm_running) {
-    10bc:	4b10      	ldr	r3, [pc, #64]	; (1100 <check_button_press+0x64>)
-    10be:	781b      	ldrb	r3, [r3, #0]
-    10c0:	2b00      	cmp	r3, #0
-    10c2:	d113      	bne.n	10ec <check_button_press+0x50>
+    10c0:	4b10      	ldr	r3, [pc, #64]	; (1104 <check_button_press+0x64>)
+    10c2:	781b      	ldrb	r3, [r3, #0]
+    10c4:	2b00      	cmp	r3, #0
+    10c6:	d113      	bne.n	10f0 <check_button_press+0x50>
 			pwm_running = true;			
-    10c4:	4b0e      	ldr	r3, [pc, #56]	; (1100 <check_button_press+0x64>)
-    10c6:	701a      	strb	r2, [r3, #0]
+    10c8:	4b0e      	ldr	r3, [pc, #56]	; (1104 <check_button_press+0x64>)
+    10ca:	701a      	strb	r2, [r3, #0]
 	Tcc *const tcc_module = module_inst->hw;
-    10c8:	4b0e      	ldr	r3, [pc, #56]	; (1104 <check_button_press+0x68>)
-    10ca:	681a      	ldr	r2, [r3, #0]
+    10cc:	4b0e      	ldr	r3, [pc, #56]	; (1108 <check_button_press+0x68>)
+    10ce:	681a      	ldr	r2, [r3, #0]
 	while (tcc_module->SYNCBUSY.reg & TCC_SYNCBUSY_ENABLE) {
-    10cc:	2102      	movs	r1, #2
-    10ce:	6893      	ldr	r3, [r2, #8]
-    10d0:	4219      	tst	r1, r3
-    10d2:	d1fc      	bne.n	10ce <check_button_press+0x32>
+    10d0:	2102      	movs	r1, #2
+    10d2:	6893      	ldr	r3, [r2, #8]
+    10d4:	4219      	tst	r1, r3
+    10d6:	d1fc      	bne.n	10d2 <check_button_press+0x32>
 	tcc_module->CTRLA.reg |= TCC_CTRLA_ENABLE;
-    10d4:	6813      	ldr	r3, [r2, #0]
-    10d6:	2102      	movs	r1, #2
-    10d8:	430b      	orrs	r3, r1
-    10da:	6013      	str	r3, [r2, #0]
+    10d8:	6813      	ldr	r3, [r2, #0]
+    10da:	2102      	movs	r1, #2
+    10dc:	430b      	orrs	r3, r1
+    10de:	6013      	str	r3, [r2, #0]
 	if(button_released){
-    10dc:	4b0a      	ldr	r3, [pc, #40]	; (1108 <check_button_press+0x6c>)
-    10de:	781b      	ldrb	r3, [r3, #0]
-    10e0:	2b00      	cmp	r3, #0
-    10e2:	d002      	beq.n	10ea <check_button_press+0x4e>
+    10e0:	4b0a      	ldr	r3, [pc, #40]	; (110c <check_button_press+0x6c>)
+    10e2:	781b      	ldrb	r3, [r3, #0]
+    10e4:	2b00      	cmp	r3, #0
+    10e6:	d002      	beq.n	10ee <check_button_press+0x4e>
 		motor_status_changed = false;
-    10e4:	2200      	movs	r2, #0
-    10e6:	4b04      	ldr	r3, [pc, #16]	; (10f8 <check_button_press+0x5c>)
-    10e8:	701a      	strb	r2, [r3, #0]
+    10e8:	2200      	movs	r2, #0
+    10ea:	4b04      	ldr	r3, [pc, #16]	; (10fc <check_button_press+0x5c>)
+    10ec:	701a      	strb	r2, [r3, #0]
 }
-    10ea:	bd10      	pop	{r4, pc}
+    10ee:	bd10      	pop	{r4, pc}
 			toggle_pwm_duty_cycle();
-    10ec:	4b07      	ldr	r3, [pc, #28]	; (110c <check_button_press+0x70>)
-    10ee:	4798      	blx	r3
-    10f0:	e7f4      	b.n	10dc <check_button_press+0x40>
-    10f2:	46c0      	nop			; (mov r8, r8)
-    10f4:	00000fc5 	.word	0x00000fc5
-    10f8:	20000066 	.word	0x20000066
-    10fc:	20000069 	.word	0x20000069
-    1100:	20000067 	.word	0x20000067
-    1104:	200000b0 	.word	0x200000b0
-    1108:	20000065 	.word	0x20000065
-    110c:	00001011 	.word	0x00001011
+    10f0:	4b07      	ldr	r3, [pc, #28]	; (1110 <check_button_press+0x70>)
+    10f2:	4798      	blx	r3
+    10f4:	e7f4      	b.n	10e0 <check_button_press+0x40>
+    10f6:	46c0      	nop			; (mov r8, r8)
+    10f8:	00000fc5 	.word	0x00000fc5
+    10fc:	20000066 	.word	0x20000066
+    1100:	20000069 	.word	0x20000069
+    1104:	20000067 	.word	0x20000067
+    1108:	200000b0 	.word	0x200000b0
+    110c:	20000065 	.word	0x20000065
+    1110:	00001011 	.word	0x00001011
 
-00001110 <main>:
+00001114 <main>:
 int main(void) {
-    1110:	b570      	push	{r4, r5, r6, lr}
+    1114:	b570      	push	{r4, r5, r6, lr}
 	system_init();
-    1112:	4b13      	ldr	r3, [pc, #76]	; (1160 <main+0x50>)
-    1114:	4798      	blx	r3
+    1116:	4b13      	ldr	r3, [pc, #76]	; (1164 <main+0x50>)
+    1118:	4798      	blx	r3
 	cpu_irq_enable();
-    1116:	2601      	movs	r6, #1
-    1118:	4b12      	ldr	r3, [pc, #72]	; (1164 <main+0x54>)
-    111a:	701e      	strb	r6, [r3, #0]
+    111a:	2501      	movs	r5, #1
+    111c:	4b12      	ldr	r3, [pc, #72]	; (1168 <main+0x54>)
+    111e:	701d      	strb	r5, [r3, #0]
   __ASM volatile ("dmb 0xF":::"memory");
-    111c:	f3bf 8f5f 	dmb	sy
+    1120:	f3bf 8f5f 	dmb	sy
   __ASM volatile ("cpsie i" : : : "memory");
-    1120:	b662      	cpsie	i
+    1124:	b662      	cpsie	i
 	tcc_get_config_defaults(&config_tcc, CONF_PWM_MODULE);
-    1122:	4d11      	ldr	r5, [pc, #68]	; (1168 <main+0x58>)
-    1124:	4c11      	ldr	r4, [pc, #68]	; (116c <main+0x5c>)
-    1126:	0029      	movs	r1, r5
-    1128:	0020      	movs	r0, r4
-    112a:	4b11      	ldr	r3, [pc, #68]	; (1170 <main+0x60>)
-    112c:	4798      	blx	r3
+    1126:	4e11      	ldr	r6, [pc, #68]	; (116c <main+0x58>)
+    1128:	4c11      	ldr	r4, [pc, #68]	; (1170 <main+0x5c>)
+    112a:	0031      	movs	r1, r6
+    112c:	0020      	movs	r0, r4
+    112e:	4b11      	ldr	r3, [pc, #68]	; (1174 <main+0x60>)
+    1130:	4798      	blx	r3
 	config_tcc.counter.period                               = TCC_PERIOD_VALUE;
-    112e:	238c      	movs	r3, #140	; 0x8c
-    1130:	009b      	lsls	r3, r3, #2
-    1132:	6063      	str	r3, [r4, #4]
+    1132:	4b11      	ldr	r3, [pc, #68]	; (1178 <main+0x64>)
+    1134:	6063      	str	r3, [r4, #4]
 	config_tcc.compare.match[TCC_MATCH_CAPTURE_CHANNEL_0]	= start_duty_cycle;
-    1134:	2376      	movs	r3, #118	; 0x76
-    1136:	33ff      	adds	r3, #255	; 0xff
+    1136:	23e5      	movs	r3, #229	; 0xe5
     1138:	61e3      	str	r3, [r4, #28]
+	config_tcc.compare.wave_polarity[TCC_MATCH_CAPTURE_CHANNEL_0] = 1;
+    113a:	7525      	strb	r5, [r4, #20]
 	config_tcc.compare.wave_generation = TCC_WAVE_GENERATION_DOUBLE_SLOPE_BOTH;
-    113a:	3b70      	subs	r3, #112	; 0x70
-    113c:	3bff      	subs	r3, #255	; 0xff
+    113c:	3bdf      	subs	r3, #223	; 0xdf
     113e:	7623      	strb	r3, [r4, #24]
+	config_tcc.counter.clock_prescaler = TCC_CLOCK_DIVIDER;
+    1140:	3b04      	subs	r3, #4
+    1142:	72e3      	strb	r3, [r4, #11]
 	config_tcc.pins.enable_wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]    = true;
-    1140:	3392      	adds	r3, #146	; 0x92
-    1142:	54e6      	strb	r6, [r4, r3]
+    1144:	3396      	adds	r3, #150	; 0x96
+    1146:	54e5      	strb	r5, [r4, r3]
 	config_tcc.pins.wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]           = PIN_PA04F_TCC0_WO0;
-    1144:	3b94      	subs	r3, #148	; 0x94
-    1146:	65a3      	str	r3, [r4, #88]	; 0x58
+    1148:	3b94      	subs	r3, #148	; 0x94
+    114a:	65a3      	str	r3, [r4, #88]	; 0x58
 	config_tcc.pins.wave_out_pin_mux[TCC_MATCH_CAPTURE_CHANNEL_0]       = MUX_PA04F_TCC0_WO0;
-    1148:	3301      	adds	r3, #1
-    114a:	67a3      	str	r3, [r4, #120]	; 0x78
+    114c:	3301      	adds	r3, #1
+    114e:	67a3      	str	r3, [r4, #120]	; 0x78
 	stat = tcc_init(&tcc_instance, CONF_PWM_MODULE, &config_tcc);
-    114c:	0022      	movs	r2, r4
-    114e:	0029      	movs	r1, r5
-    1150:	4808      	ldr	r0, [pc, #32]	; (1174 <main+0x64>)
-    1152:	4b09      	ldr	r3, [pc, #36]	; (1178 <main+0x68>)
-    1154:	4798      	blx	r3
-    1156:	4b09      	ldr	r3, [pc, #36]	; (117c <main+0x6c>)
-    1158:	7018      	strb	r0, [r3, #0]
+    1150:	0022      	movs	r2, r4
+    1152:	0031      	movs	r1, r6
+    1154:	4809      	ldr	r0, [pc, #36]	; (117c <main+0x68>)
+    1156:	4b0a      	ldr	r3, [pc, #40]	; (1180 <main+0x6c>)
+    1158:	4798      	blx	r3
+    115a:	4b0a      	ldr	r3, [pc, #40]	; (1184 <main+0x70>)
+    115c:	7018      	strb	r0, [r3, #0]
     system_interrupt_enable_global();
 	configure_tcc();
 	while (1) {
 		check_button_press();
-    115a:	4c09      	ldr	r4, [pc, #36]	; (1180 <main+0x70>)
-    115c:	47a0      	blx	r4
-    115e:	e7fd      	b.n	115c <main+0x4c>
-    1160:	00000925 	.word	0x00000925
-    1164:	20000000 	.word	0x20000000
-    1168:	42001400 	.word	0x42001400
-    116c:	200000f0 	.word	0x200000f0
-    1170:	000009ad 	.word	0x000009ad
-    1174:	200000b0 	.word	0x200000b0
-    1178:	00000ae9 	.word	0x00000ae9
-    117c:	20000068 	.word	0x20000068
-    1180:	0000109d 	.word	0x0000109d
+    115e:	4c0a      	ldr	r4, [pc, #40]	; (1188 <main+0x74>)
+    1160:	47a0      	blx	r4
+    1162:	e7fd      	b.n	1160 <main+0x4c>
+    1164:	00000925 	.word	0x00000925
+    1168:	20000000 	.word	0x20000000
+    116c:	42001400 	.word	0x42001400
+    1170:	200000f0 	.word	0x200000f0
+    1174:	000009ad 	.word	0x000009ad
+    1178:	00000395 	.word	0x00000395
+    117c:	200000b0 	.word	0x200000b0
+    1180:	00000ae9 	.word	0x00000ae9
+    1184:	20000068 	.word	0x20000068
+    1188:	000010a1 	.word	0x000010a1
 
-00001184 <__libc_init_array>:
-    1184:	b570      	push	{r4, r5, r6, lr}
-    1186:	2600      	movs	r6, #0
-    1188:	4d0c      	ldr	r5, [pc, #48]	; (11bc <__libc_init_array+0x38>)
-    118a:	4c0d      	ldr	r4, [pc, #52]	; (11c0 <__libc_init_array+0x3c>)
-    118c:	1b64      	subs	r4, r4, r5
-    118e:	10a4      	asrs	r4, r4, #2
-    1190:	42a6      	cmp	r6, r4
-    1192:	d109      	bne.n	11a8 <__libc_init_array+0x24>
-    1194:	2600      	movs	r6, #0
-    1196:	f000 f843 	bl	1220 <_init>
-    119a:	4d0a      	ldr	r5, [pc, #40]	; (11c4 <__libc_init_array+0x40>)
-    119c:	4c0a      	ldr	r4, [pc, #40]	; (11c8 <__libc_init_array+0x44>)
-    119e:	1b64      	subs	r4, r4, r5
-    11a0:	10a4      	asrs	r4, r4, #2
-    11a2:	42a6      	cmp	r6, r4
-    11a4:	d105      	bne.n	11b2 <__libc_init_array+0x2e>
-    11a6:	bd70      	pop	{r4, r5, r6, pc}
-    11a8:	00b3      	lsls	r3, r6, #2
-    11aa:	58eb      	ldr	r3, [r5, r3]
-    11ac:	4798      	blx	r3
-    11ae:	3601      	adds	r6, #1
-    11b0:	e7ee      	b.n	1190 <__libc_init_array+0xc>
-    11b2:	00b3      	lsls	r3, r6, #2
-    11b4:	58eb      	ldr	r3, [r5, r3]
-    11b6:	4798      	blx	r3
-    11b8:	3601      	adds	r6, #1
-    11ba:	e7f2      	b.n	11a2 <__libc_init_array+0x1e>
-    11bc:	0000122c 	.word	0x0000122c
-    11c0:	0000122c 	.word	0x0000122c
-    11c4:	0000122c 	.word	0x0000122c
-    11c8:	00001230 	.word	0x00001230
-    11cc:	00000484 	.word	0x00000484
-    11d0:	00000464 	.word	0x00000464
-    11d4:	00000464 	.word	0x00000464
-    11d8:	000004f0 	.word	0x000004f0
-    11dc:	00000476 	.word	0x00000476
-    11e0:	00000492 	.word	0x00000492
-    11e4:	00000468 	.word	0x00000468
-    11e8:	000004a0 	.word	0x000004a0
-    11ec:	000004e0 	.word	0x000004e0
+0000118c <__libc_init_array>:
+    118c:	b570      	push	{r4, r5, r6, lr}
+    118e:	2600      	movs	r6, #0
+    1190:	4d0c      	ldr	r5, [pc, #48]	; (11c4 <__libc_init_array+0x38>)
+    1192:	4c0d      	ldr	r4, [pc, #52]	; (11c8 <__libc_init_array+0x3c>)
+    1194:	1b64      	subs	r4, r4, r5
+    1196:	10a4      	asrs	r4, r4, #2
+    1198:	42a6      	cmp	r6, r4
+    119a:	d109      	bne.n	11b0 <__libc_init_array+0x24>
+    119c:	2600      	movs	r6, #0
+    119e:	f000 f843 	bl	1228 <_init>
+    11a2:	4d0a      	ldr	r5, [pc, #40]	; (11cc <__libc_init_array+0x40>)
+    11a4:	4c0a      	ldr	r4, [pc, #40]	; (11d0 <__libc_init_array+0x44>)
+    11a6:	1b64      	subs	r4, r4, r5
+    11a8:	10a4      	asrs	r4, r4, #2
+    11aa:	42a6      	cmp	r6, r4
+    11ac:	d105      	bne.n	11ba <__libc_init_array+0x2e>
+    11ae:	bd70      	pop	{r4, r5, r6, pc}
+    11b0:	00b3      	lsls	r3, r6, #2
+    11b2:	58eb      	ldr	r3, [r5, r3]
+    11b4:	4798      	blx	r3
+    11b6:	3601      	adds	r6, #1
+    11b8:	e7ee      	b.n	1198 <__libc_init_array+0xc>
+    11ba:	00b3      	lsls	r3, r6, #2
+    11bc:	58eb      	ldr	r3, [r5, r3]
+    11be:	4798      	blx	r3
+    11c0:	3601      	adds	r6, #1
+    11c2:	e7f2      	b.n	11aa <__libc_init_array+0x1e>
+    11c4:	00001234 	.word	0x00001234
+    11c8:	00001234 	.word	0x00001234
+    11cc:	00001234 	.word	0x00001234
+    11d0:	00001238 	.word	0x00001238
+    11d4:	00000484 	.word	0x00000484
+    11d8:	00000464 	.word	0x00000464
+    11dc:	00000464 	.word	0x00000464
+    11e0:	000004f0 	.word	0x000004f0
+    11e4:	00000476 	.word	0x00000476
+    11e8:	00000492 	.word	0x00000492
+    11ec:	00000468 	.word	0x00000468
+    11f0:	000004a0 	.word	0x000004a0
+    11f4:	000004e0 	.word	0x000004e0
 
-000011f0 <_tcc_intflag>:
-    11f0:	00000001 00000002 00000004 00000008     ................
-    1200:	00001000 00002000 00004000 00008000     ..... ...@......
-    1210:	00010000 00020000 00040000 00080000     ................
+000011f8 <_tcc_intflag>:
+    11f8:	00000001 00000002 00000004 00000008     ................
+    1208:	00001000 00002000 00004000 00008000     ..... ...@......
+    1218:	00010000 00020000 00040000 00080000     ................
 
-00001220 <_init>:
-    1220:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-    1222:	46c0      	nop			; (mov r8, r8)
-    1224:	bcf8      	pop	{r3, r4, r5, r6, r7}
-    1226:	bc08      	pop	{r3}
-    1228:	469e      	mov	lr, r3
-    122a:	4770      	bx	lr
+00001228 <_init>:
+    1228:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+    122a:	46c0      	nop			; (mov r8, r8)
+    122c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+    122e:	bc08      	pop	{r3}
+    1230:	469e      	mov	lr, r3
+    1232:	4770      	bx	lr
 
-0000122c <__init_array_start>:
-    122c:	000000b5 	.word	0x000000b5
+00001234 <__init_array_start>:
+    1234:	000000b5 	.word	0x000000b5
 
-00001230 <_fini>:
-    1230:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-    1232:	46c0      	nop			; (mov r8, r8)
-    1234:	bcf8      	pop	{r3, r4, r5, r6, r7}
-    1236:	bc08      	pop	{r3}
-    1238:	469e      	mov	lr, r3
-    123a:	4770      	bx	lr
+00001238 <_fini>:
+    1238:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+    123a:	46c0      	nop			; (mov r8, r8)
+    123c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+    123e:	bc08      	pop	{r3}
+    1240:	469e      	mov	lr, r3
+    1242:	4770      	bx	lr
 
-0000123c <__fini_array_start>:
-    123c:	0000008d 	.word	0x0000008d
+00001244 <__fini_array_start>:
+    1244:	0000008d 	.word	0x0000008d

@@ -8,8 +8,10 @@ struct tcc_module tcc_instance;
 enum status_code stat = STATUS_OK;
 struct tcc_config config_tcc;
 
-#define TCC_PERIOD_VALUE 0x230
+#define TCC_PERIOD_VALUE 0x395
 #define DEBOUNCE_DELAY 50 
+#define GLCK_SOURCE                 GCLK_GENERATOR_0
+#define TCC_CLOCK_DIVIDER           TCC_CLOCK_PRESCALER_DIV4
 
 uint32_t debounce_timestamp = 0;
 
@@ -29,9 +31,9 @@ uint8_t toggle_count = 0;
 bool pwm_running = false;
 
 
-#define start_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 1.5))
-#define first_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 3.0))
-#define second_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 7.0)) 
+#define start_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 4.0))
+#define first_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 2.5))
+#define second_duty_cycle ((int)lround(TCC_PERIOD_VALUE / 1.10)) 
 
 
 static void configure_tcc(void) {
@@ -39,8 +41,12 @@ static void configure_tcc(void) {
 	tcc_get_config_defaults(&config_tcc, CONF_PWM_MODULE);
 	config_tcc.counter.period                               = TCC_PERIOD_VALUE;
 	config_tcc.compare.match[TCC_MATCH_CAPTURE_CHANNEL_0]	= start_duty_cycle;
-
+	
+	config_tcc.compare.wave_polarity[TCC_MATCH_CAPTURE_CHANNEL_0] = 1;
 	config_tcc.compare.wave_generation = TCC_WAVE_GENERATION_DOUBLE_SLOPE_BOTH;
+	
+	config_tcc.counter.clock_prescaler = TCC_CLOCK_DIVIDER;
+	
 	config_tcc.pins.enable_wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]    = true;
 	config_tcc.pins.wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]           = PIN_PA04F_TCC0_WO0;
 	config_tcc.pins.wave_out_pin_mux[TCC_MATCH_CAPTURE_CHANNEL_0]       = MUX_PA04F_TCC0_WO0;
