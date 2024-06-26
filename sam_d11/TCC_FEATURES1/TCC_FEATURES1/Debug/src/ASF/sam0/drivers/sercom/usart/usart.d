@@ -111,6 +111,8 @@ src/ASF/sam0/drivers/sercom/usart/usart.d \
  ../src/ASF/sam0/drivers/system/pinmux/pinmux.h \
  ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h \
  ../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h \
+ ../src/ASF/common2/services/delay/delay.h \
+ ../src/ASF/common2/services/delay/sam0/systick_counter.h \
  ../src/ASF/sam0/drivers/system/interrupt/system_interrupt.h \
  ../src/ASF/sam0/drivers/system/interrupt/system_interrupt_samd10_d11/system_interrupt_features.h \
  ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
@@ -339,6 +341,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h:
 
 ../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h:
+
+../src/ASF/common2/services/delay/delay.h:
+
+../src/ASF/common2/services/delay/sam0/systick_counter.h:
 
 ../src/ASF/sam0/drivers/system/interrupt/system_interrupt.h:
 

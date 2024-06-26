@@ -100,6 +100,12 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
  ../src/ASF/common/utils/interrupt.h \
  ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h \
+ ../src/ASF/common2/services/delay/delay.h \
+ ../src/ASF/common2/services/delay/sam0/systick_counter.h \
+ ../src/ASF/sam0/drivers/system/clock/clock.h \
+ ../src/ASF/sam0/drivers/system/clock/gclk.h \
+ ../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_feature.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  ../src/ASF/sam0/drivers/events/events.h \
  ../src/ASF/sam0/drivers/events/events_common.h \
  ../src/ASF/sam0/drivers/events/events_hooks.h \
@@ -110,14 +116,9 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/sam0/drivers/extint/extint_callback.h \
  ../src/ASF/common/boards/board.h \
  ../src/ASF/sam0/boards/samd11_xplained_pro/samd11_xplained_pro.h \
- ../src/config/conf_board.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- ../src/ASF/sam0/drivers/port/port.h \
+ ../src/config/conf_board.h ../src/ASF/sam0/drivers/port/port.h \
  ../src/ASF/sam0/drivers/sercom/sercom.h \
  ../src/ASF/sam0/drivers/system/system.h \
- ../src/ASF/sam0/drivers/system/clock/clock.h \
- ../src/ASF/sam0/drivers/system/clock/gclk.h \
- ../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_feature.h \
  ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h \
  ../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h \
  ../src/ASF/sam0/drivers/system/interrupt/system_interrupt.h \
@@ -345,6 +346,18 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h:
 
+../src/ASF/common2/services/delay/delay.h:
+
+../src/ASF/common2/services/delay/sam0/systick_counter.h:
+
+../src/ASF/sam0/drivers/system/clock/clock.h:
+
+../src/ASF/sam0/drivers/system/clock/gclk.h:
+
+../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_feature.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
 ../src/ASF/sam0/drivers/events/events.h:
 
 ../src/ASF/sam0/drivers/events/events_common.h:
@@ -367,19 +380,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/config/conf_board.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
-
 ../src/ASF/sam0/drivers/port/port.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom.h:
 
 ../src/ASF/sam0/drivers/system/system.h:
-
-../src/ASF/sam0/drivers/system/clock/clock.h:
-
-../src/ASF/sam0/drivers/system/clock/gclk.h:
-
-../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_feature.h:
 
 ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h:
 

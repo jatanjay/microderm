@@ -69,7 +69,6 @@
  * #define TCC_MODE_CAPTURE. No other definitions should be done by user.
  */
 
-#define  TCC_MODE_DUAL_SLOPE
  // End of feature definitions. 
  
 
@@ -242,11 +241,11 @@ enum eTCC_Channel {
 //////////// END OF symbolic constants FEATURE SPECIFIC /////////////////////
 
 //////////// START OF Function Prototypes ///////////////////////////////////
-void configure_tcc(void);
-void swap_operation(void);
-void pattern_generation(void);
-void oneshot_operation(void);
-void configure_tcc_callback(void);
+//void configure_tcc(void);
+//void swap_operation(void);
+//void pattern_generation(void);
+//void oneshot_operation(void);
+//void configure_tcc_callback(void);
 //////////// END OF Function Prototypes /////////////////////////////////////
 
 #endif /* CONF_EXAMPLE_H_INCLUDED */

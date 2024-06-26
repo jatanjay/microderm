@@ -42,6 +42,7 @@
 #include <pinmux.h>
 #include <power.h>
 #include <reset.h>
+#include <delay.h>
 
 #ifdef __cplusplus
 extern "C" {

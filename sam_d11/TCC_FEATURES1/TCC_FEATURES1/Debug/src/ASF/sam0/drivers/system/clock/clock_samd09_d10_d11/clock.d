@@ -109,6 +109,8 @@ src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.d \
  ../src/ASF/sam0/drivers/system/pinmux/pinmux.h \
  ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h \
  ../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h \
+ ../src/ASF/common2/services/delay/delay.h \
+ ../src/ASF/common2/services/delay/sam0/systick_counter.h \
  ../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_config_check.h
 
 ../src/ASF/sam0/drivers/system/clock/clock.h:
@@ -330,5 +332,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h:
 
 ../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h:
+
+../src/ASF/common2/services/delay/delay.h:
+
+../src/ASF/common2/services/delay/sam0/systick_counter.h:
 
 ../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_config_check.h:

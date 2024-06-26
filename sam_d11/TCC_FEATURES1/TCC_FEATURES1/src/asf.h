@@ -56,6 +56,9 @@
 #include <compiler.h>
 #include <status_codes.h>
 
+// From module: Delay routines
+#include <delay.h>
+#include <math.h>
 // From module: EVSYS - Event System Common
 #include <events.h>
 
@@ -68,7 +71,7 @@
 
 // From module: Generic board support
 #include <board.h>
-#include <math.h>
+
 // From module: Interrupt management - SAM implementation
 #include <interrupt.h>
 
