@@ -105,7 +105,6 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/sam0/drivers/system/clock/clock.h \
  ../src/ASF/sam0/drivers/system/clock/gclk.h \
  ../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_feature.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  ../src/ASF/sam0/drivers/events/events.h \
  ../src/ASF/sam0/drivers/events/events_common.h \
  ../src/ASF/sam0/drivers/events/events_hooks.h \
@@ -132,13 +131,16 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/sam0/utils/stdio/stdio_serial/stdio_serial.h \
  ../src/ASF/common/services/serial/serial.h \
  ../src/ASF/common/services/serial/sam0_usart/usart_serial.h \
- ../src/ASF/sam0/drivers/tcc/tcc.h \
+ ../src/ASF/sam0/drivers/tc/tc.h \
+ ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
+ ../src/ASF/sam0/drivers/tc/tc.h ../src/ASF/sam0/drivers/tcc/tcc.h \
  ../src/ASF/sam0/drivers/tcc/tcc_callback.h \
  ../src/ASF/sam0/drivers/tcc/tcc.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
+ ../src/conf_example.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../src/conf_example.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h
 
 ../src/asf.h:
 
@@ -356,8 +358,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_feature.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
-
 ../src/ASF/sam0/drivers/events/events.h:
 
 ../src/ASF/sam0/drivers/events/events_common.h:
@@ -412,16 +412,24 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common/services/serial/sam0_usart/usart_serial.h:
 
+../src/ASF/sam0/drivers/tc/tc.h:
+
+../src/ASF/sam0/drivers/tc/tc_interrupt.h:
+
+../src/ASF/sam0/drivers/tc/tc.h:
+
 ../src/ASF/sam0/drivers/tcc/tcc.h:
 
 ../src/ASF/sam0/drivers/tcc/tcc_callback.h:
 
 ../src/ASF/sam0/drivers/tcc/tcc.h:
 
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
+../src/conf_example.h:
+
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
-
-../src/conf_example.h:

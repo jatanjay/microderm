@@ -3,48 +3,48 @@ TC_QUICK_START_CALLBACK2.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000bd8  00000000  00000000  00010000  2**2
+  0 .text         00000b7c  00000000  00000000  00010000  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .relocate     00000004  20000000  00000bd8  00020000  2**0
+  1 .relocate     00000004  20000000  00000b7c  00020000  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000064  20000004  00000bdc  00020004  2**2
+  2 .bss          00000060  20000004  00000b80  00020004  2**2
                   ALLOC
-  3 .stack        00000400  20000068  00000c40  00020004  2**0
+  3 .stack        00000404  20000064  00000be0  00020004  2**0
                   ALLOC
   4 .ARM.attributes 00000028  00000000  00000000  00020004  2**0
                   CONTENTS, READONLY
   5 .comment      00000059  00000000  00000000  0002002c  2**0
                   CONTENTS, READONLY
-  6 .debug_info   00013afd  00000000  00000000  00020085  2**0
+  6 .debug_info   000141db  00000000  00000000  00020085  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000022f1  00000000  00000000  00033b82  2**0
+  7 .debug_abbrev 00002314  00000000  00000000  00034260  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_aranges 000002c8  00000000  00000000  00035e73  2**0
+  8 .debug_aranges 000002c8  00000000  00000000  00036574  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_ranges 00000280  00000000  00000000  0003613b  2**0
+  9 .debug_ranges 00000280  00000000  00000000  0003683c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_macro  00014978  00000000  00000000  000363bb  2**0
+ 10 .debug_macro  00014978  00000000  00000000  00036abc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_line   00006e7f  00000000  00000000  0004ad33  2**0
+ 11 .debug_line   00006e89  00000000  00000000  0004b434  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_str    00075667  00000000  00000000  00051bb2  2**0
+ 12 .debug_str    00075667  00000000  00000000  000522bd  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_frame  0000060c  00000000  00000000  000c721c  2**2
+ 13 .debug_frame  00000604  00000000  00000000  000c7924  2**2
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    0000299f  00000000  00000000  000c7828  2**0
+ 14 .debug_loc    0000299c  00000000  00000000  000c7f28  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <exception_table>:
-   0:	68 04 00 20 65 09 00 00 61 09 00 00 61 09 00 00     h.. e...a...a...
+   0:	68 04 00 20 15 09 00 00 11 09 00 00 11 09 00 00     h.. ............
 	...
-  2c:	61 09 00 00 00 00 00 00 00 00 00 00 61 09 00 00     a...........a...
-  3c:	61 09 00 00 61 09 00 00 61 09 00 00 61 09 00 00     a...a...a...a...
-  4c:	61 09 00 00 61 09 00 00 61 09 00 00 61 09 00 00     a...a...a...a...
-  5c:	61 09 00 00 61 09 00 00 61 09 00 00 61 09 00 00     a...a...a...a...
-  6c:	61 09 00 00 61 09 00 00 9d 06 00 00 ad 06 00 00     a...a...........
-  7c:	61 09 00 00 61 09 00 00 61 09 00 00 61 09 00 00     a...a...a...a...
+  2c:	11 09 00 00 00 00 00 00 00 00 00 00 11 09 00 00     ................
+  3c:	11 09 00 00 11 09 00 00 11 09 00 00 11 09 00 00     ................
+  4c:	11 09 00 00 11 09 00 00 11 09 00 00 11 09 00 00     ................
+  5c:	11 09 00 00 11 09 00 00 11 09 00 00 11 09 00 00     ................
+  6c:	11 09 00 00 11 09 00 00 9d 06 00 00 ad 06 00 00     ................
+  7c:	11 09 00 00 11 09 00 00 11 09 00 00 11 09 00 00     ................
 
 0000008c <__do_global_dtors_aux>:
   8c:	b510      	push	{r4, lr}
@@ -63,7 +63,7 @@ Disassembly of section .text:
   a6:	bd10      	pop	{r4, pc}
   a8:	20000004 	.word	0x20000004
   ac:	00000000 	.word	0x00000000
-  b0:	00000bd8 	.word	0x00000bd8
+  b0:	00000b7c 	.word	0x00000b7c
 
 000000b4 <frame_dummy>:
   b4:	4b08      	ldr	r3, [pc, #32]	; (d8 <frame_dummy+0x24>)
@@ -86,8 +86,8 @@ Disassembly of section .text:
   d6:	e7f9      	b.n	cc <frame_dummy+0x18>
   d8:	00000000 	.word	0x00000000
   dc:	20000008 	.word	0x20000008
-  e0:	00000bd8 	.word	0x00000bd8
-  e4:	00000bd8 	.word	0x00000bd8
+  e0:	00000b7c 	.word	0x00000b7c
+  e4:	00000b7c 	.word	0x00000b7c
   e8:	00000000 	.word	0x00000000
 
 000000ec <cpu_irq_enter_critical>:
@@ -453,7 +453,7 @@ enum status_code system_clock_source_enable(
  28c:	2000      	movs	r0, #0
 }
  28e:	4770      	bx	lr
- 290:	00000b90 	.word	0x00000b90
+ 290:	00000b34 	.word	0x00000b34
  294:	40000800 	.word	0x40000800
  298:	20000028 	.word	0x20000028
 
@@ -1423,7 +1423,7 @@ void _tc_interrupt_handler(
 }
  694:	e7e2      	b.n	65c <_tc_interrupt_handler+0x24>
  696:	46c0      	nop			; (mov r8, r8)
- 698:	20000044 	.word	0x20000044
+ 698:	20000040 	.word	0x20000040
 
 0000069c <TC1_Handler>:
 	MRECURSION(TC_INST_NUM, _TC_INTERRUPT_HANDLER, TC_INST_MAX_ID)
@@ -1921,540 +1921,442 @@ enum status_code tc_init(
  8f4:	2000      	movs	r0, #0
  8f6:	e718      	b.n	72a <tc_init+0x4a>
  8f8:	000006bd 	.word	0x000006bd
- 8fc:	20000044 	.word	0x20000044
+ 8fc:	20000040 	.word	0x20000040
  900:	40000400 	.word	0x40000400
  904:	000004e1 	.word	0x000004e1
  908:	00000455 	.word	0x00000455
  90c:	000005a5 	.word	0x000005a5
 
-00000910 <tc_set_compare_value>:
- */
-enum status_code tc_set_compare_value(
-		const struct tc_module *const module_inst,
-		const enum tc_compare_capture_channel channel_index,
-		const uint32_t compare)
-{
- 910:	b510      	push	{r4, lr}
-	/* Sanity check arguments */
-	Assert(module_inst);
-	Assert(module_inst->hw);
-
-	/* Get a pointer to the module's hardware instance */
-	Tc *const tc_module = module_inst->hw;
- 912:	6804      	ldr	r4, [r0, #0]
- 914:	7be3      	ldrb	r3, [r4, #15]
-
-	while (tc_is_syncing(module_inst)) {
- 916:	b25b      	sxtb	r3, r3
- 918:	2b00      	cmp	r3, #0
- 91a:	dbfb      	blt.n	914 <tc_set_compare_value+0x4>
-		/* Wait for sync */
-	}
-
-	/* Read out based on the TC counter size */
-	switch (module_inst->counter_size) {
- 91c:	7903      	ldrb	r3, [r0, #4]
- 91e:	2b04      	cmp	r3, #4
- 920:	d005      	beq.n	92e <tc_set_compare_value+0x1e>
- 922:	2b08      	cmp	r3, #8
- 924:	d014      	beq.n	950 <tc_set_compare_value+0x40>
-						(uint32_t)compare;
-				return STATUS_OK;
-			}
-	}
-
-	return STATUS_ERR_INVALID_ARG;
- 926:	2017      	movs	r0, #23
-	switch (module_inst->counter_size) {
- 928:	2b00      	cmp	r3, #0
- 92a:	d008      	beq.n	93e <tc_set_compare_value+0x2e>
-}
- 92c:	bd10      	pop	{r4, pc}
-	return STATUS_ERR_INVALID_ARG;
- 92e:	2017      	movs	r0, #23
-			if (channel_index <
- 930:	2901      	cmp	r1, #1
- 932:	d8fb      	bhi.n	92c <tc_set_compare_value+0x1c>
-						(uint8_t)compare;
- 934:	b2d2      	uxtb	r2, r2
-				tc_module->COUNT8.CC[channel_index].reg  =
- 936:	1861      	adds	r1, r4, r1
- 938:	760a      	strb	r2, [r1, #24]
-				return STATUS_OK;
- 93a:	2000      	movs	r0, #0
- 93c:	e7f6      	b.n	92c <tc_set_compare_value+0x1c>
-	return STATUS_ERR_INVALID_ARG;
- 93e:	2017      	movs	r0, #23
-			if (channel_index <
- 940:	2901      	cmp	r1, #1
- 942:	d8f3      	bhi.n	92c <tc_set_compare_value+0x1c>
-						(uint16_t)compare;
- 944:	b292      	uxth	r2, r2
-				tc_module->COUNT16.CC[channel_index].reg =
- 946:	310c      	adds	r1, #12
- 948:	0049      	lsls	r1, r1, #1
- 94a:	530a      	strh	r2, [r1, r4]
-				return STATUS_OK;
- 94c:	2000      	movs	r0, #0
- 94e:	e7ed      	b.n	92c <tc_set_compare_value+0x1c>
-	return STATUS_ERR_INVALID_ARG;
- 950:	2017      	movs	r0, #23
-			if (channel_index <
- 952:	2901      	cmp	r1, #1
- 954:	d8ea      	bhi.n	92c <tc_set_compare_value+0x1c>
-				tc_module->COUNT32.CC[channel_index].reg =
- 956:	3106      	adds	r1, #6
- 958:	0089      	lsls	r1, r1, #2
- 95a:	510a      	str	r2, [r1, r4]
-				return STATUS_OK;
- 95c:	2000      	movs	r0, #0
- 95e:	e7e5      	b.n	92c <tc_set_compare_value+0x1c>
-
-00000960 <Dummy_Handler>:
+00000910 <Dummy_Handler>:
 
 /**
  * \brief Default interrupt handler for unused IRQs.
  */
 void Dummy_Handler(void)
 {
- 960:	e7fe      	b.n	960 <Dummy_Handler>
+ 910:	e7fe      	b.n	910 <Dummy_Handler>
 	...
 
-00000964 <Reset_Handler>:
+00000914 <Reset_Handler>:
 {
- 964:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 914:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
         if (pSrc != pDest) {
- 966:	4a2a      	ldr	r2, [pc, #168]	; (a10 <Reset_Handler+0xac>)
- 968:	4b2a      	ldr	r3, [pc, #168]	; (a14 <Reset_Handler+0xb0>)
- 96a:	429a      	cmp	r2, r3
- 96c:	d011      	beq.n	992 <Reset_Handler+0x2e>
+ 916:	4a2a      	ldr	r2, [pc, #168]	; (9c0 <Reset_Handler+0xac>)
+ 918:	4b2a      	ldr	r3, [pc, #168]	; (9c4 <Reset_Handler+0xb0>)
+ 91a:	429a      	cmp	r2, r3
+ 91c:	d011      	beq.n	942 <Reset_Handler+0x2e>
                 for (; pDest < &_erelocate;) {
- 96e:	001a      	movs	r2, r3
- 970:	4b29      	ldr	r3, [pc, #164]	; (a18 <Reset_Handler+0xb4>)
- 972:	429a      	cmp	r2, r3
- 974:	d20d      	bcs.n	992 <Reset_Handler+0x2e>
- 976:	4a29      	ldr	r2, [pc, #164]	; (a1c <Reset_Handler+0xb8>)
- 978:	3303      	adds	r3, #3
- 97a:	1a9b      	subs	r3, r3, r2
- 97c:	089b      	lsrs	r3, r3, #2
- 97e:	3301      	adds	r3, #1
- 980:	009b      	lsls	r3, r3, #2
- 982:	2200      	movs	r2, #0
+ 91e:	001a      	movs	r2, r3
+ 920:	4b29      	ldr	r3, [pc, #164]	; (9c8 <Reset_Handler+0xb4>)
+ 922:	429a      	cmp	r2, r3
+ 924:	d20d      	bcs.n	942 <Reset_Handler+0x2e>
+ 926:	4a29      	ldr	r2, [pc, #164]	; (9cc <Reset_Handler+0xb8>)
+ 928:	3303      	adds	r3, #3
+ 92a:	1a9b      	subs	r3, r3, r2
+ 92c:	089b      	lsrs	r3, r3, #2
+ 92e:	3301      	adds	r3, #1
+ 930:	009b      	lsls	r3, r3, #2
+ 932:	2200      	movs	r2, #0
                         *pDest++ = *pSrc++;
- 984:	4823      	ldr	r0, [pc, #140]	; (a14 <Reset_Handler+0xb0>)
- 986:	4922      	ldr	r1, [pc, #136]	; (a10 <Reset_Handler+0xac>)
- 988:	588c      	ldr	r4, [r1, r2]
- 98a:	5084      	str	r4, [r0, r2]
- 98c:	3204      	adds	r2, #4
+ 934:	4823      	ldr	r0, [pc, #140]	; (9c4 <Reset_Handler+0xb0>)
+ 936:	4922      	ldr	r1, [pc, #136]	; (9c0 <Reset_Handler+0xac>)
+ 938:	588c      	ldr	r4, [r1, r2]
+ 93a:	5084      	str	r4, [r0, r2]
+ 93c:	3204      	adds	r2, #4
                 for (; pDest < &_erelocate;) {
- 98e:	429a      	cmp	r2, r3
- 990:	d1fa      	bne.n	988 <Reset_Handler+0x24>
+ 93e:	429a      	cmp	r2, r3
+ 940:	d1fa      	bne.n	938 <Reset_Handler+0x24>
         for (pDest = &_szero; pDest < &_ezero;) {
- 992:	4a23      	ldr	r2, [pc, #140]	; (a20 <Reset_Handler+0xbc>)
- 994:	4b23      	ldr	r3, [pc, #140]	; (a24 <Reset_Handler+0xc0>)
- 996:	429a      	cmp	r2, r3
- 998:	d20a      	bcs.n	9b0 <Reset_Handler+0x4c>
- 99a:	43d3      	mvns	r3, r2
- 99c:	4921      	ldr	r1, [pc, #132]	; (a24 <Reset_Handler+0xc0>)
- 99e:	185b      	adds	r3, r3, r1
- 9a0:	2103      	movs	r1, #3
- 9a2:	438b      	bics	r3, r1
- 9a4:	3304      	adds	r3, #4
- 9a6:	189b      	adds	r3, r3, r2
+ 942:	4a23      	ldr	r2, [pc, #140]	; (9d0 <Reset_Handler+0xbc>)
+ 944:	4b23      	ldr	r3, [pc, #140]	; (9d4 <Reset_Handler+0xc0>)
+ 946:	429a      	cmp	r2, r3
+ 948:	d20a      	bcs.n	960 <Reset_Handler+0x4c>
+ 94a:	43d3      	mvns	r3, r2
+ 94c:	4921      	ldr	r1, [pc, #132]	; (9d4 <Reset_Handler+0xc0>)
+ 94e:	185b      	adds	r3, r3, r1
+ 950:	2103      	movs	r1, #3
+ 952:	438b      	bics	r3, r1
+ 954:	3304      	adds	r3, #4
+ 956:	189b      	adds	r3, r3, r2
                 *pDest++ = 0;
- 9a8:	2100      	movs	r1, #0
- 9aa:	c202      	stmia	r2!, {r1}
+ 958:	2100      	movs	r1, #0
+ 95a:	c202      	stmia	r2!, {r1}
         for (pDest = &_szero; pDest < &_ezero;) {
- 9ac:	4293      	cmp	r3, r2
- 9ae:	d1fc      	bne.n	9aa <Reset_Handler+0x46>
+ 95c:	4293      	cmp	r3, r2
+ 95e:	d1fc      	bne.n	95a <Reset_Handler+0x46>
         SCB->VTOR = ((uint32_t) pSrc & SCB_VTOR_TBLOFF_Msk);
- 9b0:	4a1d      	ldr	r2, [pc, #116]	; (a28 <Reset_Handler+0xc4>)
- 9b2:	21ff      	movs	r1, #255	; 0xff
- 9b4:	4b1d      	ldr	r3, [pc, #116]	; (a2c <Reset_Handler+0xc8>)
- 9b6:	438b      	bics	r3, r1
- 9b8:	6093      	str	r3, [r2, #8]
+ 960:	4a1d      	ldr	r2, [pc, #116]	; (9d8 <Reset_Handler+0xc4>)
+ 962:	21ff      	movs	r1, #255	; 0xff
+ 964:	4b1d      	ldr	r3, [pc, #116]	; (9dc <Reset_Handler+0xc8>)
+ 966:	438b      	bics	r3, r1
+ 968:	6093      	str	r3, [r2, #8]
         SBMATRIX->SFR[SBMATRIX_SLAVE_HMCRAMC0].reg = 2;
- 9ba:	39fd      	subs	r1, #253	; 0xfd
- 9bc:	2390      	movs	r3, #144	; 0x90
- 9be:	005b      	lsls	r3, r3, #1
- 9c0:	4a1b      	ldr	r2, [pc, #108]	; (a30 <Reset_Handler+0xcc>)
- 9c2:	50d1      	str	r1, [r2, r3]
+ 96a:	39fd      	subs	r1, #253	; 0xfd
+ 96c:	2390      	movs	r3, #144	; 0x90
+ 96e:	005b      	lsls	r3, r3, #1
+ 970:	4a1b      	ldr	r2, [pc, #108]	; (9e0 <Reset_Handler+0xcc>)
+ 972:	50d1      	str	r1, [r2, r3]
         USB->DEVICE.QOSCTRL.bit.CQOS = 2;
- 9c4:	4a1b      	ldr	r2, [pc, #108]	; (a34 <Reset_Handler+0xd0>)
- 9c6:	78d3      	ldrb	r3, [r2, #3]
- 9c8:	2503      	movs	r5, #3
- 9ca:	43ab      	bics	r3, r5
- 9cc:	2402      	movs	r4, #2
- 9ce:	4323      	orrs	r3, r4
- 9d0:	70d3      	strb	r3, [r2, #3]
+ 974:	4a1b      	ldr	r2, [pc, #108]	; (9e4 <Reset_Handler+0xd0>)
+ 976:	78d3      	ldrb	r3, [r2, #3]
+ 978:	2503      	movs	r5, #3
+ 97a:	43ab      	bics	r3, r5
+ 97c:	2402      	movs	r4, #2
+ 97e:	4323      	orrs	r3, r4
+ 980:	70d3      	strb	r3, [r2, #3]
         USB->DEVICE.QOSCTRL.bit.DQOS = 2;
- 9d2:	78d3      	ldrb	r3, [r2, #3]
- 9d4:	270c      	movs	r7, #12
- 9d6:	43bb      	bics	r3, r7
- 9d8:	2608      	movs	r6, #8
- 9da:	4333      	orrs	r3, r6
- 9dc:	70d3      	strb	r3, [r2, #3]
+ 982:	78d3      	ldrb	r3, [r2, #3]
+ 984:	270c      	movs	r7, #12
+ 986:	43bb      	bics	r3, r7
+ 988:	2608      	movs	r6, #8
+ 98a:	4333      	orrs	r3, r6
+ 98c:	70d3      	strb	r3, [r2, #3]
         DMAC->QOSCTRL.bit.DQOS = 2;
- 9de:	4b16      	ldr	r3, [pc, #88]	; (a38 <Reset_Handler+0xd4>)
- 9e0:	7b98      	ldrb	r0, [r3, #14]
- 9e2:	2230      	movs	r2, #48	; 0x30
- 9e4:	4390      	bics	r0, r2
- 9e6:	2220      	movs	r2, #32
- 9e8:	4310      	orrs	r0, r2
- 9ea:	7398      	strb	r0, [r3, #14]
+ 98e:	4b16      	ldr	r3, [pc, #88]	; (9e8 <Reset_Handler+0xd4>)
+ 990:	7b98      	ldrb	r0, [r3, #14]
+ 992:	2230      	movs	r2, #48	; 0x30
+ 994:	4390      	bics	r0, r2
+ 996:	2220      	movs	r2, #32
+ 998:	4310      	orrs	r0, r2
+ 99a:	7398      	strb	r0, [r3, #14]
         DMAC->QOSCTRL.bit.FQOS = 2;
- 9ec:	7b99      	ldrb	r1, [r3, #14]
- 9ee:	43b9      	bics	r1, r7
- 9f0:	4331      	orrs	r1, r6
- 9f2:	7399      	strb	r1, [r3, #14]
+ 99c:	7b99      	ldrb	r1, [r3, #14]
+ 99e:	43b9      	bics	r1, r7
+ 9a0:	4331      	orrs	r1, r6
+ 9a2:	7399      	strb	r1, [r3, #14]
         DMAC->QOSCTRL.bit.WRBQOS = 2;
- 9f4:	7b9a      	ldrb	r2, [r3, #14]
- 9f6:	43aa      	bics	r2, r5
- 9f8:	4322      	orrs	r2, r4
- 9fa:	739a      	strb	r2, [r3, #14]
+ 9a4:	7b9a      	ldrb	r2, [r3, #14]
+ 9a6:	43aa      	bics	r2, r5
+ 9a8:	4322      	orrs	r2, r4
+ 9aa:	739a      	strb	r2, [r3, #14]
         NVMCTRL->CTRLB.bit.MANW = 1;
- 9fc:	4a0f      	ldr	r2, [pc, #60]	; (a3c <Reset_Handler+0xd8>)
- 9fe:	6853      	ldr	r3, [r2, #4]
- a00:	2180      	movs	r1, #128	; 0x80
- a02:	430b      	orrs	r3, r1
- a04:	6053      	str	r3, [r2, #4]
+ 9ac:	4a0f      	ldr	r2, [pc, #60]	; (9ec <Reset_Handler+0xd8>)
+ 9ae:	6853      	ldr	r3, [r2, #4]
+ 9b0:	2180      	movs	r1, #128	; 0x80
+ 9b2:	430b      	orrs	r3, r1
+ 9b4:	6053      	str	r3, [r2, #4]
         __libc_init_array();
- a06:	4b0e      	ldr	r3, [pc, #56]	; (a40 <Reset_Handler+0xdc>)
- a08:	4798      	blx	r3
+ 9b6:	4b0e      	ldr	r3, [pc, #56]	; (9f0 <Reset_Handler+0xdc>)
+ 9b8:	4798      	blx	r3
         main();
- a0a:	4b0e      	ldr	r3, [pc, #56]	; (a44 <Reset_Handler+0xe0>)
- a0c:	4798      	blx	r3
- a0e:	e7fe      	b.n	a0e <Reset_Handler+0xaa>
- a10:	00000bd8 	.word	0x00000bd8
- a14:	20000000 	.word	0x20000000
- a18:	20000004 	.word	0x20000004
- a1c:	20000004 	.word	0x20000004
- a20:	20000004 	.word	0x20000004
- a24:	20000068 	.word	0x20000068
- a28:	e000ed00 	.word	0xe000ed00
- a2c:	00000000 	.word	0x00000000
- a30:	41007000 	.word	0x41007000
- a34:	41005000 	.word	0x41005000
- a38:	41004800 	.word	0x41004800
- a3c:	41004000 	.word	0x41004000
- a40:	00000b49 	.word	0x00000b49
- a44:	00000b1d 	.word	0x00000b1d
+ 9ba:	4b0e      	ldr	r3, [pc, #56]	; (9f4 <Reset_Handler+0xe0>)
+ 9bc:	4798      	blx	r3
+ 9be:	e7fe      	b.n	9be <Reset_Handler+0xaa>
+ 9c0:	00000b7c 	.word	0x00000b7c
+ 9c4:	20000000 	.word	0x20000000
+ 9c8:	20000004 	.word	0x20000004
+ 9cc:	20000004 	.word	0x20000004
+ 9d0:	20000004 	.word	0x20000004
+ 9d4:	20000064 	.word	0x20000064
+ 9d8:	e000ed00 	.word	0xe000ed00
+ 9dc:	00000000 	.word	0x00000000
+ 9e0:	41007000 	.word	0x41007000
+ 9e4:	41005000 	.word	0x41005000
+ 9e8:	41004800 	.word	0x41004800
+ 9ec:	41004000 	.word	0x41004000
+ 9f0:	00000aed 	.word	0x00000aed
+ 9f4:	00000ac1 	.word	0x00000ac1
 
-00000a48 <tc_callback_to_change_duty_cycle>:
-//! [module_inst]
+000009f8 <tc_callback_to_change_duty_cycle>:
+	} else {
+		port_base->OUTCLR.reg = pin_mask;
+ 9f8:	2280      	movs	r2, #128	; 0x80
+ 9fa:	0252      	lsls	r2, r2, #9
+ 9fc:	4b01      	ldr	r3, [pc, #4]	; (a04 <tc_callback_to_change_duty_cycle+0xc>)
+ 9fe:	615a      	str	r2, [r3, #20]
+		struct tc_module *const module_inst);
 
-//! [callback_funcs]
-void tc_callback_to_change_duty_cycle(
-		struct tc_module *const module_inst)
+void tc_callback_to_change_duty_cycle(struct tc_module *const module_inst)
 {
- a48:	b510      	push	{r4, lr}
-	static uint16_t i = 0;
-
-	i += 100;
- a4a:	4b05      	ldr	r3, [pc, #20]	; (a60 <tc_callback_to_change_duty_cycle+0x18>)
- a4c:	881a      	ldrh	r2, [r3, #0]
- a4e:	3264      	adds	r2, #100	; 0x64
- a50:	b292      	uxth	r2, r2
- a52:	801a      	strh	r2, [r3, #0]
-	tc_set_compare_value(module_inst, TC_COMPARE_CAPTURE_CHANNEL_0, i + 1);
- a54:	3201      	adds	r2, #1
- a56:	2100      	movs	r1, #0
- a58:	4b02      	ldr	r3, [pc, #8]	; (a64 <tc_callback_to_change_duty_cycle+0x1c>)
- a5a:	4798      	blx	r3
+	LED_On(LED0_PIN);
 }
- a5c:	bd10      	pop	{r4, pc}
- a5e:	46c0      	nop			; (mov r8, r8)
- a60:	20000040 	.word	0x20000040
- a64:	00000911 	.word	0x00000911
+ a00:	4770      	bx	lr
+ a02:	46c0      	nop			; (mov r8, r8)
+ a04:	41004400 	.word	0x41004400
 
-00000a68 <configure_tc>:
-//! [callback_funcs]
+00000a08 <configure_tc>:
 
-//! [setup]
+
 void configure_tc(void)
 {
- a68:	b510      	push	{r4, lr}
- a6a:	b08e      	sub	sp, #56	; 0x38
-{
+ a08:	b510      	push	{r4, lr}
+ a0a:	b08e      	sub	sp, #56	; 0x38
 	/* Sanity check arguments */
 	Assert(config);
 
 	/* Write default config to config struct */
 	config->clock_source               = GCLK_GENERATOR_0;
- a6c:	aa01      	add	r2, sp, #4
- a6e:	2300      	movs	r3, #0
- a70:	7013      	strb	r3, [r2, #0]
 	config->counter_size               = TC_COUNTER_SIZE_16BIT;
- a72:	7093      	strb	r3, [r2, #2]
+ a0c:	aa01      	add	r2, sp, #4
+ a0e:	2300      	movs	r3, #0
+ a10:	2100      	movs	r1, #0
+ a12:	7093      	strb	r3, [r2, #2]
 	config->clock_prescaler            = TC_CLOCK_PRESCALER_DIV1;
- a74:	2100      	movs	r1, #0
- a76:	8093      	strh	r3, [r2, #4]
 	config->wave_generation            = TC_WAVE_GENERATION_NORMAL_FREQ;
+ a14:	7193      	strb	r3, [r2, #6]
 	config->reload_action              = TC_RELOAD_ACTION_GCLK;
- a78:	8113      	strh	r3, [r2, #8]
+ a16:	8113      	strh	r3, [r2, #8]
 	config->run_in_standby             = false;
- a7a:	7051      	strb	r1, [r2, #1]
+ a18:	2000      	movs	r0, #0
+ a1a:	7050      	strb	r0, [r2, #1]
 #if (SAML21) || (SAML22) || (SAMC20) || (SAMC21) || (SAMR30) || (SAMR34) || (SAMR35) || (WLR089)
 	config->on_demand                  = false;
 #endif
 	config->waveform_invert_output     = TC_WAVEFORM_INVERT_OUTPUT_NONE;
- a7c:	7291      	strb	r1, [r2, #10]
+ a1c:	7291      	strb	r1, [r2, #10]
 	config->enable_capture_on_channel[TC_COMPARE_CAPTURE_CHANNEL_0] = false;
- a7e:	72d1      	strb	r1, [r2, #11]
+ a1e:	72d1      	strb	r1, [r2, #11]
 	config->enable_capture_on_channel[TC_COMPARE_CAPTURE_CHANNEL_1] = false;
- a80:	7311      	strb	r1, [r2, #12]
+ a20:	7311      	strb	r1, [r2, #12]
 #ifdef 	FEATURE_TC_IO_CAPTURE
 	config->enable_capture_on_IO[TC_COMPARE_CAPTURE_CHANNEL_0] = false;
 	config->enable_capture_on_IO[TC_COMPARE_CAPTURE_CHANNEL_1] = false;
 #endif
 
 	config->count_direction            = TC_COUNT_DIRECTION_UP;
- a82:	7391      	strb	r1, [r2, #14]
+ a22:	7391      	strb	r1, [r2, #14]
 	config->oneshot                    = false;
- a84:	7351      	strb	r1, [r2, #13]
+ a24:	7351      	strb	r1, [r2, #13]
 
 	config->pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].enabled = false;
+ a26:	7411      	strb	r1, [r2, #16]
 	config->pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].pin_out = 0;
+ a28:	6153      	str	r3, [r2, #20]
 	config->pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].pin_mux = 0;
+ a2a:	6193      	str	r3, [r2, #24]
 
 	config->pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_1].enabled = false;
- a86:	7711      	strb	r1, [r2, #28]
+ a2c:	7711      	strb	r1, [r2, #28]
 	config->pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_1].pin_out = 0;
- a88:	6213      	str	r3, [r2, #32]
+ a2e:	6213      	str	r3, [r2, #32]
 	config->pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_1].pin_mux = 0;
- a8a:	6253      	str	r3, [r2, #36]	; 0x24
+ a30:	6253      	str	r3, [r2, #36]	; 0x24
 
 	config->counter_16_bit.value                   = 0x0000;
- a8c:	8513      	strh	r3, [r2, #40]	; 0x28
+ a32:	8513      	strh	r3, [r2, #40]	; 0x28
 	config->counter_16_bit.compare_capture_channel\
 		[TC_COMPARE_CAPTURE_CHANNEL_0]                        = 0x0000;
+ a34:	8553      	strh	r3, [r2, #42]	; 0x2a
 	config->counter_16_bit.compare_capture_channel\
 		[TC_COMPARE_CAPTURE_CHANNEL_1]                        = 0x0000;
- a8e:	8593      	strh	r3, [r2, #44]	; 0x2c
+ a36:	8593      	strh	r3, [r2, #44]	; 0x2c
+	struct tc_config config_tc;
+	
 	tc_get_config_defaults(&config_tc);
-	//! [setup_config_defaults]
+	
+	config_tc.clock_source = GCLK_GENERATOR_1;
+ a38:	3301      	adds	r3, #1
+ a3a:	7013      	strb	r3, [r2, #0]
+	//config_tc.counter_size = TC_COUNTER_SIZE_16BIT;
+	config_tc.clock_prescaler = TC_CLOCK_PRESCALER_DIV64;
+ a3c:	23a0      	movs	r3, #160	; 0xa0
+ a3e:	00db      	lsls	r3, r3, #3
+ a40:	8093      	strh	r3, [r2, #4]
+	config_tc.counter_8_bit.period = 100;
+ a42:	2164      	movs	r1, #100	; 0x64
+ a44:	2329      	movs	r3, #41	; 0x29
+ a46:	54d1      	strb	r1, [r2, r3]
 
-	//! [setup_change_config]
-	config_tc.counter_size    = TC_COUNTER_SIZE_16BIT;
-	config_tc.wave_generation = TC_WAVE_GENERATION_NORMAL_PWM;
- a90:	3340      	adds	r3, #64	; 0x40
- a92:	7193      	strb	r3, [r2, #6]
-	config_tc.counter_16_bit.compare_capture_channel[0] = 0xFFFF;
- a94:	3b41      	subs	r3, #65	; 0x41
- a96:	8553      	strh	r3, [r2, #42]	; 0x2a
-	//! [setup_change_config]
-
-	//! [setup_change_config_pwm]
-	config_tc.pwm_channel[0].enabled = true;
- a98:	3302      	adds	r3, #2
- a9a:	7413      	strb	r3, [r2, #16]
-	config_tc.pwm_channel[0].pin_out = PWM_OUT_PIN;
- a9c:	330f      	adds	r3, #15
- a9e:	6153      	str	r3, [r2, #20]
-	config_tc.pwm_channel[0].pin_mux = PWM_OUT_MUX;
- aa0:	3b0c      	subs	r3, #12
- aa2:	6193      	str	r3, [r2, #24]
-	//! [setup_change_config_pwm]
-
-	//! [setup_set_config]
-	tc_init(&tc_instance, PWM_MODULE, &config_tc);
- aa4:	4c07      	ldr	r4, [pc, #28]	; (ac4 <configure_tc+0x5c>)
- aa6:	4908      	ldr	r1, [pc, #32]	; (ac8 <configure_tc+0x60>)
- aa8:	0020      	movs	r0, r4
- aaa:	4b08      	ldr	r3, [pc, #32]	; (acc <configure_tc+0x64>)
- aac:	4798      	blx	r3
+	
+	
+	tc_init(&tc_instance, TC1, &config_tc);
+ a48:	4c07      	ldr	r4, [pc, #28]	; (a68 <configure_tc+0x60>)
+ a4a:	4908      	ldr	r1, [pc, #32]	; (a6c <configure_tc+0x64>)
+ a4c:	0020      	movs	r0, r4
+ a4e:	4b08      	ldr	r3, [pc, #32]	; (a70 <configure_tc+0x68>)
+ a50:	4798      	blx	r3
 	/* Sanity check arguments */
 	Assert(module_inst);
 	Assert(module_inst->hw);
 
 	/* Get a pointer to the module's hardware instance */
 	TcCount8 *const tc_module = &(module_inst->hw->COUNT8);
- aae:	6822      	ldr	r2, [r4, #0]
+ a52:	6822      	ldr	r2, [r4, #0]
 	return (tc_module->STATUS.reg & TC_STATUS_SYNCBUSY);
- ab0:	7bd3      	ldrb	r3, [r2, #15]
+ a54:	7bd3      	ldrb	r3, [r2, #15]
 
 	while (tc_is_syncing(module_inst)) {
- ab2:	b25b      	sxtb	r3, r3
- ab4:	2b00      	cmp	r3, #0
- ab6:	dbfb      	blt.n	ab0 <configure_tc+0x48>
+ a56:	b25b      	sxtb	r3, r3
+ a58:	2b00      	cmp	r3, #0
+ a5a:	dbfb      	blt.n	a54 <configure_tc+0x4c>
 		/* Wait for sync */
 	}
 
 	/* Enable TC module */
 	tc_module->CTRLA.reg |= TC_CTRLA_ENABLE;
- ab8:	8813      	ldrh	r3, [r2, #0]
- aba:	2102      	movs	r1, #2
- abc:	430b      	orrs	r3, r1
- abe:	8013      	strh	r3, [r2, #0]
-	//! [setup_set_config]
-
-	//! [setup_enable]
-	tc_enable(&tc_instance);
-	//! [setup_enable]
+ a5c:	8813      	ldrh	r3, [r2, #0]
+ a5e:	2102      	movs	r1, #2
+ a60:	430b      	orrs	r3, r1
+ a62:	8013      	strh	r3, [r2, #0]
+ //tc_enable(&tc_instance);	
+	
+	
+	
+	
 }
- ac0:	b00e      	add	sp, #56	; 0x38
- ac2:	bd10      	pop	{r4, pc}
- ac4:	2000004c 	.word	0x2000004c
- ac8:	42001800 	.word	0x42001800
- acc:	000006e1 	.word	0x000006e1
+ a64:	b00e      	add	sp, #56	; 0x38
+ a66:	bd10      	pop	{r4, pc}
+ a68:	20000048 	.word	0x20000048
+ a6c:	42001800 	.word	0x42001800
+ a70:	000006e1 	.word	0x000006e1
 
-00000ad0 <configure_tc_callbacks>:
+00000a74 <configure_tc_callbacks>:
 
 void configure_tc_callbacks(void)
 {
- ad0:	b510      	push	{r4, lr}
-	//! [setup_register_callback]
+ a74:	b510      	push	{r4, lr}
+
 	tc_register_callback(
- ad2:	4c0c      	ldr	r4, [pc, #48]	; (b04 <configure_tc_callbacks+0x34>)
- ad4:	2202      	movs	r2, #2
- ad6:	490c      	ldr	r1, [pc, #48]	; (b08 <configure_tc_callbacks+0x38>)
- ad8:	0020      	movs	r0, r4
- ada:	4b0c      	ldr	r3, [pc, #48]	; (b0c <configure_tc_callbacks+0x3c>)
- adc:	4798      	blx	r3
+ a76:	4c0c      	ldr	r4, [pc, #48]	; (aa8 <configure_tc_callbacks+0x34>)
+ a78:	2200      	movs	r2, #0
+ a7a:	490c      	ldr	r1, [pc, #48]	; (aac <configure_tc_callbacks+0x38>)
+ a7c:	0020      	movs	r0, r4
+ a7e:	4b0c      	ldr	r3, [pc, #48]	; (ab0 <configure_tc_callbacks+0x3c>)
+ a80:	4798      	blx	r3
 	/* Sanity check arguments */
 	Assert(module);
 
 
 	/* Enable interrupts for this TC module */
 	system_interrupt_enable(_tc_interrupt_get_interrupt_vector(_tc_get_inst_index(module->hw)));
- ade:	6820      	ldr	r0, [r4, #0]
- ae0:	4b0b      	ldr	r3, [pc, #44]	; (b10 <configure_tc_callbacks+0x40>)
- ae2:	4798      	blx	r3
+ a82:	6820      	ldr	r0, [r4, #0]
+ a84:	4b0b      	ldr	r3, [pc, #44]	; (ab4 <configure_tc_callbacks+0x40>)
+ a86:	4798      	blx	r3
 	return (enum system_interrupt_vector)tc_interrupt_vectors[inst_num];
- ae4:	4b0b      	ldr	r3, [pc, #44]	; (b14 <configure_tc_callbacks+0x44>)
+ a88:	4b0b      	ldr	r3, [pc, #44]	; (ab8 <configure_tc_callbacks+0x44>)
  * \param[in] vector Interrupt vector to enable
  */
 static inline void system_interrupt_enable(
 		const enum system_interrupt_vector vector)
 {
 	NVIC->ISER[0] = (uint32_t)(1 << ((uint32_t)vector & 0x0000001f));
- ae6:	5c1b      	ldrb	r3, [r3, r0]
- ae8:	221f      	movs	r2, #31
- aea:	401a      	ands	r2, r3
- aec:	2301      	movs	r3, #1
- aee:	4093      	lsls	r3, r2
- af0:	4a09      	ldr	r2, [pc, #36]	; (b18 <configure_tc_callbacks+0x48>)
- af2:	6013      	str	r3, [r2, #0]
+ a8a:	5c1a      	ldrb	r2, [r3, r0]
+ a8c:	231f      	movs	r3, #31
+ a8e:	4013      	ands	r3, r2
+ a90:	2201      	movs	r2, #1
+ a92:	0011      	movs	r1, r2
+ a94:	4099      	lsls	r1, r3
+ a96:	4b09      	ldr	r3, [pc, #36]	; (abc <configure_tc_callbacks+0x48>)
+ a98:	6019      	str	r1, [r3, #0]
+	else if (callback_type == TC_CALLBACK_CC_CHANNEL1) {
+		module->enable_callback_mask |= TC_INTFLAG_MC(2);
+		module->hw->COUNT8.INTENSET.reg = TC_INTFLAG_MC(2);
+	}
+	else {
+		module->enable_callback_mask |= (1 << callback_type);
+ a9a:	7e63      	ldrb	r3, [r4, #25]
+ a9c:	2101      	movs	r1, #1
+ a9e:	430b      	orrs	r3, r1
+ aa0:	7663      	strb	r3, [r4, #25]
+		module->hw->COUNT8.INTENSET.reg = (1 << callback_type);
+ aa2:	6823      	ldr	r3, [r4, #0]
+ aa4:	735a      	strb	r2, [r3, #13]
+			&tc_instance,
+			tc_callback_to_change_duty_cycle,
+			TC_CALLBACK_OVERFLOW);
 
-	/* Enable callback */
-	if (callback_type == TC_CALLBACK_CC_CHANNEL0) {
-		module->enable_callback_mask |= TC_INTFLAG_MC(1);
- af4:	7e63      	ldrb	r3, [r4, #25]
- af6:	2210      	movs	r2, #16
- af8:	4313      	orrs	r3, r2
- afa:	7663      	strb	r3, [r4, #25]
-		module->hw->COUNT8.INTENSET.reg = TC_INTFLAG_MC(1);
- afc:	6823      	ldr	r3, [r4, #0]
- afe:	2210      	movs	r2, #16
- b00:	735a      	strb	r2, [r3, #13]
-	//! [setup_register_callback]
-
-	//! [setup_enable_callback]
-	tc_enable_callback(&tc_instance, TC_CALLBACK_CC_CHANNEL0);
-	//! [setup_enable_callback]
+	tc_enable_callback(&tc_instance, TC_CALLBACK_OVERFLOW);
 }
- b02:	bd10      	pop	{r4, pc}
- b04:	2000004c 	.word	0x2000004c
- b08:	00000a49 	.word	0x00000a49
- b0c:	00000605 	.word	0x00000605
- b10:	000006bd 	.word	0x000006bd
- b14:	00000bb4 	.word	0x00000bb4
- b18:	e000e100 	.word	0xe000e100
+ aa6:	bd10      	pop	{r4, pc}
+ aa8:	20000048 	.word	0x20000048
+ aac:	000009f9 	.word	0x000009f9
+ ab0:	00000605 	.word	0x00000605
+ ab4:	000006bd 	.word	0x000006bd
+ ab8:	00000b58 	.word	0x00000b58
+ abc:	e000e100 	.word	0xe000e100
 
-00000b1c <main>:
-//! [setup]
+00000ac0 <main>:
 
 int main(void)
 {
- b1c:	b510      	push	{r4, lr}
+ ac0:	b510      	push	{r4, lr}
 	system_init();
- b1e:	4b06      	ldr	r3, [pc, #24]	; (b38 <main+0x1c>)
- b20:	4798      	blx	r3
+ ac2:	4b06      	ldr	r3, [pc, #24]	; (adc <main+0x1c>)
+ ac4:	4798      	blx	r3
 
-//! [setup_init]
 	configure_tc();
- b22:	4b06      	ldr	r3, [pc, #24]	; (b3c <main+0x20>)
- b24:	4798      	blx	r3
+ ac6:	4b06      	ldr	r3, [pc, #24]	; (ae0 <main+0x20>)
+ ac8:	4798      	blx	r3
 	configure_tc_callbacks();
- b26:	4b06      	ldr	r3, [pc, #24]	; (b40 <main+0x24>)
- b28:	4798      	blx	r3
+ aca:	4b06      	ldr	r3, [pc, #24]	; (ae4 <main+0x24>)
+ acc:	4798      	blx	r3
 	cpu_irq_enable();
- b2a:	2201      	movs	r2, #1
- b2c:	4b05      	ldr	r3, [pc, #20]	; (b44 <main+0x28>)
- b2e:	701a      	strb	r2, [r3, #0]
+ ace:	2201      	movs	r2, #1
+ ad0:	4b05      	ldr	r3, [pc, #20]	; (ae8 <main+0x28>)
+ ad2:	701a      	strb	r2, [r3, #0]
   __ASM volatile ("dmb 0xF":::"memory");
- b30:	f3bf 8f5f 	dmb	sy
+ ad4:	f3bf 8f5f 	dmb	sy
   __ASM volatile ("cpsie i" : : : "memory");
- b34:	b662      	cpsie	i
- b36:	e7fe      	b.n	b36 <main+0x1a>
- b38:	000005d9 	.word	0x000005d9
- b3c:	00000a69 	.word	0x00000a69
- b40:	00000ad1 	.word	0x00000ad1
- b44:	20000000 	.word	0x20000000
+ ad8:	b662      	cpsie	i
+ ada:	e7fe      	b.n	ada <main+0x1a>
+ adc:	000005d9 	.word	0x000005d9
+ ae0:	00000a09 	.word	0x00000a09
+ ae4:	00000a75 	.word	0x00000a75
+ ae8:	20000000 	.word	0x20000000
 
-00000b48 <__libc_init_array>:
- b48:	b570      	push	{r4, r5, r6, lr}
- b4a:	2600      	movs	r6, #0
- b4c:	4d0c      	ldr	r5, [pc, #48]	; (b80 <__libc_init_array+0x38>)
- b4e:	4c0d      	ldr	r4, [pc, #52]	; (b84 <__libc_init_array+0x3c>)
- b50:	1b64      	subs	r4, r4, r5
- b52:	10a4      	asrs	r4, r4, #2
- b54:	42a6      	cmp	r6, r4
- b56:	d109      	bne.n	b6c <__libc_init_array+0x24>
- b58:	2600      	movs	r6, #0
- b5a:	f000 f82d 	bl	bb8 <_init>
- b5e:	4d0a      	ldr	r5, [pc, #40]	; (b88 <__libc_init_array+0x40>)
- b60:	4c0a      	ldr	r4, [pc, #40]	; (b8c <__libc_init_array+0x44>)
- b62:	1b64      	subs	r4, r4, r5
- b64:	10a4      	asrs	r4, r4, #2
- b66:	42a6      	cmp	r6, r4
- b68:	d105      	bne.n	b76 <__libc_init_array+0x2e>
- b6a:	bd70      	pop	{r4, r5, r6, pc}
- b6c:	00b3      	lsls	r3, r6, #2
- b6e:	58eb      	ldr	r3, [r5, r3]
- b70:	4798      	blx	r3
- b72:	3601      	adds	r6, #1
- b74:	e7ee      	b.n	b54 <__libc_init_array+0xc>
- b76:	00b3      	lsls	r3, r6, #2
- b78:	58eb      	ldr	r3, [r5, r3]
- b7a:	4798      	blx	r3
- b7c:	3601      	adds	r6, #1
- b7e:	e7f2      	b.n	b66 <__libc_init_array+0x1e>
- b80:	00000bc4 	.word	0x00000bc4
- b84:	00000bc4 	.word	0x00000bc4
- b88:	00000bc4 	.word	0x00000bc4
- b8c:	00000bc8 	.word	0x00000bc8
- b90:	00000220 	.word	0x00000220
- b94:	00000200 	.word	0x00000200
- b98:	00000200 	.word	0x00000200
- b9c:	0000028c 	.word	0x0000028c
- ba0:	00000212 	.word	0x00000212
- ba4:	0000022e 	.word	0x0000022e
- ba8:	00000204 	.word	0x00000204
- bac:	0000023c 	.word	0x0000023c
- bb0:	0000027c 	.word	0x0000027c
+00000aec <__libc_init_array>:
+ aec:	b570      	push	{r4, r5, r6, lr}
+ aee:	2600      	movs	r6, #0
+ af0:	4d0c      	ldr	r5, [pc, #48]	; (b24 <__libc_init_array+0x38>)
+ af2:	4c0d      	ldr	r4, [pc, #52]	; (b28 <__libc_init_array+0x3c>)
+ af4:	1b64      	subs	r4, r4, r5
+ af6:	10a4      	asrs	r4, r4, #2
+ af8:	42a6      	cmp	r6, r4
+ afa:	d109      	bne.n	b10 <__libc_init_array+0x24>
+ afc:	2600      	movs	r6, #0
+ afe:	f000 f82d 	bl	b5c <_init>
+ b02:	4d0a      	ldr	r5, [pc, #40]	; (b2c <__libc_init_array+0x40>)
+ b04:	4c0a      	ldr	r4, [pc, #40]	; (b30 <__libc_init_array+0x44>)
+ b06:	1b64      	subs	r4, r4, r5
+ b08:	10a4      	asrs	r4, r4, #2
+ b0a:	42a6      	cmp	r6, r4
+ b0c:	d105      	bne.n	b1a <__libc_init_array+0x2e>
+ b0e:	bd70      	pop	{r4, r5, r6, pc}
+ b10:	00b3      	lsls	r3, r6, #2
+ b12:	58eb      	ldr	r3, [r5, r3]
+ b14:	4798      	blx	r3
+ b16:	3601      	adds	r6, #1
+ b18:	e7ee      	b.n	af8 <__libc_init_array+0xc>
+ b1a:	00b3      	lsls	r3, r6, #2
+ b1c:	58eb      	ldr	r3, [r5, r3]
+ b1e:	4798      	blx	r3
+ b20:	3601      	adds	r6, #1
+ b22:	e7f2      	b.n	b0a <__libc_init_array+0x1e>
+ b24:	00000b68 	.word	0x00000b68
+ b28:	00000b68 	.word	0x00000b68
+ b2c:	00000b68 	.word	0x00000b68
+ b30:	00000b6c 	.word	0x00000b6c
+ b34:	00000220 	.word	0x00000220
+ b38:	00000200 	.word	0x00000200
+ b3c:	00000200 	.word	0x00000200
+ b40:	0000028c 	.word	0x0000028c
+ b44:	00000212 	.word	0x00000212
+ b48:	0000022e 	.word	0x0000022e
+ b4c:	00000204 	.word	0x00000204
+ b50:	0000023c 	.word	0x0000023c
+ b54:	0000027c 	.word	0x0000027c
 
-00000bb4 <tc_interrupt_vectors.11720>:
- bb4:	00000e0d                                ....
+00000b58 <tc_interrupt_vectors.11720>:
+ b58:	00000e0d                                ....
 
-00000bb8 <_init>:
- bb8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- bba:	46c0      	nop			; (mov r8, r8)
- bbc:	bcf8      	pop	{r3, r4, r5, r6, r7}
- bbe:	bc08      	pop	{r3}
- bc0:	469e      	mov	lr, r3
- bc2:	4770      	bx	lr
+00000b5c <_init>:
+ b5c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ b5e:	46c0      	nop			; (mov r8, r8)
+ b60:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ b62:	bc08      	pop	{r3}
+ b64:	469e      	mov	lr, r3
+ b66:	4770      	bx	lr
 
-00000bc4 <__init_array_start>:
- bc4:	000000b5 	.word	0x000000b5
+00000b68 <__init_array_start>:
+ b68:	000000b5 	.word	0x000000b5
 
-00000bc8 <_fini>:
- bc8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- bca:	46c0      	nop			; (mov r8, r8)
- bcc:	bcf8      	pop	{r3, r4, r5, r6, r7}
- bce:	bc08      	pop	{r3}
- bd0:	469e      	mov	lr, r3
- bd2:	4770      	bx	lr
+00000b6c <_fini>:
+ b6c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ b6e:	46c0      	nop			; (mov r8, r8)
+ b70:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ b72:	bc08      	pop	{r3}
+ b74:	469e      	mov	lr, r3
+ b76:	4770      	bx	lr
 
-00000bd4 <__fini_array_start>:
- bd4:	0000008d 	.word	0x0000008d
+00000b78 <__fini_array_start>:
+ b78:	0000008d 	.word	0x0000008d

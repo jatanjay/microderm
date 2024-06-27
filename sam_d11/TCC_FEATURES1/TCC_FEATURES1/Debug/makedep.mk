@@ -40,6 +40,10 @@ src\ASF\sam0\drivers\tcc\tcc.c
 
 src\ASF\sam0\drivers\tcc\tcc_callback.c
 
+src\ASF\sam0\drivers\tc\tc_interrupt.c
+
+src\ASF\sam0\drivers\tc\tc_sam_d_r_h\tc.c
+
 src\ASF\sam0\utils\cmsis\samd11\source\gcc\startup_samd11.c
 
 src\ASF\sam0\utils\cmsis\samd11\source\system_samd11.c
