@@ -137,13 +137,11 @@ void check_button_press(void) {
 void toggle_pwm_duty_cycle(void) {
 	if (pwm_running) {
 		if (toggle_count == 2) {
-			LED_On(LED_0_PIN);
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0,
 			first_duty_cycle);
 			} else if (toggle_count == 3) {
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0,
 			second_duty_cycle);
-			LED_Off(LED_0_PIN);
 			} else if (toggle_count > 3) {
 			toggle_count = 0;
 			tcc_set_compare_value(&tcc_instance, TCC_MATCH_CAPTURE_CHANNEL_0,
