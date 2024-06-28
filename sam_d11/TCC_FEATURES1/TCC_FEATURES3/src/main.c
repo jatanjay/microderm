@@ -129,10 +129,58 @@ void configure_tcc(void)
 
 #ifdef TCC_MODE_DUAL_SLOPE
 	config_tcc.compare.wave_generation = TCC_WAVE_GENERATION_SINGLE_SLOPE_PWM;
-	config_tcc.pins.enable_wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]    = true;
-	config_tcc.pins.wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_0]           = PIN_PA04F_TCC0_WO0;
-	// Configure the Alternate function of GPIO pins for TCC functionality.
-	config_tcc.pins.wave_out_pin_mux[TCC_MATCH_CAPTURE_CHANNEL_0]       = MUX_PA04F_TCC0_WO0;
+	
+	
+	
+	config_tcc.pins.enable_wave_out_pin[TCC_CHANNEL_NUM_0]    = true;
+	config_tcc.pins.wave_out_pin[TCC_CHANNEL_NUM_0]           = PIN_PA04F_TCC0_WO0;
+	config_tcc.pins.wave_out_pin_mux[TCC_CHANNEL_NUM_0]       = MUX_PA04F_TCC0_WO0;
+
+	config_tcc.pins.enable_wave_out_pin[TCC_CHANNEL_NUM_1]    = true;
+	config_tcc.pins.wave_out_pin[TCC_CHANNEL_NUM_1]           = PIN_PA05F_TCC0_WO1;
+	config_tcc.pins.wave_out_pin_mux[TCC_CHANNEL_NUM_1]       = MUX_PA05F_TCC0_WO1;
+
+	config_tcc.pins.enable_wave_out_pin[TCC_CHANNEL_NUM_2]    = true;
+	config_tcc.pins.wave_out_pin[TCC_CHANNEL_NUM_2]           = PIN_PA08E_TCC0_WO2;
+	config_tcc.pins.wave_out_pin_mux[TCC_CHANNEL_NUM_2]       = MUX_PA08E_TCC0_WO2;
+
+	config_tcc.pins.enable_wave_out_pin[TCC_CHANNEL_NUM_5]    = true;
+	config_tcc.pins.wave_out_pin[TCC_CHANNEL_NUM_5]           = PIN_PA09F_TCC0_WO5;
+	config_tcc.pins.wave_out_pin_mux[TCC_CHANNEL_NUM_5]       = MUX_PA09F_TCC0_WO5;
+
+
+
+//// Configure the TCC Waveform Output pins for waveform generation output
+//config_tcc.pins.enable_wave_out_pin[TCC_CHANNEL_NUM_0]  = true;
+//config_tcc.pins.enable_wave_out_pin[TCC_CHANNEL_NUM_1]  = true;
+//config_tcc.pins.enable_wave_out_pin[TCC_CHANNEL_NUM_2]  = true;
+//config_tcc.pins.enable_wave_out_pin[TCC_CHANNEL_NUM_6]  = true;
+
+//config_tcc.pins.wave_out_pin[TCC_CHANNEL_NUM_0]         = PIN_PA04F_TCC0_WO0;
+//config_tcc.pins.wave_out_pin[TCC_CHANNEL_NUM_1]         = PIN_PA05F_TCC0_WO1;
+//config_tcc.pins.wave_out_pin[TCC_CHANNEL_NUM_2] = PIN_PA06F_TCC0_WO2;
+//config_tcc.pins.wave_out_pin[TCC_CHANNEL_NUM_6] = PIN_PA16F_TCC0_WO6;
+//// Configure the Alternate function of GPIO pins for TCC functionality
+//config_tcc.pins.wave_out_pin_mux[TCC_CHANNEL_NUM_0]     = MUX_PA04F_TCC0_WO0;
+//config_tcc.pins.wave_out_pin_mux[TCC_CHANNEL_NUM_1]     = MUX_PA05F_TCC0_WO1;
+//config_tcc.pins.wave_out_pin_mux[TCC_CHANNEL_NUM_2] = MUX_PA06F_TCC0_WO2;
+//config_tcc.pins.wave_out_pin_mux[TCC_CHANNEL_NUM_6] = MUX_PA16F_TCC0_WO6;
+
+
+
+
+
+
+
+
+
+
+
+	//config_tcc.pins.enable_wave_out_pin[TCC_CHANNEL_NUM_5]    = true;
+	//config_tcc.pins.wave_out_pin[TCC_MATCH_CAPTURE_CHANNEL_5]           = PIN_PA09F_TCC0_WO5;
+	//config_tcc.pins.wave_out_pin_mux[TCC_MATCH_CAPTURE_CHANNEL_5]       = MUX_PA09F_TCC0_WO5;
+
+
 
 #endif
 // Configure the TCC clock source and its divider value.

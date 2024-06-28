@@ -5083,7 +5083,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
                 0x00000400                STACK_SIZE = DEFINED (STACK_SIZE)?STACK_SIZE:DEFINED (__stack_size__)?__stack_size__:0x400
 
-.text           0x00000000     0x10d4
+.text           0x00000000     0x10f4
                 0x00000000                . = ALIGN (0x4)
                 0x00000000                _sfixed = .
  *(.vectors .vectors.*)
@@ -5214,91 +5214,91 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x00000e78       0xe4 src/ASF/sam0/utils/cmsis/samd11/source/gcc/startup_samd11.o
                 0x00000e78                Reset_Handler
  .text.configure_tcc
-                0x00000f5c       0x98 src/main.o
+                0x00000f5c       0xb8 src/main.o
                 0x00000f5c                configure_tcc
- .text.main     0x00000ff4       0x24 src/main.o
-                0x00000ff4                main
+ .text.main     0x00001014       0x24 src/main.o
+                0x00001014                main
  .text.__libc_init_array
-                0x00001018       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-init.o)
-                0x00001018                __libc_init_array
+                0x00001038       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-init.o)
+                0x00001038                __libc_init_array
  *(.glue_7t)
- .glue_7t       0x00001060        0x0 linker stubs
+ .glue_7t       0x00001080        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00001060        0x0 linker stubs
+ .glue_7        0x00001080        0x0 linker stubs
  *(.rodata .rodata* .gnu.linkonce.r.*)
  .rodata.system_clock_source_enable
-                0x00001060       0x24 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x00001080       0x24 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
  .rodata._tcc_intflag
-                0x00001084       0x30 src/ASF/sam0/drivers/tcc/tcc_callback.o
-                0x00001084                _tcc_intflag
+                0x000010a4       0x30 src/ASF/sam0/drivers/tcc/tcc_callback.o
+                0x000010a4                _tcc_intflag
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x000010b4                . = ALIGN (0x4)
+                0x000010d4                . = ALIGN (0x4)
  *(.init)
- .init          0x000010b4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
-                0x000010b4                _init
- .init          0x000010b8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
-                0x000010c0                . = ALIGN (0x4)
-                0x000010c0                __preinit_array_start = .
+ .init          0x000010d4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
+                0x000010d4                _init
+ .init          0x000010d8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
+                0x000010e0                . = ALIGN (0x4)
+                0x000010e0                __preinit_array_start = .
  *(.preinit_array)
-                0x000010c0                __preinit_array_end = .
-                0x000010c0                . = ALIGN (0x4)
-                0x000010c0                __init_array_start = .
+                0x000010e0                __preinit_array_end = .
+                0x000010e0                . = ALIGN (0x4)
+                0x000010e0                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x000010c0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
-                0x000010c4                __init_array_end = .
-                0x000010c4                . = ALIGN (0x4)
+ .init_array    0x000010e0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+                0x000010e4                __init_array_end = .
+                0x000010e4                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x000010c4                . = ALIGN (0x4)
+                0x000010e4                . = ALIGN (0x4)
  *(.fini)
- .fini          0x000010c4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
-                0x000010c4                _fini
- .fini          0x000010c8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
-                0x000010d0                . = ALIGN (0x4)
-                0x000010d0                __fini_array_start = .
+ .fini          0x000010e4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
+                0x000010e4                _fini
+ .fini          0x000010e8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
+                0x000010f0                . = ALIGN (0x4)
+                0x000010f0                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x000010d0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+ .fini_array    0x000010f0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x000010d4                __fini_array_end = .
+                0x000010f4                __fini_array_end = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x000010d4                . = ALIGN (0x4)
-                0x000010d4                _efixed = .
+                0x000010f4                . = ALIGN (0x4)
+                0x000010f4                _efixed = .
                 [!provide]                PROVIDE (__exidx_start, .)
 
-.vfp11_veneer   0x000010d4        0x0
- .vfp11_veneer  0x000010d4        0x0 linker stubs
+.vfp11_veneer   0x000010f4        0x0
+ .vfp11_veneer  0x000010f4        0x0 linker stubs
 
-.v4_bx          0x000010d4        0x0
- .v4_bx         0x000010d4        0x0 linker stubs
+.v4_bx          0x000010f4        0x0
+ .v4_bx         0x000010f4        0x0 linker stubs
 
-.iplt           0x000010d4        0x0
- .iplt          0x000010d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+.iplt           0x000010f4        0x0
+ .iplt          0x000010f4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.eh_frame       0x000010d4        0x0
- .eh_frame      0x000010d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+.eh_frame       0x000010f4        0x0
+ .eh_frame      0x000010f4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.rel.dyn        0x000010d4        0x0
- .rel.iplt      0x000010d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+.rel.dyn        0x000010f4        0x0
+ .rel.iplt      0x000010f4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.jcr            0x000010d4        0x0
- .jcr           0x000010d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+.jcr            0x000010f4        0x0
+ .jcr           0x000010f4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.igot.plt       0x000010d4        0x0
- .igot.plt      0x000010d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+.igot.plt       0x000010f4        0x0
+ .igot.plt      0x000010f4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
                 [!provide]                PROVIDE (__exidx_end, .)
-                0x000010d4                . = ALIGN (0x4)
-                0x000010d4                _etext = .
+                0x000010f4                . = ALIGN (0x4)
+                0x000010f4                _etext = .
 
-.relocate       0x20000000       0x18 load address 0x000010d4
+.relocate       0x20000000       0x18 load address 0x000010f4
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _srelocate = .
  *(.ramfunc .ramfunc.*)
@@ -5313,7 +5313,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x20000018                . = ALIGN (0x4)
                 0x20000018                _erelocate = .
 
-.bss            0x20000018       0xd0 load address 0x000010ec
+.bss            0x20000018       0xd0 load address 0x0000110c
                 0x20000018                . = ALIGN (0x4)
                 0x20000018                _sbss = .
                 0x20000018                _szero = .
@@ -5344,7 +5344,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x200000e8                _ebss = .
                 0x200000e8                _ezero = .
 
-.stack          0x200000e8      0x400 load address 0x000011bc
+.stack          0x200000e8      0x400 load address 0x000011dc
                 0x200000e8                . = ALIGN (0x8)
                 0x200000e8                _sstack = .
                 0x200004e8                . = (. + STACK_SIZE)
@@ -5417,7 +5417,7 @@ OUTPUT(TCC_FEATURES3.elf elf32-littlearm)
  .comment       0x00000059       0x5a src/ASF/sam0/utils/cmsis/samd11/source/gcc/startup_samd11.o
  .comment       0x00000059       0x5a src/main.o
 
-.debug_info     0x00000000    0x226d3
+.debug_info     0x00000000    0x2270e
  .debug_info    0x00000000      0xb05 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .debug_info    0x00000b05     0x12ab src/ASF/sam0/boards/samd11_xplained_pro/board_init.o
  .debug_info    0x00001db0     0x17ed src/ASF/sam0/drivers/events/events_hooks.o
@@ -5433,7 +5433,7 @@ OUTPUT(TCC_FEATURES3.elf elf32-littlearm)
  .debug_info    0x00014a47     0x4b9a src/ASF/sam0/drivers/tcc/tcc.o
  .debug_info    0x000195e1     0x3035 src/ASF/sam0/drivers/tcc/tcc_callback.o
  .debug_info    0x0001c616     0x2bd9 src/ASF/sam0/utils/cmsis/samd11/source/gcc/startup_samd11.o
- .debug_info    0x0001f1ef     0x34e4 src/main.o
+ .debug_info    0x0001f1ef     0x351f src/main.o
 
 .debug_abbrev   0x00000000     0x35c9
  .debug_abbrev  0x00000000      0x23b src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -5640,7 +5640,7 @@ OUTPUT(TCC_FEATURES3.elf elf32-littlearm)
  .debug_macro   0x000165c7       0x16 src/main.o
  .debug_macro   0x000165dd       0xd0 src/main.o
 
-.debug_line     0x00000000     0xa7cd
+.debug_line     0x00000000     0xa7d8
  .debug_line    0x00000000      0x87f src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .debug_line    0x0000087f      0x92a src/ASF/sam0/boards/samd11_xplained_pro/board_init.o
  .debug_line    0x000011a9      0xa12 src/ASF/sam0/drivers/events/events_hooks.o
@@ -5656,9 +5656,9 @@ OUTPUT(TCC_FEATURES3.elf elf32-littlearm)
  .debug_line    0x00007c27      0xde0 src/ASF/sam0/drivers/tcc/tcc.o
  .debug_line    0x00008a07      0xa45 src/ASF/sam0/drivers/tcc/tcc_callback.o
  .debug_line    0x0000944c      0x603 src/ASF/sam0/utils/cmsis/samd11/source/gcc/startup_samd11.o
- .debug_line    0x00009a4f      0xd7e src/main.o
+ .debug_line    0x00009a4f      0xd89 src/main.o
 
-.debug_str      0x00000000    0x792fb
+.debug_str      0x00000000    0x79386
  .debug_str     0x00000000    0x6e913 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x6edec (size before relaxing)
  .debug_str     0x0006e913     0x1bf5 src/ASF/sam0/boards/samd11_xplained_pro/board_init.o
@@ -5689,8 +5689,8 @@ OUTPUT(TCC_FEATURES3.elf elf32-littlearm)
                               0x70633 (size before relaxing)
  .debug_str     0x00078067      0xbf7 src/ASF/sam0/utils/cmsis/samd11/source/gcc/startup_samd11.o
                               0x59afa (size before relaxing)
- .debug_str     0x00078c5e      0x69d src/main.o
-                              0x72fa5 (size before relaxing)
+ .debug_str     0x00078c5e      0x728 src/main.o
+                              0x73030 (size before relaxing)
 
 .debug_frame    0x00000000      0xb00
  .debug_frame   0x00000000       0x30 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
