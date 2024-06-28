@@ -57,7 +57,7 @@ static uint8_t rd_buffer[DATA_LENGTH];
 //! [packet_data]
 
 //! [address]
-#define SLAVE_ADDRESS 0x72
+#define SLAVE_ADDRESS 0x12
 //! [address]
 
 //! [packet_glob]
@@ -101,7 +101,7 @@ void configure_i2c(void)
 
 	/* Initialize and enable device with config */
 	//! [init_module]
-	while(i2c_master_init(&i2c_master_instance, CONF_I2C_MASTER_MODULE, &config_i2c_master)     
+	while(i2c_master_init(&i2c_master_instance, CONF_I2C_MASTER_MODULE, &config_i2c_master)     \
 			!= STATUS_OK);
 	//! [init_module]
 
