@@ -37,7 +37,10 @@ uint8_t toggle_count = 0;
 bool BUTTON_PRESS_STATUS = false;
 bool BUTTON_RELEASE_STATUS = false;
 bool PWM_RUNNING = false;
-static bool tick_flag_10ms;
+static bool SYS_TICK_10MS;
+static bool SYS_TICK_50MS;
+static bool SYS_TICK_100MS;
+
 
 static void configure_pwm_generator (void);
 void check_button_press (void);
@@ -127,20 +130,42 @@ void configure_port_pins(void)
 
 void configure_system_tc (void);
 void system_tc_callbacks (void);
-void tc_callback_to_toggle_led (struct tc_module *const module_inst);
+void sys_tc_callback (struct tc_module *const module_inst);
 
-void tc_callback_to_toggle_led (struct tc_module *const module_inst)
+void sys_tc_callback(struct tc_module *const module_inst)
 {
 	static int tick_count_1ms;
 	static int tick_count_10ms;
+	static int tick_count_50ms;
+	static int tick_count_100ms;
+	
 	tick_count_1ms++;
+	
+	// Check for 10ms interval
 	if (tick_count_1ms > 10)
 	{
 		tick_count_10ms++;
 		tick_count_1ms = 0;
-		tick_flag_10ms = true;
-		check_button_press ();
+		SYS_TICK_10MS = true;  // Flag for 10ms interval
 	}
+	
+	// Check for 50ms interval
+	if (tick_count_10ms > 5)
+	{
+		tick_count_50ms++;
+		tick_count_10ms = 0;
+		SYS_TICK_50MS = true;  // Flag for 50ms interval
+	}
+	
+	// Check for 100ms interval
+	if (tick_count_50ms > 2)
+	{
+		tick_count_100ms++;
+		tick_count_50ms = 0;
+		SYS_TICK_100MS = true;  // Flag for 100ms interval
+	}
+	
+	
 }
 
 void configure_system_tc (void)
@@ -157,14 +182,13 @@ void configure_system_tc (void)
 
 void system_tc_callbacks (void)
 {
-	tc_register_callback (&system_timer_instance, tc_callback_to_toggle_led,
+	tc_register_callback (&system_timer_instance, sys_tc_callback,
 	TC_CALLBACK_OVERFLOW);
 	tc_enable_callback (&system_timer_instance, TC_CALLBACK_OVERFLOW);
 }
 
 /************************************************************************/
-/* TC - SYSTEM TIMER
-*/
+/* TC - SYSTEM TIMER													*/
 /************************************************************************/
 
 
@@ -191,13 +215,28 @@ static void configure_pwm_generator (void)
 	tc_init (&pwm_generator_instance, PWM_GENERATOR, &config_tc);
 }
 
+
+
+
+
+
+
+
+/*
+Test long button press
+*/
+
+
 bool is_button_pressed (void)
 {
 	static int press_delay_count = 5;
+
+	
 	if (!port_pin_get_input_level (SW0_PIN))
 	{
 		BUTTON_PRESS_STATUS = true;
 		press_delay_count--;
+		
 	}else
 	{
 		BUTTON_PRESS_STATUS = false;
@@ -214,7 +253,32 @@ bool is_button_pressed (void)
 		BUTTON_RELEASE_STATUS = true;
 		return false;
 	}
+	
 }
+
+
+
+bool LONG_BUTTON_PRESS;
+
+void long_button_press(void){
+	static int long_press = 165;
+	if (!port_pin_get_input_level (SW0_PIN))
+	{
+		long_press--;
+	}else
+	{
+		LONG_BUTTON_PRESS = false;
+		long_press = 165;
+	}
+	if (long_press <= 0)
+	{
+		LONG_BUTTON_PRESS = true;
+		
+		long_press = 0;
+	}
+}
+
+
 
 void check_button_press (void)
 {
@@ -438,6 +502,15 @@ void system_logic(void){
 	if (BATTERY_LOWEST){
 		display_battery_state();					// Blink Red
 	}
+	
+	if (SYS_TICK_10MS){
+		SYS_TICK_10MS = false;
+		check_button_press ();						// Poll Button Press State
+		long_button_press();
+	}
+	if (LONG_BUTTON_PRESS){
+		LED_On(LED0_PIN);
+	}
 }
 
 
@@ -464,11 +537,7 @@ int main (void)
 	
 	while (true)
 	{
-		if(tick_flag_10ms)
-		{
-			tick_flag_10ms = false;
-			system_state();
-			system_logic();
-		}
+		system_state();								// Get latest system_state
+		system_logic();								// Invoke System Logic
 	}
 }
