@@ -218,117 +218,243 @@ static void configure_pwm_generator (void)
 
 
 
-
-
-
-
 /*
 Test long button press
 */
-
+static uint16_t button_press_count = 0;
+static bool long_button_press_flag = false;
 
 bool is_button_pressed (void)
 {
 	static int press_delay_count = 5;
-
 	
 	if (!port_pin_get_input_level (SW0_PIN))
 	{
+		button_press_count++;
 		BUTTON_PRESS_STATUS = true;
 		press_delay_count--;
-		
-	}else
+	}
+	else
 	{
 		BUTTON_PRESS_STATUS = false;
 		press_delay_count = 5;
 	}
+	
 	if (press_delay_count <= 0)
 	{
 		BUTTON_RELEASE_STATUS = false;
 		return true;
-		press_delay_count = 0;
 	}
 	else
 	{
 		BUTTON_RELEASE_STATUS = true;
 		return false;
 	}
-	
 }
 
-
-
-bool LONG_BUTTON_PRESS;
-
-void long_button_press(void){
-	static int long_press = 165;
-	if (!port_pin_get_input_level (SW0_PIN))
+void check_long_button_press(void)
+{
+	if (button_press_count >= 200)  // 200 * 10ms = 2000ms = 2 seconds
 	{
-		long_press--;
-	}else
-	{
-		LONG_BUTTON_PRESS = false;
-		long_press = 165;
-	}
-	if (long_press <= 0)
-	{
-		LONG_BUTTON_PRESS = true;
-		
-		long_press = 0;
+		long_button_press_flag = true;
 	}
 }
 
 
+static bool start_pwm_on_release = false;
 
-void check_button_press (void)
+void check_button_press(void)
 {
 	static bool motor_status_changed = false;
-	if (is_button_pressed () & !motor_status_changed)
+
+	if (is_button_pressed() & !motor_status_changed)
 	{
-		toggle_count++;
-		motor_status_changed = true;
-		if (!PWM_RUNNING)
+		if (button_press_count < 200) 
 		{
-			PWM_RUNNING = true;
-			tc_enable (&pwm_generator_instance);
+				motor_status_changed = true;
+			
+			if (!PWM_RUNNING)
+			{
+				PWM_RUNNING = true;
+				tc_enable(&pwm_generator_instance);
+			}
+			else
+			{
+				cycle_pwm_duty();
+			}
+		}
+		else if (button_press_count >= 200)
+		{
+		}
+	}
+
+	if (BUTTON_RELEASE_STATUS)
+	{
+		if (start_pwm_on_release)
+		{
+			motor_status_changed = true;
+			start_pwm_on_release = false; // Reset flag
+
+			if (!PWM_RUNNING)
+			{
+				PWM_RUNNING = true;
+				tc_enable(&pwm_generator_instance);
+			}
+			else
+			{
+				cycle_pwm_duty();
+			}
 		}
 		else
 		{
-			cycle_pwm_duty ();
+			motor_status_changed = false;
 		}
-	}
-	if (BUTTON_RELEASE_STATUS)
-	{
-		motor_status_changed = false;
+
+		button_press_count = 0;
 	}
 }
 
-void cycle_pwm_duty (void)
+
+
+void cycle_pwm_duty(void)
 {
 	if (PWM_RUNNING)
 	{
+		toggle_count++;
 		if (toggle_count == 2)
 		{
-			tc_set_compare_value (&pwm_generator_instance,
-			TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
+			tc_set_compare_value(&pwm_generator_instance, TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
 		}
 		else if (toggle_count == 3)
 		{
-			tc_set_compare_value (&pwm_generator_instance,
-			TC_COMPARE_CAPTURE_CHANNEL_0,
-			SECOND_DUTY_CYCLE);
+			tc_set_compare_value(&pwm_generator_instance, TC_COMPARE_CAPTURE_CHANNEL_0, SECOND_DUTY_CYCLE);
 		}
 		else if (toggle_count > 3)
 		{
 			toggle_count = 0;
-			tc_set_compare_value (&pwm_generator_instance,
-			TC_COMPARE_CAPTURE_CHANNEL_0,
-			INITIAL_DUTY_CYCLE);
-			PWM_RUNNING = false;
+			tc_set_compare_value(&pwm_generator_instance, TC_COMPARE_CAPTURE_CHANNEL_0, INITIAL_DUTY_CYCLE);
 			tc_disable (&pwm_generator_instance);
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//bool is_button_pressed (void)
+//{
+	//static int press_delay_count = 5;
+//
+	//
+	//if (!port_pin_get_input_level (SW0_PIN))
+	//{
+		//BUTTON_PRESS_STATUS = true;
+		//press_delay_count--;
+		//
+	//}else
+	//{
+		//BUTTON_PRESS_STATUS = false;
+		//press_delay_count = 5;
+	//}
+	//if (press_delay_count <= 0)
+	//{
+		//BUTTON_RELEASE_STATUS = false;
+		//return true;
+		//press_delay_count = 0;
+	//}
+	//else
+	//{
+		//BUTTON_RELEASE_STATUS = true;
+		//return false;
+	//}
+	//
+//}
+
+
+//void check_button_press (void)
+//{
+	//static bool motor_status_changed = false;
+	//if (is_button_pressed () & !motor_status_changed)
+	//{
+		//toggle_count++;
+		//motor_status_changed = true;
+		//if (!PWM_RUNNING)
+		//{
+			//PWM_RUNNING = true;
+			//tc_enable (&pwm_generator_instance);
+		//}
+		//else
+		//{
+			//cycle_pwm_duty ();
+		//}
+	//}
+	//if (BUTTON_RELEASE_STATUS)
+	//{
+		//motor_status_changed = false;
+	//}
+//}
+
+
+//void cycle_pwm_duty (void)
+//{
+	//if (PWM_RUNNING)
+	//{
+		//if (toggle_count == 2)
+		//{
+			//tc_set_compare_value (&pwm_generator_instance,
+			//TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
+		//}
+		//else if (toggle_count == 3)
+		//{
+			//tc_set_compare_value (&pwm_generator_instance,
+			//TC_COMPARE_CAPTURE_CHANNEL_0,
+			//SECOND_DUTY_CYCLE);
+		//}
+		//else if (toggle_count > 3)
+		//{
+			//toggle_count = 0;
+			//tc_set_compare_value (&pwm_generator_instance,
+			//TC_COMPARE_CAPTURE_CHANNEL_0,
+			//INITIAL_DUTY_CYCLE);
+			//PWM_RUNNING = false;
+			//tc_disable (&pwm_generator_instance);
+		//}
+	//}
+//}
 
 
 
@@ -506,10 +632,11 @@ void system_logic(void){
 	if (SYS_TICK_10MS){
 		SYS_TICK_10MS = false;
 		check_button_press ();						// Poll Button Press State
-		long_button_press();
+		check_long_button_press();
 	}
-	if (LONG_BUTTON_PRESS){
+	if (long_button_press_flag){
 		LED_On(LED0_PIN);
+		//system_shutdown();						// Call system Shutdown (set NSleep Flag) 
 	}
 }
 
