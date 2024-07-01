@@ -226,7 +226,7 @@ static bool long_button_press_flag = false;
 
 bool is_button_pressed (void)
 {
-	static int press_delay_count = 5;
+	static int press_delay_count = 3;
 	
 	if (!port_pin_get_input_level (SW0_PIN))
 	{
@@ -237,7 +237,7 @@ bool is_button_pressed (void)
 	else
 	{
 		BUTTON_PRESS_STATUS = false;
-		press_delay_count = 5;
+		press_delay_count = 3;
 	}
 	
 	if (press_delay_count <= 0)
@@ -254,7 +254,7 @@ bool is_button_pressed (void)
 
 void check_long_button_press(void)
 {
-	if (button_press_count >= 200)  // 200 * 10ms = 2000ms = 2 seconds
+	if (button_press_count >= 200) 
 	{
 		long_button_press_flag = true;
 	}
@@ -269,7 +269,7 @@ void check_button_press(void)
 
 	if (is_button_pressed() & !motor_status_changed)
 	{
-		if (button_press_count < 200) 
+		if (button_press_count > 200) 
 		{
 				motor_status_changed = true;
 			
@@ -282,9 +282,6 @@ void check_button_press(void)
 			{
 				cycle_pwm_duty();
 			}
-		}
-		else if (button_press_count >= 200)
-		{
 		}
 	}
 
@@ -321,18 +318,19 @@ void cycle_pwm_duty(void)
 	if (PWM_RUNNING)
 	{
 		toggle_count++;
-		if (toggle_count == 2)
+		if (toggle_count == 1)
 		{
 			tc_set_compare_value(&pwm_generator_instance, TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
 		}
-		else if (toggle_count == 3)
+		else if (toggle_count == 2)
 		{
 			tc_set_compare_value(&pwm_generator_instance, TC_COMPARE_CAPTURE_CHANNEL_0, SECOND_DUTY_CYCLE);
 		}
-		else if (toggle_count > 3)
+		else if (toggle_count > 2)
 		{
 			toggle_count = 0;
 			tc_set_compare_value(&pwm_generator_instance, TC_COMPARE_CAPTURE_CHANNEL_0, INITIAL_DUTY_CYCLE);
+			PWM_RUNNING = false;
 			tc_disable (&pwm_generator_instance);
 		}
 	}
