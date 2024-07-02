@@ -20,7 +20,7 @@ struct tc_module pwm_generator_instance; // instance for PWM Motor Control (TC0)
 #define TC_CLOCK_PRESCALER 											    TC_CLOCK_PRESCALER_DIV64
 #define TC_CLOCK_SOURCE  											    GCLK_GENERATOR_0
 
-#define SYSTEM_TC_PERIOD_VALUE  										124
+#define SYSTEM_TC_PERIOD_VALUE  										111												// Tuned for 1.99 -- 2.002 ms (1ms * 2) Period
 
 #define PWM_PIN_OUT  													PIN_PA10E_TC2_WO0;
 #define PWM_MUX_OUT  													MUX_PA10E_TC2_WO0;
@@ -32,53 +32,52 @@ struct tc_module pwm_generator_instance; // instance for PWM Motor Control (TC0)
 #define MAX_TOGGLE_COUNT  											    3
 
 #define VBUS_PIN														PIN_PA27
+#define MOTOR_NSLEEP_PIN												PIN_PA06
 
-uint8_t toggle_count = 0;
-bool BUTTON_PRESS_STATUS = false;
-bool BUTTON_RELEASE_STATUS = false;
-bool PWM_RUNNING = false;
+#define DELAY_PRESS_CN													400
+#define DELAY_DEBOUNCE_CN												2
+
+
+
+static uint8_t toggle_count = 0;
+static bool BUTTON_PRESS_STATUS = false;
+static bool BUTTON_RELEASE_STATUS = false;
+static bool PWM_RUNNING = false;
+
+static bool VBUS_STATE;
+
+static bool BATTERY_CHARGING;
+static bool BATTERY_CHARGED;
+static bool BATTERY_LOW;
+static bool BATTERY_LOWEST;
+static bool PULSATING_MOTOR_ROUTINE = false;
+
+
+
 static bool SYS_TICK_10MS;
 static bool SYS_TICK_50MS;
 static bool SYS_TICK_100MS;
+static bool SYS_TICK_200MS;
+static bool LongPressFlag = false;
+
+static int press_delay_count = DELAY_DEBOUNCE_CN;
+static int long_press_delay_count = DELAY_PRESS_CN;
+
+
+
+
+
 
 
 static void configure_pwm_generator (void);
-void check_button_press (void);
+void regular_routine (void);
 void cycle_pwm_duty (void);
 void turn_led_on (void);
 bool is_button_pressed (void);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /************************************************************************/
-/* GPIO - PIN SETUP
-*/
+/* GPIO - PIN SETUP														*/
 /************************************************************************/
 
 void configure_port_pins(void);
@@ -87,6 +86,7 @@ void configure_port_pins(void)
 {
 	struct port_config config_port_pin;
 	port_get_config_defaults(&config_port_pin);
+	
 	
 	/* PA27 is shared between EDBG
 	SS and VBUS detection
@@ -104,28 +104,20 @@ void configure_port_pins(void)
 	
 	/*
 	
-	Configure your own pins as PULL_UP OR PULL_DOWN
+	MOTOR'S NSLEEP PIN
 	
 	*/
+	
+	config_port_pin.direction  = PORT_PIN_DIR_OUTPUT;
+	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;						// START AT PULL DOWN.
+	port_pin_set_config(MOTOR_NSLEEP_PIN, &config_port_pin);
+	
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /************************************************************************/
-/* TC - TIMER CODE START
-*/
+/* TC - TIMER CODE START												*/
 /************************************************************************/
 
 void configure_system_tc (void);
@@ -138,32 +130,52 @@ void sys_tc_callback(struct tc_module *const module_inst)
 	static int tick_count_10ms;
 	static int tick_count_50ms;
 	static int tick_count_100ms;
+	static int tick_count_200ms;
+	
 	
 	tick_count_1ms++;
 	
+	
+	//port_pin_toggle_output_level (LED0_PIN);					// visually check sys clock on PA16
+	
 	// Check for 10ms interval
-	if (tick_count_1ms > 10)
+	if (tick_count_1ms >= 10)
 	{
 		tick_count_10ms++;
 		tick_count_1ms = 0;
-		SYS_TICK_10MS = true;  // Flag for 10ms interval
+		SYS_TICK_10MS = true;									// Flag for 10ms interval
+		//port_pin_toggle_output_level (LED0_PIN);				// visually check sys clock on PA16
 	}
 	
 	// Check for 50ms interval
-	if (tick_count_10ms > 5)
+	if (tick_count_10ms >= 5)
 	{
 		tick_count_50ms++;
 		tick_count_10ms = 0;
-		SYS_TICK_50MS = true;  // Flag for 50ms interval
+		SYS_TICK_50MS = true;									// Flag for 50ms interval
+		//port_pin_toggle_output_level (LED0_PIN);				// visually check sys clock on PA16
 	}
 	
 	// Check for 100ms interval
-	if (tick_count_50ms > 2)
+	if (tick_count_50ms >= 2)
 	{
 		tick_count_100ms++;
 		tick_count_50ms = 0;
-		SYS_TICK_100MS = true;  // Flag for 100ms interval
+		SYS_TICK_100MS = true;									// Flag for 100ms interval
+		//port_pin_toggle_output_level (LED0_PIN);				// visually check sys clock on PA16
 	}
+	
+	
+	// Check for 200ms interval
+	if (tick_count_100ms >= 2)
+	{
+		tick_count_200ms++;
+		tick_count_100ms = 0;
+		SYS_TICK_200MS = true;									// Flag for 200ms interval
+		//port_pin_toggle_output_level (LED0_PIN);				// visually check sys clock on PA16
+	}
+	
+	
 	
 	
 }
@@ -176,6 +188,11 @@ void configure_system_tc (void)
 	config_tc.counter_size = TC_COUNTER_SIZE;
 	config_tc.clock_prescaler = TC_CLOCK_PRESCALER;
 	config_tc.counter_8_bit.period = SYSTEM_TC_PERIOD_VALUE;
+	
+	config_tc.pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].enabled = true;
+	config_tc.pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].pin_out = PIN_PA15E_TC1_WO1; // PA15 FOR TESTING
+	config_tc.pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].pin_mux = MUX_PA15E_TC1_WO1; // PA15 FOR TESTING
+	
 	tc_init (&system_timer_instance, SYSTEM_TC, &config_tc);
 	tc_enable (&system_timer_instance);
 }
@@ -211,248 +228,148 @@ static void configure_pwm_generator (void)
 	config_tc.pwm_channel[0].pin_mux = MUX_PA10E_TC2_WO0;
 
 	config_tc.pwm_channel[0].enabled = true;
-
+	
 	tc_init (&pwm_generator_instance, PWM_GENERATOR, &config_tc);
+
+	
 }
 
 
 
-
-/*
-Test long button press
-*/
-static uint16_t button_press_count = 0;
-static bool long_button_press_flag = false;
-
 bool is_button_pressed (void)
 {
-	static int press_delay_count = 3;
-	
+
 	if (!port_pin_get_input_level (SW0_PIN))
 	{
-		button_press_count++;
 		BUTTON_PRESS_STATUS = true;
 		press_delay_count--;
-	}
-	else
+		long_press_delay_count--;
+		
+	}else
 	{
 		BUTTON_PRESS_STATUS = false;
-		press_delay_count = 3;
+		press_delay_count = DELAY_DEBOUNCE_CN;
+		long_press_delay_count = DELAY_PRESS_CN;
+		
 	}
 	
+	// long press delay logic
+	if (long_press_delay_count <= 0){
+		LongPressFlag = true;
+		long_press_delay_count = 0 ;
+	}
+	
+	// debounce logic
 	if (press_delay_count <= 0)
 	{
 		BUTTON_RELEASE_STATUS = false;
+		press_delay_count = 0;
 		return true;
+
 	}
 	else
 	{
 		BUTTON_RELEASE_STATUS = true;
 		return false;
 	}
-}
+	
 
-void check_long_button_press(void)
-{
-	if (button_press_count >= 200) 
-	{
-		long_button_press_flag = true;
-	}
+	
 }
 
 
-static bool start_pwm_on_release = false;
+void pwm_motor_cleanup(void);
 
-void check_button_press(void)
+void pwm_motor_cleanup(void){
+	PULSATING_MOTOR_ROUTINE = false;
+	toggle_count = 0;
+	tc_set_compare_value (&pwm_generator_instance,
+	TC_COMPARE_CAPTURE_CHANNEL_0,
+	INITIAL_DUTY_CYCLE);
+	PWM_RUNNING = false;
+	tc_disable (&pwm_generator_instance);
+	port_pin_set_output_level(MOTOR_NSLEEP_PIN,LOW);
+}
+
+
+void regular_routine (void)
 {
 	static bool motor_status_changed = false;
-
-	if (is_button_pressed() & !motor_status_changed)
-	{
-		if (button_press_count > 200) 
-		{
-				motor_status_changed = true;
+	
+	if (is_button_pressed()){
+		if (LongPressFlag){
 			
-			if (!PWM_RUNNING)
+			LED_On(LED0_PIN);
+			pwm_motor_cleanup();
+			
+			/*
+			DO 2 second shutdown routine
+			*/
+			
+			} else {
+			
+			// routine for motor (regular)
+			if (!motor_status_changed)
 			{
-				PWM_RUNNING = true;
-				tc_enable(&pwm_generator_instance);
-			}
-			else
-			{
-				cycle_pwm_duty();
+				toggle_count++;
+				motor_status_changed = true;
+				if (!PWM_RUNNING)
+				{
+					PWM_RUNNING = true;
+					tc_enable (&pwm_generator_instance);
+					port_pin_set_output_level(MOTOR_NSLEEP_PIN,HIGH);
+				}
+				else
+				{
+					cycle_pwm_duty ();
+				}
 			}
 		}
+		
 	}
 
 	if (BUTTON_RELEASE_STATUS)
 	{
-		if (start_pwm_on_release)
-		{
-			motor_status_changed = true;
-			start_pwm_on_release = false; // Reset flag
-
-			if (!PWM_RUNNING)
-			{
-				PWM_RUNNING = true;
-				tc_enable(&pwm_generator_instance);
-			}
-			else
-			{
-				cycle_pwm_duty();
-			}
-		}
-		else
-		{
-			motor_status_changed = false;
-		}
-
-		button_press_count = 0;
+		motor_status_changed = false;
 	}
 }
 
 
 
-void cycle_pwm_duty(void)
+
+
+
+void cycle_pwm_duty (void)
 {
 	if (PWM_RUNNING)
 	{
-		toggle_count++;
-		if (toggle_count == 1)
+		
+		if (toggle_count == 2)
 		{
-			tc_set_compare_value(&pwm_generator_instance, TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
+			tc_set_compare_value (&pwm_generator_instance,
+			TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
 		}
-		else if (toggle_count == 2)
+		else if (toggle_count == 3)
 		{
-			tc_set_compare_value(&pwm_generator_instance, TC_COMPARE_CAPTURE_CHANNEL_0, SECOND_DUTY_CYCLE);
+			tc_set_compare_value (&pwm_generator_instance,
+			TC_COMPARE_CAPTURE_CHANNEL_0,
+			SECOND_DUTY_CYCLE);
 		}
-		else if (toggle_count > 2)
+		
+		else if (toggle_count == 4)
 		{
-			toggle_count = 0;
-			tc_set_compare_value(&pwm_generator_instance, TC_COMPARE_CAPTURE_CHANNEL_0, INITIAL_DUTY_CYCLE);
-			PWM_RUNNING = false;
-			tc_disable (&pwm_generator_instance);
+			PULSATING_MOTOR_ROUTINE = true;
+			tc_set_compare_value (&pwm_generator_instance,
+			TC_COMPARE_CAPTURE_CHANNEL_0,
+			SECOND_DUTY_CYCLE);
+		}
+		
+		else if (toggle_count > 4)
+		{
+			pwm_motor_cleanup();
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//bool is_button_pressed (void)
-//{
-	//static int press_delay_count = 5;
-//
-	//
-	//if (!port_pin_get_input_level (SW0_PIN))
-	//{
-		//BUTTON_PRESS_STATUS = true;
-		//press_delay_count--;
-		//
-	//}else
-	//{
-		//BUTTON_PRESS_STATUS = false;
-		//press_delay_count = 5;
-	//}
-	//if (press_delay_count <= 0)
-	//{
-		//BUTTON_RELEASE_STATUS = false;
-		//return true;
-		//press_delay_count = 0;
-	//}
-	//else
-	//{
-		//BUTTON_RELEASE_STATUS = true;
-		//return false;
-	//}
-	//
-//}
-
-
-//void check_button_press (void)
-//{
-	//static bool motor_status_changed = false;
-	//if (is_button_pressed () & !motor_status_changed)
-	//{
-		//toggle_count++;
-		//motor_status_changed = true;
-		//if (!PWM_RUNNING)
-		//{
-			//PWM_RUNNING = true;
-			//tc_enable (&pwm_generator_instance);
-		//}
-		//else
-		//{
-			//cycle_pwm_duty ();
-		//}
-	//}
-	//if (BUTTON_RELEASE_STATUS)
-	//{
-		//motor_status_changed = false;
-	//}
-//}
-
-
-//void cycle_pwm_duty (void)
-//{
-	//if (PWM_RUNNING)
-	//{
-		//if (toggle_count == 2)
-		//{
-			//tc_set_compare_value (&pwm_generator_instance,
-			//TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
-		//}
-		//else if (toggle_count == 3)
-		//{
-			//tc_set_compare_value (&pwm_generator_instance,
-			//TC_COMPARE_CAPTURE_CHANNEL_0,
-			//SECOND_DUTY_CYCLE);
-		//}
-		//else if (toggle_count > 3)
-		//{
-			//toggle_count = 0;
-			//tc_set_compare_value (&pwm_generator_instance,
-			//TC_COMPARE_CAPTURE_CHANNEL_0,
-			//INITIAL_DUTY_CYCLE);
-			//PWM_RUNNING = false;
-			//tc_disable (&pwm_generator_instance);
-		//}
-	//}
-//}
 
 
 
@@ -462,7 +379,6 @@ void cycle_pwm_duty(void)
 /************************************************************************/
 
 
-bool VBUS_STATE;
 void get_vbus_state(void);
 
 void get_vbus_state(void){
@@ -471,8 +387,6 @@ void get_vbus_state(void){
 
 
 
-bool BATTERY_CHARGING;
-bool BATTERY_CHARGED;
 void update_battery_states(void);
 
 void update_battery_states(void){
@@ -484,8 +398,6 @@ void update_battery_states(void){
 }
 
 
-bool BATTERY_LOW;
-bool BATTERY_LOWEST;
 void sample_battery_states(void);
 
 
@@ -503,26 +415,6 @@ void sample_battery_states(void){
 	
 	*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /************************************************************************/
@@ -576,7 +468,7 @@ void display_battery_state(void){
 	}
 	
 	if (BATTERY_CHARGED){
-		led_control("blink","yellow");
+		//led_control("blink","yellow");
 	}
 	
 	if (BATTERY_CHARGING){
@@ -586,7 +478,22 @@ void display_battery_state(void){
 }
 
 
+void toggle_nsleep(void);
 
+void toggle_nsleep(void){
+	static bool PULSATING_MOTOR = false;
+	if (PULSATING_MOTOR_ROUTINE){
+		if (PULSATING_MOTOR){
+			port_pin_set_output_level(MOTOR_NSLEEP_PIN,LOW);
+			LED_Off(LED0_PIN);
+			PULSATING_MOTOR = false;
+			}else{
+			PULSATING_MOTOR = true;
+			port_pin_set_output_level(MOTOR_NSLEEP_PIN,HIGH);
+			LED_On(LED0_PIN);
+		}
+	}
+}
 
 
 /************************************************************************/
@@ -600,7 +507,6 @@ void system_state(void){
 	update_battery_states();
 	sample_battery_states();
 }
-
 
 
 /************************************************************************/
@@ -629,19 +535,29 @@ void system_logic(void){
 	
 	if (SYS_TICK_10MS){
 		SYS_TICK_10MS = false;
-		check_button_press ();						// Poll Button Press State
-		check_long_button_press();
+		regular_routine();
 	}
-	if (long_button_press_flag){
-		LED_On(LED0_PIN);
-		//system_shutdown();						// Call system Shutdown (set NSleep Flag) 
+	
+	if (SYS_TICK_200MS){
+		SYS_TICK_200MS = false;
+		toggle_nsleep();
 	}
+
+
 }
 
 
 /************************************************************************/
 /* Start Up Configurations                                              */
 /************************************************************************/
+
+void startup_default_pin_state(void);
+
+void startup_default_pin_state(void){
+	port_pin_set_output_level(MOTOR_NSLEEP_PIN,LOW);
+}
+
+
 
 void startup_sys_configs(void);
 
@@ -650,6 +566,7 @@ void startup_sys_configs(void){
 	system_init ();									// System Initialize
 	system_interrupt_enable_global ();				// System Interrupts
 	configure_port_pins ();							// System PORTs
+	startup_default_pin_state();
 	configure_system_tc ();							// System Clock
 	system_tc_callbacks ();							// System Clock Callback
 }
