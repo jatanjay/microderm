@@ -6705,7 +6705,7 @@ OUTPUT(timer_pwm.elf elf32-littlearm)
  .debug_macro   0x0000638c       0xb4 src/main.o
  .debug_macro   0x00006440       0x16 src/main.o
 
-.debug_line     0x00000000     0xb82d
+.debug_line     0x00000000     0xb82f
  .debug_line    0x00000000      0x880 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .debug_line    0x00000880      0x975 src/ASF/sam0/boards/samd11_xplained_pro/board_init.o
  .debug_line    0x000011f5      0xa14 src/ASF/sam0/drivers/events/events_hooks.o
@@ -6722,7 +6722,7 @@ OUTPUT(timer_pwm.elf elf32-littlearm)
  .debug_line    0x00008a1a      0xa44 src/ASF/sam0/drivers/tc/tc_interrupt.o
  .debug_line    0x0000945e      0xc6e src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
  .debug_line    0x0000a0cc      0x60f src/ASF/sam0/utils/cmsis/samd11/source/gcc/startup_samd11.o
- .debug_line    0x0000a6db     0x1152 src/main.o
+ .debug_line    0x0000a6db     0x1154 src/main.o
 
 .debug_str      0x00000000    0x79306
  .debug_str     0x00000000    0x6e930 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o

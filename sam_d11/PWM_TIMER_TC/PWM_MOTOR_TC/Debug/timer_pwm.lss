@@ -27,11 +27,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  11 .debug_macro  00006456  00000000  00000000  00047eee  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   0000b82d  00000000  00000000  0004e344  2**0
+ 12 .debug_line   0000b82f  00000000  00000000  0004e344  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    00079306  00000000  00000000  00059b71  2**0
+ 13 .debug_str    00079306  00000000  00000000  00059b73  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00001740  00000000  00000000  000d2e78  2**2
+ 14 .debug_frame  00001740  00000000  00000000  000d2e7c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -6805,6 +6805,7 @@ void regular_routine (void)
     24da:	781b      	ldrb	r3, [r3, #0]
     24dc:	2b00      	cmp	r3, #0
     24de:	d006      	beq.n	24ee <regular_routine+0x22>
+			
 			LED_On(LED0_PIN);
     24e0:	2100      	movs	r1, #0
     24e2:	2010      	movs	r0, #16
