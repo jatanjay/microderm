@@ -8,6 +8,7 @@
 #include <asf.h>
 #include "conf_example.h"
 #include "string.h"
+#include "led_driver.h"
 
 struct tc_module
 system_timer_instance; // instance for system timer counter (TC1)
@@ -65,7 +66,9 @@ static int long_press_delay_count = DELAY_PRESS_CN;
 
 
 
-
+/*
+shutdown routine -- turn PA07 low to turn off peripherals
+*/
 
 
 
@@ -74,6 +77,41 @@ void regular_routine (void);
 void cycle_pwm_duty (void);
 void turn_led_on (void);
 bool is_button_pressed (void);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /************************************************************************/
@@ -318,6 +356,7 @@ void regular_routine (void)
 					PWM_RUNNING = true;
 					tc_enable (&pwm_generator_instance);
 					port_pin_set_output_level(MOTOR_NSLEEP_PIN,HIGH);
+					set_color_red();
 				}
 				else
 				{
@@ -348,12 +387,14 @@ void cycle_pwm_duty (void)
 		{
 			tc_set_compare_value (&pwm_generator_instance,
 			TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
+			set_color_green();
 		}
 		else if (toggle_count == 3)
 		{
 			tc_set_compare_value (&pwm_generator_instance,
 			TC_COMPARE_CAPTURE_CHANNEL_0,
 			SECOND_DUTY_CYCLE);
+			set_color_blue();
 		}
 		
 		else if (toggle_count == 4)
@@ -362,11 +403,13 @@ void cycle_pwm_duty (void)
 			tc_set_compare_value (&pwm_generator_instance,
 			TC_COMPARE_CAPTURE_CHANNEL_0,
 			SECOND_DUTY_CYCLE);
+			set_battery_charge_routine();
 		}
 		
 		else if (toggle_count > 4)
 		{
 			pwm_motor_cleanup();
+			set_battery_low_routine();
 		}
 	}
 }
@@ -461,18 +504,15 @@ void display_battery_state(void){
 	
 	
 	if (BATTERY_LOWEST){
-		
 	}
 	
 	if (BATTERY_LOW){
 	}
 	
 	if (BATTERY_CHARGED){
-		//led_control("blink","yellow");
 	}
 	
 	if (BATTERY_CHARGING){
-		
 	}
 	
 }
@@ -569,6 +609,8 @@ void startup_sys_configs(void){
 	startup_default_pin_state();
 	configure_system_tc ();							// System Clock
 	system_tc_callbacks ();							// System Clock Callback
+	i2c_master_setup();
+	//reset_chip();
 }
 
 

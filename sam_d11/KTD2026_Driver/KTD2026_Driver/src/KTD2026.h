@@ -20,7 +20,11 @@
 // http://blog.janjongboom.com/2015/12/01/asf-i2c.html
 
 
-static uint8_t WriteBuffer_FOR_JOB_X[DATA_LENGTH]; // WriteBuffer_FOR_JOB_X = {0xREGISTER_TO_BE_WRITTEN, 0xDATA}
+static uint8_t WriteBuffer_FOR_JOB_X[DATA_LENGTH_FOR_JOB_X]; // WriteBuffer_FOR_JOB_X = {0xREGISTER_TO_BE_WRITTEN, 0xDATA}
+
+
+
+
 
 
 

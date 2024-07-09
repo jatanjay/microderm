@@ -8,6 +8,14 @@ src\ASF\sam0\boards\samd11_xplained_pro\board_init.c
 
 src\ASF\sam0\drivers\port\port.c
 
+src\ASF\sam0\drivers\sercom\i2c\i2c_sam0\i2c_master.c
+
+src\ASF\sam0\drivers\sercom\i2c\i2c_sam0\i2c_master_interrupt.c
+
+src\ASF\sam0\drivers\sercom\sercom.c
+
+src\ASF\sam0\drivers\sercom\sercom_interrupt.c
+
 src\ASF\sam0\drivers\system\clock\clock_samd09_d10_d11\clock.c
 
 src\ASF\sam0\drivers\system\clock\clock_samd09_d10_d11\gclk.c
