@@ -274,44 +274,54 @@ static void configure_pwm_generator (void)
 
 
 
-bool is_button_pressed (void)
-{
 
-	if (!port_pin_get_input_level (SW0_PIN))
-	{
-		BUTTON_PRESS_STATUS = true;
-		press_delay_count--;
-		long_press_delay_count--;
-		
-	}else
-	{
-		BUTTON_PRESS_STATUS = false;
-		press_delay_count = DELAY_DEBOUNCE_CN;
-		long_press_delay_count = DELAY_PRESS_CN;
-		
-	}
-	
-	// long press delay logic
-	if (long_press_delay_count <= 0){
-		LongPressFlag = true;
-		long_press_delay_count = 0 ;
-	}
-	
-	// debounce logic
-	if (press_delay_count <= 0)
-	{
-		BUTTON_RELEASE_STATUS = false;
-		press_delay_count = 0;
-		return true;
+/*
+comment is_button_pressed for pwm led routine - 7/9
 
-	}
-	else
-	{
-		BUTTON_RELEASE_STATUS = true;
-		return false;
-	}
-	
 
+*/
+
+
+//bool is_button_pressed (void)
+//{
+//
+	//if (!port_pin_get_input_level (SW0_PIN))
+	//{
+		//BUTTON_PRESS_STATUS = true;
+		//press_delay_count--;
+		//long_press_delay_count--;
+		//
+	//}else
+	//{
+		//BUTTON_PRESS_STATUS = false;
+		//press_delay_count = DELAY_DEBOUNCE_CN;
+		//long_press_delay_count = DELAY_PRESS_CN;
+		//
+	//}
+	//
+	//// long press delay logic
+	//if (long_press_delay_count <= 0){
+		//LongPressFlag = true;
+		//long_press_delay_count = 0 ;
+	//}
+	//
+	//// debounce logic
+	//if (press_delay_count <= 0)
+	//{
+		//BUTTON_RELEASE_STATUS = false;
+		//press_delay_count = 0;
+		//return true;
+//
+	//}
+	//else
+	//{
+		//BUTTON_RELEASE_STATUS = true;
+		//return false;
+	//}
+//}
+
+
+bool is_button_pressed(void){
 	
 }
 
@@ -504,6 +514,7 @@ void display_battery_state(void){
 	
 	
 	if (BATTERY_LOWEST){
+		set_battery_low_routine();
 	}
 	
 	if (BATTERY_LOW){
@@ -513,6 +524,7 @@ void display_battery_state(void){
 	}
 	
 	if (BATTERY_CHARGING){
+		set_battery_charge_routine();
 	}
 	
 }
