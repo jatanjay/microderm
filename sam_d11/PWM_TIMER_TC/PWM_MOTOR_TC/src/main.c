@@ -409,7 +409,7 @@ void cycle_pwm_duty (void)
 		else if (toggle_count > 4)
 		{
 			pwm_motor_cleanup();
-			set_battery_low_routine();
+			//set_battery_low_routine();
 		}
 	}
 }
@@ -496,10 +496,10 @@ void display_battery_state(void){
 	1. Sense VBUS level
 	2. Map to following states and call led_control()
 	
-	a. level_lowest				: led_control(blink,	red)		!! CHUCK FOR NOW
-	a. level_low				: led_control(steady,	red)
-	a. level_charging			: led_control(blink,	green)
-	a. level_charged			: led_control(steady,	green)
+	a. level_lowest				: set_battery_low_routine();
+	a. level_low				: set_color_red();
+	a. level_charging			: set_battery_charge_routine();
+	a. level_charged			: set_color_green();
 	*/
 	
 	
