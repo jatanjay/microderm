@@ -262,8 +262,8 @@ static void configure_pwm_generator (void)
 	config_tc.counter_8_bit.compare_capture_channel[0] = INITIAL_DUTY_CYCLE;
 
 	config_tc.wave_generation = TC_WAVE_GENERATION_NORMAL_PWM;
-	config_tc.pwm_channel[0].pin_out = PIN_PA10E_TC2_WO0;
-	config_tc.pwm_channel[0].pin_mux = MUX_PA10E_TC2_WO0;
+	config_tc.pwm_channel[0].pin_out = PWM_PIN_OUT;
+	config_tc.pwm_channel[0].pin_mux = PWM_MUX_OUT;
 
 	config_tc.pwm_channel[0].enabled = true;
 	
@@ -282,48 +282,46 @@ comment is_button_pressed for pwm led routine - 7/9
 */
 
 
-//bool is_button_pressed (void)
-//{
-//
-	//if (!port_pin_get_input_level (SW0_PIN))
-	//{
-		//BUTTON_PRESS_STATUS = true;
-		//press_delay_count--;
-		//long_press_delay_count--;
-		//
-	//}else
-	//{
-		//BUTTON_PRESS_STATUS = false;
-		//press_delay_count = DELAY_DEBOUNCE_CN;
-		//long_press_delay_count = DELAY_PRESS_CN;
-		//
-	//}
-	//
-	//// long press delay logic
-	//if (long_press_delay_count <= 0){
-		//LongPressFlag = true;
-		//long_press_delay_count = 0 ;
-	//}
-	//
-	//// debounce logic
-	//if (press_delay_count <= 0)
-	//{
-		//BUTTON_RELEASE_STATUS = false;
-		//press_delay_count = 0;
-		//return true;
-//
-	//}
-	//else
-	//{
-		//BUTTON_RELEASE_STATUS = true;
-		//return false;
-	//}
-//}
+bool is_button_pressed (void)
+{
 
-
-bool is_button_pressed(void){
+	if (!port_pin_get_input_level (SW0_PIN))
+	{
+		BUTTON_PRESS_STATUS = true;
+		press_delay_count--;
+		long_press_delay_count--;
+		
+	}else
+	{
+		BUTTON_PRESS_STATUS = false;
+		press_delay_count = DELAY_DEBOUNCE_CN;
+		long_press_delay_count = DELAY_PRESS_CN;
+		
+	}
 	
+	// long press delay logic
+	if (long_press_delay_count <= 0){
+		LongPressFlag = true;
+		long_press_delay_count = 0 ;
+	}
+	
+	// debounce logic
+	if (press_delay_count <= 0)
+	{
+		BUTTON_RELEASE_STATUS = false;
+		press_delay_count = 0;
+		return true;
+
+	}
+	else
+	{
+		BUTTON_RELEASE_STATUS = true;
+		return false;
+	}
 }
+
+
+
 
 
 void pwm_motor_cleanup(void);
@@ -366,7 +364,6 @@ void regular_routine (void)
 					PWM_RUNNING = true;
 					tc_enable (&pwm_generator_instance);
 					port_pin_set_output_level(MOTOR_NSLEEP_PIN,HIGH);
-					set_color_red();
 				}
 				else
 				{
@@ -397,14 +394,12 @@ void cycle_pwm_duty (void)
 		{
 			tc_set_compare_value (&pwm_generator_instance,
 			TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
-			set_color_green();
 		}
 		else if (toggle_count == 3)
 		{
 			tc_set_compare_value (&pwm_generator_instance,
 			TC_COMPARE_CAPTURE_CHANNEL_0,
 			SECOND_DUTY_CYCLE);
-			set_color_blue();
 		}
 		
 		else if (toggle_count == 4)
@@ -413,13 +408,11 @@ void cycle_pwm_duty (void)
 			tc_set_compare_value (&pwm_generator_instance,
 			TC_COMPARE_CAPTURE_CHANNEL_0,
 			SECOND_DUTY_CYCLE);
-			set_battery_charge_routine();
 		}
 		
 		else if (toggle_count > 4)
 		{
 			pwm_motor_cleanup();
-			//set_battery_low_routine();
 		}
 	}
 }
@@ -514,7 +507,7 @@ void display_battery_state(void){
 	
 	
 	if (BATTERY_LOWEST){
-		set_battery_low_routine();
+		//set_battery_low_routine();
 	}
 	
 	if (BATTERY_LOW){
@@ -524,7 +517,7 @@ void display_battery_state(void){
 	}
 	
 	if (BATTERY_CHARGING){
-		set_battery_charge_routine();
+		//set_battery_charge_routine();
 	}
 	
 }
@@ -637,3 +630,112 @@ int main (void)
 		system_logic();								// Invoke System Logic
 	}
 }
+
+
+
+
+
+/************************************************************************/
+/* TCC LED CHANLE TEST CODE                                                                     */
+/************************************************************************/
+
+
+/*
+
+ Define the TCC channel numbers corresponding to the LED colors
+#define RED_CHANNEL    TCC_CHANNEL_NUM_0
+#define GREEN_CHANNEL  TCC_CHANNEL_NUM_1
+#define BLUE_CHANNEL   TCC_CHANNEL_NUM_2
+#define WHITE_CHANNEL  TCC_CHANNEL_NUM_5
+
+ Function to turn on Red LED
+void turn_on_red(void) {
+	 Enable PWM output on Red channel (TCC_CHANNEL_NUM_0)
+	tcc_enable_pwm_output(&config_tcc, RED_CHANNEL);
+}
+
+ Function to turn on Green LED
+void turn_on_green(void) {
+	 Enable PWM output on Green channel (TCC_CHANNEL_NUM_1)
+	tcc_enable_pwm_output(&config_tcc, GREEN_CHANNEL);
+}
+
+ Function to turn on Blue LED
+void turn_on_blue(void) {
+	 Enable PWM output on Blue channel (TCC_CHANNEL_NUM_2)
+	tcc_enable_pwm_output(&config_tcc, BLUE_CHANNEL);
+}
+
+ Function to turn on White LED
+void turn_on_white(void) {
+	 Enable PWM output on White channel (TCC_CHANNEL_NUM_5)
+	tcc_enable_pwm_output(&config_tcc, WHITE_CHANNEL);
+}
+
+ Function to turn off all LEDs
+void turn_off_all(void) {
+	 Disable PWM outputs on all channels
+	tcc_disable_pwm_output(&config_tcc, RED_CHANNEL);
+	tcc_disable_pwm_output(&config_tcc, GREEN_CHANNEL);
+	tcc_disable_pwm_output(&config_tcc, BLUE_CHANNEL);
+	tcc_disable_pwm_output(&config_tcc, WHITE_CHANNEL);
+}
+
+ Function to create specific colors
+void create_color(int color) {
+	 Color combinations based on the algorithm
+	switch (color) {
+		case 0:  // Red
+		turn_on_red();
+		break;
+		case 1:  // Green
+		turn_on_green();
+		break;
+		case 2:  // Blue
+		turn_on_blue();
+		break;
+		case 3:  // White
+		turn_on_white();
+		break;
+		case 4:  // Yellow (Red + Green)
+		turn_on_red();
+		turn_on_green();
+		break;
+		case 5:  // Purple (Red + Blue)
+		turn_on_red();
+		turn_on_blue();
+		break;
+		case 6:  // Cyan (Green + Blue)
+		turn_on_green();
+		turn_on_blue();
+		break;
+		default:
+		 Turn off all LEDs if an invalid color is selected
+		turn_off_all();
+		break;
+	}
+}
+
+
+int main() {
+	 Initialize TCC configuration (assuming config_tcc is globally defined)
+	configure_tcc();
+
+	 Create Yellow color (Red + Green)
+	create_color(4);  // 4 corresponds to Yellow
+
+	 Delay or perform other operations
+
+	 Create Cyan color (Green + Blue)
+	create_color(6);  // 6 corresponds to Cyan
+
+	 Delay or perform other operations
+
+	 Turn off all LEDs
+	turn_off_all();
+
+	return 0;
+}
+
+
+*/

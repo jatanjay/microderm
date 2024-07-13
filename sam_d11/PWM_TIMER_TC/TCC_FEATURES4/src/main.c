@@ -203,6 +203,57 @@ void configure_evsys(void)
  * Function to configure TCC, this will configure TCC for other than Capture,
  * Counter and Fault mode related operations.
  */
+
+
+
+
+/************************************************************************/
+/* 
+
+
+ALGORITHM:
+
+tcc channel 
+1
+2
+3
+4
+
+
+On	1 - red
+On	2 - green
+on	3 - blue
+on	4 - white
+
+on 1,2 - yellow
+on 1,3 - purple
+on 2,3 - cyan
+
+
+
+
+	
+
+
+
+
+
+                                                                     */
+/************************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void configure_tcc(void)
 {
 // Structure used to store the TCC configuration parameters
