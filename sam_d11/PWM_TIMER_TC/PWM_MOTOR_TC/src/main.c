@@ -9,6 +9,7 @@
 #include "conf_example.h"
 #include "string.h"
 #include "led_driver.h"
+#include "pwm_led.h"
 
 struct tc_module
 system_timer_instance; // instance for system timer counter (TC1)
@@ -34,6 +35,8 @@ struct tc_module pwm_generator_instance; // instance for PWM Motor Control (TC0)
 
 #define VBUS_PIN														PIN_PA27
 #define MOTOR_NSLEEP_PIN												PIN_PA06
+#define SWITCH_OFF_PIN													PIN_PA07
+
 
 #define DELAY_PRESS_CN													400
 #define DELAY_DEBOUNCE_CN												2
@@ -66,9 +69,7 @@ static int long_press_delay_count = DELAY_PRESS_CN;
 
 
 
-/*
-shutdown routine -- turn PA07 low to turn off peripherals
-*/
+
 
 
 
@@ -150,6 +151,19 @@ void configure_port_pins(void)
 	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;						// START AT PULL DOWN.
 	port_pin_set_config(MOTOR_NSLEEP_PIN, &config_port_pin);
 	
+	
+	
+	/*
+	
+	shutdown routine -- turn PA07 low to turn off peripherals
+	
+	*/
+	
+	config_port_pin.direction  = PORT_PIN_DIR_OUTPUT;
+	config_port_pin.input_pull = PORT_PIN_PULL_UP;							// START AT PULL UP.
+	port_pin_set_config(SWITCH_OFF_PIN, &config_port_pin);
+	
+	
 }
 
 
@@ -228,8 +242,8 @@ void configure_system_tc (void)
 	config_tc.counter_8_bit.period = SYSTEM_TC_PERIOD_VALUE;
 	
 	config_tc.pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].enabled = true;
-	config_tc.pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].pin_out = PIN_PA15E_TC1_WO1; // PA15 FOR TESTING
-	config_tc.pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].pin_mux = MUX_PA15E_TC1_WO1; // PA15 FOR TESTING
+	config_tc.pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].pin_out = PIN_PA15E_TC1_WO1; // PA15 FOR TESTING ; OG PA16 (LED)
+	config_tc.pwm_channel[TC_COMPARE_CAPTURE_CHANNEL_0].pin_mux = MUX_PA15E_TC1_WO1; // PA15 FOR TESTING ; OG PA16 (LED)
 	
 	tc_init (&system_timer_instance, SYSTEM_TC, &config_tc);
 	tc_enable (&system_timer_instance);
@@ -392,22 +406,25 @@ void cycle_pwm_duty (void)
 		
 		if (toggle_count == 2)
 		{
-			tc_set_compare_value (&pwm_generator_instance,
-			TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
+			//tc_set_compare_value (&pwm_generator_instance,
+			//TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
+			set_red();
 		}
 		else if (toggle_count == 3)
 		{
-			tc_set_compare_value (&pwm_generator_instance,
-			TC_COMPARE_CAPTURE_CHANNEL_0,
-			SECOND_DUTY_CYCLE);
+			//tc_set_compare_value (&pwm_generator_instance,
+			//TC_COMPARE_CAPTURE_CHANNEL_0,
+			//SECOND_DUTY_CYCLE);	
+			set_blue();
 		}
 		
 		else if (toggle_count == 4)
 		{
 			PULSATING_MOTOR_ROUTINE = true;
-			tc_set_compare_value (&pwm_generator_instance,
-			TC_COMPARE_CAPTURE_CHANNEL_0,
-			SECOND_DUTY_CYCLE);
+			//tc_set_compare_value (&pwm_generator_instance,
+			//TC_COMPARE_CAPTURE_CHANNEL_0,
+			//SECOND_DUTY_CYCLE);
+			set_green();
 		}
 		
 		else if (toggle_count > 4)
@@ -561,21 +578,24 @@ void system_state(void){
 void system_logic(void);
 
 void system_logic(void){
-	if (!VBUS_STATE){
-		configure_pwm_generator();					// Enable Motor PWM
-	}
+	//if (!VBUS_STATE){
+		//configure_pwm_generator();					// Enable Motor PWM
+	//}
+	
+	//configure_pwm_generator();					// Enable Motor PWM
+		
 	
 	if (VBUS_STATE){
 		// LED_On(LED0_PIN);						// Verify VBUS Connection
-		display_battery_state();					// Display colors mapped to battery state
+		//display_battery_state();					// Display colors mapped to battery state
 	}
 	
 	if (BATTERY_LOW){
-		display_battery_state();					// Steady Red
+		//display_battery_state();					// Steady Red
 	}
 	
 	if (BATTERY_LOWEST){
-		display_battery_state();					// Blink Red
+		//display_battery_state();					// Blink Red
 	}
 	
 	if (SYS_TICK_10MS){
@@ -600,6 +620,7 @@ void startup_default_pin_state(void);
 
 void startup_default_pin_state(void){
 	port_pin_set_output_level(MOTOR_NSLEEP_PIN,LOW);
+	port_pin_set_output_level(SWITCH_OFF_PIN,LOW);
 }
 
 
@@ -615,6 +636,7 @@ void startup_sys_configs(void){
 	configure_system_tc ();							// System Clock
 	system_tc_callbacks ();							// System Clock Callback
 	i2c_master_setup();
+	configure_pwm_tcc();
 	//reset_chip();
 }
 
@@ -634,108 +656,3 @@ int main (void)
 
 
 
-
-/************************************************************************/
-/* TCC LED CHANLE TEST CODE                                                                     */
-/************************************************************************/
-
-
-/*
-
- Define the TCC channel numbers corresponding to the LED colors
-#define RED_CHANNEL    TCC_CHANNEL_NUM_0
-#define GREEN_CHANNEL  TCC_CHANNEL_NUM_1
-#define BLUE_CHANNEL   TCC_CHANNEL_NUM_2
-#define WHITE_CHANNEL  TCC_CHANNEL_NUM_5
-
- Function to turn on Red LED
-void turn_on_red(void) {
-	 Enable PWM output on Red channel (TCC_CHANNEL_NUM_0)
-	tcc_enable_pwm_output(&config_tcc, RED_CHANNEL);
-}
-
- Function to turn on Green LED
-void turn_on_green(void) {
-	 Enable PWM output on Green channel (TCC_CHANNEL_NUM_1)
-	tcc_enable_pwm_output(&config_tcc, GREEN_CHANNEL);
-}
-
- Function to turn on Blue LED
-void turn_on_blue(void) {
-	 Enable PWM output on Blue channel (TCC_CHANNEL_NUM_2)
-	tcc_enable_pwm_output(&config_tcc, BLUE_CHANNEL);
-}
-
- Function to turn on White LED
-void turn_on_white(void) {
-	 Enable PWM output on White channel (TCC_CHANNEL_NUM_5)
-	tcc_enable_pwm_output(&config_tcc, WHITE_CHANNEL);
-}
-
- Function to turn off all LEDs
-void turn_off_all(void) {
-	 Disable PWM outputs on all channels
-	tcc_disable_pwm_output(&config_tcc, RED_CHANNEL);
-	tcc_disable_pwm_output(&config_tcc, GREEN_CHANNEL);
-	tcc_disable_pwm_output(&config_tcc, BLUE_CHANNEL);
-	tcc_disable_pwm_output(&config_tcc, WHITE_CHANNEL);
-}
-
- Function to create specific colors
-void create_color(int color) {
-	 Color combinations based on the algorithm
-	switch (color) {
-		case 0:  // Red
-		turn_on_red();
-		break;
-		case 1:  // Green
-		turn_on_green();
-		break;
-		case 2:  // Blue
-		turn_on_blue();
-		break;
-		case 3:  // White
-		turn_on_white();
-		break;
-		case 4:  // Yellow (Red + Green)
-		turn_on_red();
-		turn_on_green();
-		break;
-		case 5:  // Purple (Red + Blue)
-		turn_on_red();
-		turn_on_blue();
-		break;
-		case 6:  // Cyan (Green + Blue)
-		turn_on_green();
-		turn_on_blue();
-		break;
-		default:
-		 Turn off all LEDs if an invalid color is selected
-		turn_off_all();
-		break;
-	}
-}
-
-
-int main() {
-	 Initialize TCC configuration (assuming config_tcc is globally defined)
-	configure_tcc();
-
-	 Create Yellow color (Red + Green)
-	create_color(4);  // 4 corresponds to Yellow
-
-	 Delay or perform other operations
-
-	 Create Cyan color (Green + Blue)
-	create_color(6);  // 6 corresponds to Cyan
-
-	 Delay or perform other operations
-
-	 Turn off all LEDs
-	turn_off_all();
-
-	return 0;
-}
-
-
-*/

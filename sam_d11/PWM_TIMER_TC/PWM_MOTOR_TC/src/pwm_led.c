@@ -1,67 +1,37 @@
 /*
+ * pwm_led.c
+ *
+ * Created: 7/16/2024 2:41:09 PM
+ *  Author: jatan
+ */ 
 
-auth : jatan pandya
+#include "pwm_led.h"
 
-atmel asf code for setting led via pwm
-
-utilizes a switch mechanism to set pwm channels ( and combine ) to get colors
-
-tinker with duty cycles to tweak intensity of primary colors ( and thus get new secondary colors) 
-
-
-*/
-
-
-
-#include <asf.h>
-
-struct tcc_config config_tcc;
-struct tcc_module tcc_instance;
-
-#define CONF_PWM_MODULE             TCC0
-#define CONF_DEFAULT_PERIOD         0x3FF
-#define CONF_DEFAULT_MATCH_COMPARE  0x1FF
-
-#define RED_CHANNEL    TCC_CHANNEL_NUM_0
-#define GREEN_CHANNEL  TCC_CHANNEL_NUM_1
-#define BLUE_CHANNEL   TCC_CHANNEL_NUM_2
-#define WHITE_CHANNEL  TCC_CHANNEL_NUM_5
-
-enum eTCC_Channel {
-	TCC_CHANNEL_NUM_0 = 0,
-	TCC_CHANNEL_NUM_1,
-	TCC_CHANNEL_NUM_2,
-	TCC_CHANNEL_NUM_3,
-	TCC_CHANNEL_NUM_4,
-	TCC_CHANNEL_NUM_5,
-	TCC_CHANNEL_NUM_6
-};
-
-
-
-void turn_off_all(void);
-void configure_tcc(void);
-void set_color(int color);
-void set_color_channel(uint8_t channel, bool enable);
-
-
-void set_red(void);
-void set_green(void);
-void set_blue(void);
-void set_white(void);
-
-void set_yellow(void);
-void set_purple(void);
-void set_cyan(void);
-
+//void set_color_channel(uint8_t channel, bool enable) {	
+	////tcc_reset(&tcc_instance);
+	//config_tcc.pins.enable_wave_out_pin[channel] = enable;
+	//tcc_init(&tcc_instance, CONF_PWM_MODULE, &config_tcc);
+	//tcc_enable(&tcc_instance);
+//}
 
 
 void set_color_channel(uint8_t channel, bool enable) {
-	tcc_reset(&tcc_instance);
-	config_tcc.pins.enable_wave_out_pin[channel] = enable;
+	// Disable all channels first
+	for (int i = 0; i < 4; i++) {
+		config_tcc.pins.enable_wave_out_pin[i] = false;
+	}
+
+	// Enable only the specified channel
+	if (enable) {
+		config_tcc.pins.enable_wave_out_pin[channel] = true;
+	}
+
+	// Reinitialize and enable TCC
 	tcc_init(&tcc_instance, CONF_PWM_MODULE, &config_tcc);
 	tcc_enable(&tcc_instance);
 }
+
+
 
 void turn_off_all(void) {
 	tcc_disable(&tcc_instance);
@@ -69,7 +39,7 @@ void turn_off_all(void) {
 
 
 void set_color(int color) {
-	turn_off_all();  // Ensure all are off before setting new color
+	turn_off_all();  
 
 	switch (color) {
 		case 0:  // Red
@@ -96,13 +66,10 @@ void set_color(int color) {
 		set_color_channel(GREEN_CHANNEL, true);
 		set_color_channel(BLUE_CHANNEL, true);
 		break;
-		default:
-		turn_off_all();
-		break;
 	}
 }
 
-void configure_tcc(void)
+void configure_pwm_tcc(void)
 {
 	tcc_get_config_defaults(&config_tcc, CONF_PWM_MODULE);
 	config_tcc.compare.wave_generation = TCC_WAVE_GENERATION_DOUBLE_SLOPE_TOP;
@@ -187,11 +154,3 @@ void set_cyan(void){
 	
 }
 
-
-
-int main(void) {
-	configure_tcc();
-	
-	set_red();
-
-}

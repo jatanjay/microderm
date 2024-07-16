@@ -3,35 +3,35 @@ four_channel_rgb_pwm_tcc_testing.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000b70  00000000  00000000  00010000  2**2
+  0 .text         00000b68  00000000  00000000  00010000  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .relocate     00000004  20000000  00000b70  00020000  2**0
+  1 .relocate     00000004  20000000  00000b68  00020000  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000010c  20000004  00000b74  00020004  2**2
+  2 .bss          0000010c  20000004  00000b6c  00020004  2**2
                   ALLOC
-  3 .stack        00000400  20000110  00000c80  00020004  2**0
+  3 .stack        00000400  20000110  00000c78  00020004  2**0
                   ALLOC
   4 .ARM.attributes 00000028  00000000  00000000  00020004  2**0
                   CONTENTS, READONLY
   5 .comment      00000059  00000000  00000000  0002002c  2**0
                   CONTENTS, READONLY
-  6 .debug_info   00011b07  00000000  00000000  00020085  2**0
+  6 .debug_info   00011bb5  00000000  00000000  00020085  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000017ce  00000000  00000000  00031b8c  2**0
+  7 .debug_abbrev 000017ce  00000000  00000000  00031c3a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    00001f77  00000000  00000000  0003335a  2**0
+  8 .debug_loc    00002057  00000000  00000000  00033408  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_aranges 00000248  00000000  00000000  000352d1  2**0
+  9 .debug_aranges 00000280  00000000  00000000  0003545f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000268  00000000  00000000  00035519  2**0
+ 10 .debug_ranges 000002a0  00000000  00000000  000356df  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  00012da1  00000000  00000000  00035781  2**0
+ 11 .debug_macro  00012da1  00000000  00000000  0003597f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   000047b5  00000000  00000000  00048522  2**0
+ 12 .debug_line   0000482d  00000000  00000000  00048720  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    00074f75  00000000  00000000  0004ccd7  2**0
+ 13 .debug_str    00074fb6  00000000  00000000  0004cf4d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00000588  00000000  00000000  000c1c4c  2**2
+ 14 .debug_frame  00000630  00000000  00000000  000c1f04  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -63,7 +63,7 @@ Disassembly of section .text:
   a6:	bd10      	pop	{r4, pc}
   a8:	20000004 	.word	0x20000004
   ac:	00000000 	.word	0x00000000
-  b0:	00000b70 	.word	0x00000b70
+  b0:	00000b68 	.word	0x00000b68
 
 000000b4 <frame_dummy>:
   b4:	4b08      	ldr	r3, [pc, #32]	; (d8 <frame_dummy+0x24>)
@@ -86,8 +86,8 @@ Disassembly of section .text:
   d6:	e7f9      	b.n	cc <frame_dummy+0x18>
   d8:	00000000 	.word	0x00000000
   dc:	20000008 	.word	0x20000008
-  e0:	00000b70 	.word	0x00000b70
-  e4:	00000b70 	.word	0x00000b70
+  e0:	00000b68 	.word	0x00000b68
+  e4:	00000b68 	.word	0x00000b68
   e8:	00000000 	.word	0x00000000
 
 000000ec <_tcc_get_inst_index>:
@@ -926,7 +926,7 @@ void _tcc_interrupt_handler(
  5f4:	bdf0      	pop	{r4, r5, r6, r7, pc}
  5f6:	46c0      	nop			; (mov r8, r8)
  5f8:	20000028 	.word	0x20000028
- 5fc:	00000b04 	.word	0x00000b04
+ 5fc:	00000afc 	.word	0x00000afc
 
 00000600 <TCC0_Handler>:
 MREPEAT(TCC_INST_NUM, _TCC_INTERRUPT_HANDLER, 0)
@@ -1521,7 +1521,7 @@ void Dummy_Handler(void)
  8aa:	4b0e      	ldr	r3, [pc, #56]	; (8e4 <Reset_Handler+0xe0>)
  8ac:	4798      	blx	r3
  8ae:	e7fe      	b.n	8ae <Reset_Handler+0xaa>
- 8b0:	00000b70 	.word	0x00000b70
+ 8b0:	00000b68 	.word	0x00000b68
  8b4:	20000000 	.word	0x20000000
  8b8:	20000004 	.word	0x20000004
  8bc:	20000004 	.word	0x20000004
@@ -1533,12 +1533,12 @@ void Dummy_Handler(void)
  8d4:	41005000 	.word	0x41005000
  8d8:	41004800 	.word	0x41004800
  8dc:	41004000 	.word	0x41004000
- 8e0:	00000abd 	.word	0x00000abd
- 8e4:	00000a8d 	.word	0x00000a8d
+ 8e0:	00000ab5 	.word	0x00000ab5
+ 8e4:	00000a9d 	.word	0x00000a9d
 
 000008e8 <set_color_channel>:
-void create_color(int color);
-void set_color_channel(uint8_t channel, bool enable);
+void set_purple(void);
+void set_cyan(void);
 
 
 
@@ -1652,28 +1652,28 @@ void turn_off_all(void) {
  974:	2000002c 	.word	0x2000002c
  978:	000ff80f 	.word	0x000ff80f
 
-0000097c <create_color>:
+0000097c <set_color>:
 
 
-void create_color(int color) {
+void set_color(int color) {
  97c:	b510      	push	{r4, lr}
  97e:	0004      	movs	r4, r0
 	turn_off_all();  // Ensure all are off before setting new color
- 980:	4b1b      	ldr	r3, [pc, #108]	; (9f0 <create_color+0x74>)
+ 980:	4b1b      	ldr	r3, [pc, #108]	; (9f0 <set_color+0x74>)
  982:	4798      	blx	r3
 
 	switch (color) {
  984:	2c06      	cmp	r4, #6
- 986:	d82f      	bhi.n	9e8 <create_color+0x6c>
+ 986:	d82f      	bhi.n	9e8 <set_color+0x6c>
  988:	00a4      	lsls	r4, r4, #2
- 98a:	4b1a      	ldr	r3, [pc, #104]	; (9f4 <create_color+0x78>)
+ 98a:	4b1a      	ldr	r3, [pc, #104]	; (9f4 <set_color+0x78>)
  98c:	591b      	ldr	r3, [r3, r4]
  98e:	469f      	mov	pc, r3
 		case 0:  // Red
 		set_color_channel(RED_CHANNEL, true);
  990:	2101      	movs	r1, #1
  992:	2000      	movs	r0, #0
- 994:	4b18      	ldr	r3, [pc, #96]	; (9f8 <create_color+0x7c>)
+ 994:	4b18      	ldr	r3, [pc, #96]	; (9f8 <set_color+0x7c>)
  996:	4798      	blx	r3
 		break;
 		default:
@@ -1685,65 +1685,65 @@ void create_color(int color) {
 		set_color_channel(GREEN_CHANNEL, true);
  99a:	2101      	movs	r1, #1
  99c:	2001      	movs	r0, #1
- 99e:	4b16      	ldr	r3, [pc, #88]	; (9f8 <create_color+0x7c>)
+ 99e:	4b16      	ldr	r3, [pc, #88]	; (9f8 <set_color+0x7c>)
  9a0:	4798      	blx	r3
 		break;
- 9a2:	e7f9      	b.n	998 <create_color+0x1c>
+ 9a2:	e7f9      	b.n	998 <set_color+0x1c>
 		set_color_channel(BLUE_CHANNEL, true);
  9a4:	2101      	movs	r1, #1
  9a6:	2002      	movs	r0, #2
- 9a8:	4b13      	ldr	r3, [pc, #76]	; (9f8 <create_color+0x7c>)
+ 9a8:	4b13      	ldr	r3, [pc, #76]	; (9f8 <set_color+0x7c>)
  9aa:	4798      	blx	r3
 		break;
- 9ac:	e7f4      	b.n	998 <create_color+0x1c>
+ 9ac:	e7f4      	b.n	998 <set_color+0x1c>
 		set_color_channel(WHITE_CHANNEL, true);
  9ae:	2101      	movs	r1, #1
  9b0:	2005      	movs	r0, #5
- 9b2:	4b11      	ldr	r3, [pc, #68]	; (9f8 <create_color+0x7c>)
+ 9b2:	4b11      	ldr	r3, [pc, #68]	; (9f8 <set_color+0x7c>)
  9b4:	4798      	blx	r3
 		break;
- 9b6:	e7ef      	b.n	998 <create_color+0x1c>
+ 9b6:	e7ef      	b.n	998 <set_color+0x1c>
 		set_color_channel(RED_CHANNEL, true);
  9b8:	2101      	movs	r1, #1
  9ba:	2000      	movs	r0, #0
- 9bc:	4c0e      	ldr	r4, [pc, #56]	; (9f8 <create_color+0x7c>)
+ 9bc:	4c0e      	ldr	r4, [pc, #56]	; (9f8 <set_color+0x7c>)
  9be:	47a0      	blx	r4
 		set_color_channel(GREEN_CHANNEL, true);
  9c0:	2101      	movs	r1, #1
  9c2:	2001      	movs	r0, #1
  9c4:	47a0      	blx	r4
 		break;
- 9c6:	e7e7      	b.n	998 <create_color+0x1c>
+ 9c6:	e7e7      	b.n	998 <set_color+0x1c>
 		set_color_channel(RED_CHANNEL, true);
  9c8:	2101      	movs	r1, #1
  9ca:	2000      	movs	r0, #0
- 9cc:	4c0a      	ldr	r4, [pc, #40]	; (9f8 <create_color+0x7c>)
+ 9cc:	4c0a      	ldr	r4, [pc, #40]	; (9f8 <set_color+0x7c>)
  9ce:	47a0      	blx	r4
 		set_color_channel(BLUE_CHANNEL, true);
  9d0:	2101      	movs	r1, #1
  9d2:	2002      	movs	r0, #2
  9d4:	47a0      	blx	r4
 		break;
- 9d6:	e7df      	b.n	998 <create_color+0x1c>
+ 9d6:	e7df      	b.n	998 <set_color+0x1c>
 		set_color_channel(GREEN_CHANNEL, true);
  9d8:	2101      	movs	r1, #1
  9da:	2001      	movs	r0, #1
- 9dc:	4c06      	ldr	r4, [pc, #24]	; (9f8 <create_color+0x7c>)
+ 9dc:	4c06      	ldr	r4, [pc, #24]	; (9f8 <set_color+0x7c>)
  9de:	47a0      	blx	r4
 		set_color_channel(BLUE_CHANNEL, true);
  9e0:	2101      	movs	r1, #1
  9e2:	2002      	movs	r0, #2
  9e4:	47a0      	blx	r4
 		break;
- 9e6:	e7d7      	b.n	998 <create_color+0x1c>
+ 9e6:	e7d7      	b.n	998 <set_color+0x1c>
 		turn_off_all();
- 9e8:	4b01      	ldr	r3, [pc, #4]	; (9f0 <create_color+0x74>)
+ 9e8:	4b01      	ldr	r3, [pc, #4]	; (9f0 <set_color+0x74>)
  9ea:	4798      	blx	r3
 }
- 9ec:	e7d4      	b.n	998 <create_color+0x1c>
+ 9ec:	e7d4      	b.n	998 <set_color+0x1c>
  9ee:	46c0      	nop			; (mov r8, r8)
  9f0:	00000959 	.word	0x00000959
- 9f4:	00000b34 	.word	0x00000b34
+ 9f4:	00000b2c 	.word	0x00000b2c
  9f8:	000008e9 	.word	0x000008e9
 
 000009fc <configure_tcc>:
@@ -1853,109 +1853,103 @@ void configure_tcc(void)
  a84:	2000002c 	.word	0x2000002c
  a88:	0000022d 	.word	0x0000022d
 
-00000a8c <main>:
+00000a8c <set_red>:
+5	p	(r + b)
+6	c	(b + g)
+*/
+	
 
+void set_red(void){
+ a8c:	b510      	push	{r4, lr}
+	set_color(0);
+ a8e:	2000      	movs	r0, #0
+ a90:	4b01      	ldr	r3, [pc, #4]	; (a98 <set_red+0xc>)
+ a92:	4798      	blx	r3
+}
+ a94:	bd10      	pop	{r4, pc}
+ a96:	46c0      	nop			; (mov r8, r8)
+ a98:	0000097d 	.word	0x0000097d
+
+00000a9c <main>:
+	
+}
 
 
 
 int main(void) {
- a8c:	b510      	push	{r4, lr}
-	4	y	(r + g)
-	5	p	(r + b)
-	6	c	(b + g)
-	*/
-	
+ a9c:	b510      	push	{r4, lr}
 	configure_tcc();
- a8e:	4b09      	ldr	r3, [pc, #36]	; (ab4 <main+0x28>)
- a90:	4798      	blx	r3
+ a9e:	4b03      	ldr	r3, [pc, #12]	; (aac <main+0x10>)
+ aa0:	4798      	blx	r3
 	
-	
-	create_color(0);
- a92:	2000      	movs	r0, #0
- a94:	4c08      	ldr	r4, [pc, #32]	; (ab8 <main+0x2c>)
- a96:	47a0      	blx	r4
-	create_color(1);
- a98:	2001      	movs	r0, #1
- a9a:	47a0      	blx	r4
-	create_color(2);
- a9c:	2002      	movs	r0, #2
- a9e:	47a0      	blx	r4
-	create_color(3);
- aa0:	2003      	movs	r0, #3
- aa2:	47a0      	blx	r4
-	create_color(4);
- aa4:	2004      	movs	r0, #4
- aa6:	47a0      	blx	r4
-	create_color(5);	
- aa8:	2005      	movs	r0, #5
- aaa:	47a0      	blx	r4
-	create_color(6);
- aac:	2006      	movs	r0, #6
- aae:	47a0      	blx	r4
+	set_red();
+ aa2:	4b03      	ldr	r3, [pc, #12]	; (ab0 <main+0x14>)
+ aa4:	4798      	blx	r3
 
- ab0:	2000      	movs	r0, #0
- ab2:	bd10      	pop	{r4, pc}
- ab4:	000009fd 	.word	0x000009fd
- ab8:	0000097d 	.word	0x0000097d
+ aa6:	2000      	movs	r0, #0
+ aa8:	bd10      	pop	{r4, pc}
+ aaa:	46c0      	nop			; (mov r8, r8)
+ aac:	000009fd 	.word	0x000009fd
+ ab0:	00000a8d 	.word	0x00000a8d
 
-00000abc <__libc_init_array>:
- abc:	b570      	push	{r4, r5, r6, lr}
- abe:	2600      	movs	r6, #0
- ac0:	4d0c      	ldr	r5, [pc, #48]	; (af4 <__libc_init_array+0x38>)
- ac2:	4c0d      	ldr	r4, [pc, #52]	; (af8 <__libc_init_array+0x3c>)
- ac4:	1b64      	subs	r4, r4, r5
- ac6:	10a4      	asrs	r4, r4, #2
- ac8:	42a6      	cmp	r6, r4
- aca:	d109      	bne.n	ae0 <__libc_init_array+0x24>
- acc:	2600      	movs	r6, #0
- ace:	f000 f83f 	bl	b50 <_init>
- ad2:	4d0a      	ldr	r5, [pc, #40]	; (afc <__libc_init_array+0x40>)
- ad4:	4c0a      	ldr	r4, [pc, #40]	; (b00 <__libc_init_array+0x44>)
- ad6:	1b64      	subs	r4, r4, r5
- ad8:	10a4      	asrs	r4, r4, #2
- ada:	42a6      	cmp	r6, r4
- adc:	d105      	bne.n	aea <__libc_init_array+0x2e>
- ade:	bd70      	pop	{r4, r5, r6, pc}
- ae0:	00b3      	lsls	r3, r6, #2
- ae2:	58eb      	ldr	r3, [r5, r3]
- ae4:	4798      	blx	r3
- ae6:	3601      	adds	r6, #1
- ae8:	e7ee      	b.n	ac8 <__libc_init_array+0xc>
- aea:	00b3      	lsls	r3, r6, #2
- aec:	58eb      	ldr	r3, [r5, r3]
- aee:	4798      	blx	r3
- af0:	3601      	adds	r6, #1
- af2:	e7f2      	b.n	ada <__libc_init_array+0x1e>
- af4:	00000b5c 	.word	0x00000b5c
- af8:	00000b5c 	.word	0x00000b5c
- afc:	00000b5c 	.word	0x00000b5c
- b00:	00000b60 	.word	0x00000b60
+00000ab4 <__libc_init_array>:
+ ab4:	b570      	push	{r4, r5, r6, lr}
+ ab6:	2600      	movs	r6, #0
+ ab8:	4d0c      	ldr	r5, [pc, #48]	; (aec <__libc_init_array+0x38>)
+ aba:	4c0d      	ldr	r4, [pc, #52]	; (af0 <__libc_init_array+0x3c>)
+ abc:	1b64      	subs	r4, r4, r5
+ abe:	10a4      	asrs	r4, r4, #2
+ ac0:	42a6      	cmp	r6, r4
+ ac2:	d109      	bne.n	ad8 <__libc_init_array+0x24>
+ ac4:	2600      	movs	r6, #0
+ ac6:	f000 f83f 	bl	b48 <_init>
+ aca:	4d0a      	ldr	r5, [pc, #40]	; (af4 <__libc_init_array+0x40>)
+ acc:	4c0a      	ldr	r4, [pc, #40]	; (af8 <__libc_init_array+0x44>)
+ ace:	1b64      	subs	r4, r4, r5
+ ad0:	10a4      	asrs	r4, r4, #2
+ ad2:	42a6      	cmp	r6, r4
+ ad4:	d105      	bne.n	ae2 <__libc_init_array+0x2e>
+ ad6:	bd70      	pop	{r4, r5, r6, pc}
+ ad8:	00b3      	lsls	r3, r6, #2
+ ada:	58eb      	ldr	r3, [r5, r3]
+ adc:	4798      	blx	r3
+ ade:	3601      	adds	r6, #1
+ ae0:	e7ee      	b.n	ac0 <__libc_init_array+0xc>
+ ae2:	00b3      	lsls	r3, r6, #2
+ ae4:	58eb      	ldr	r3, [r5, r3]
+ ae6:	4798      	blx	r3
+ ae8:	3601      	adds	r6, #1
+ aea:	e7f2      	b.n	ad2 <__libc_init_array+0x1e>
+ aec:	00000b54 	.word	0x00000b54
+ af0:	00000b54 	.word	0x00000b54
+ af4:	00000b54 	.word	0x00000b54
+ af8:	00000b58 	.word	0x00000b58
 
-00000b04 <_tcc_intflag>:
- b04:	00000001 00000002 00000004 00000008     ................
- b14:	00001000 00002000 00004000 00008000     ..... ...@......
- b24:	00010000 00020000 00040000 00080000     ................
- b34:	00000990 0000099a 000009a4 000009ae     ................
- b44:	000009b8 000009c8 000009d8              ............
+00000afc <_tcc_intflag>:
+ afc:	00000001 00000002 00000004 00000008     ................
+ b0c:	00001000 00002000 00004000 00008000     ..... ...@......
+ b1c:	00010000 00020000 00040000 00080000     ................
+ b2c:	00000990 0000099a 000009a4 000009ae     ................
+ b3c:	000009b8 000009c8 000009d8              ............
 
-00000b50 <_init>:
- b50:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- b52:	46c0      	nop			; (mov r8, r8)
- b54:	bcf8      	pop	{r3, r4, r5, r6, r7}
- b56:	bc08      	pop	{r3}
- b58:	469e      	mov	lr, r3
- b5a:	4770      	bx	lr
+00000b48 <_init>:
+ b48:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ b4a:	46c0      	nop			; (mov r8, r8)
+ b4c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ b4e:	bc08      	pop	{r3}
+ b50:	469e      	mov	lr, r3
+ b52:	4770      	bx	lr
 
-00000b5c <__init_array_start>:
- b5c:	000000b5 	.word	0x000000b5
+00000b54 <__init_array_start>:
+ b54:	000000b5 	.word	0x000000b5
 
-00000b60 <_fini>:
- b60:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- b62:	46c0      	nop			; (mov r8, r8)
- b64:	bcf8      	pop	{r3, r4, r5, r6, r7}
- b66:	bc08      	pop	{r3}
- b68:	469e      	mov	lr, r3
- b6a:	4770      	bx	lr
+00000b58 <_fini>:
+ b58:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ b5a:	46c0      	nop			; (mov r8, r8)
+ b5c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ b5e:	bc08      	pop	{r3}
+ b60:	469e      	mov	lr, r3
+ b62:	4770      	bx	lr
 
-00000b6c <__fini_array_start>:
- b6c:	0000008d 	.word	0x0000008d
+00000b64 <__fini_array_start>:
+ b64:	0000008d 	.word	0x0000008d

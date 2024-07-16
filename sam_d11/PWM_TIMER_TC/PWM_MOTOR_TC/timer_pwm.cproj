@@ -226,7 +226,7 @@
     </AsfFrameworkConfig>
     <TriggerUpgrade>true</TriggerUpgrade>
     <avrtool>com.atmel.avrdbg.tool.edbg</avrtool>
-    <avrtoolserialnumber>ATML2178051800002908</avrtoolserialnumber>
+    <avrtoolserialnumber>ATML2178051800002933</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x10030100</avrdeviceexpectedsignature>
     <custom>
       <ToolOptions>
@@ -249,10 +249,21 @@
         <InterfaceName>SWD</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.edbg</ToolType>
-      <ToolNumber>ATML2178051800002908</ToolNumber>
+      <ToolNumber>ATML2178051800002933</ToolNumber>
       <ToolName>EDBG</ToolName>
     </com_atmel_avrdbg_tool_edbg>
     <avrtoolinterfaceclock>2000000</avrtoolinterfaceclock>
+    <com_atmel_avrdbg_tool_atmelice>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>2000000</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>SWD</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
+      <ToolNumber>J41800048860</ToolNumber>
+      <ToolName>Atmel-ICE</ToolName>
+    </com_atmel_avrdbg_tool_atmelice>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -663,6 +674,12 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\pwm_led.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\pwm_led.h">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="src\asf.h">
       <SubType>compile</SubType>
     </None>

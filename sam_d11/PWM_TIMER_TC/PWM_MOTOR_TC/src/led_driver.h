@@ -17,11 +17,6 @@
 #define DATA_LENGTH_PRIMARY				2
 #define DATA_LENGTH_SECONDARY			8
 
-
-
-
-
-
 void set_color_green(void);
 void set_color_red(void);
 void set_color_blue(void);
