@@ -13,7 +13,7 @@
 
 
 #define MASTER_MODULE SERCOM2
-#define KTD2026_DEVICE_ADDRESS			0x30		// pg. 17 of Data sheet
+#define KTD2026_DEVICE_ADDRESS			0x31		// pg. 17 of Data sheet
 #define DATA_LENGTH_PRIMARY				2
 #define DATA_LENGTH_SECONDARY			8
 
