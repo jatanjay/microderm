@@ -225,8 +225,8 @@
       </framework-data>
     </AsfFrameworkConfig>
     <TriggerUpgrade>true</TriggerUpgrade>
-    <avrtool>com.atmel.avrdbg.tool.edbg</avrtool>
-    <avrtoolserialnumber>ATML2178051800002933</avrtoolserialnumber>
+    <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
+    <avrtoolserialnumber>J41800048860</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x10030100</avrdeviceexpectedsignature>
     <custom>
       <ToolOptions>
