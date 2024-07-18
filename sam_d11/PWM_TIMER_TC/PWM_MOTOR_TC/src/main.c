@@ -48,9 +48,15 @@ struct tc_module pwm_generator_instance; // instance for PWM Motor Control (TC0)
 
 
 
-static uint8_t toggle_count = 0;
-static bool BUTTON_PRESS_STATUS = false;
-static bool BUTTON_RELEASE_STATUS = false;
+static uint8_t motor_toggle_count = 0;
+static uint8_t pwm_led_toggle_count = 0;
+
+static bool BUTTON_ONE_PRESS_STATUS = false;
+static bool BUTTON_ONE_RELEASE_STATUS = false;
+
+static bool BUTTON_TWO_PRESS_STATUS = false;
+static bool BUTTON_TWO_RELEASE_STATUS = false;
+
 static bool PWM_RUNNING = false;
 
 static bool VBUS_STATE;
@@ -69,10 +75,13 @@ static bool SYS_TICK_10MS;
 static bool SYS_TICK_50MS;
 static bool SYS_TICK_100MS;
 static bool SYS_TICK_200MS;
-static bool LongPressFlag = false;
+static bool LongPressB1Flag = false;
+static bool LongPressB2Flag = false;
 
-static int press_delay_count = DELAY_DEBOUNCE_CN;
-static int long_press_delay_count = DELAY_PRESS_CN;
+static int press_B1_delay_count = DELAY_DEBOUNCE_CN;
+static int press_B2_delay_count = DELAY_DEBOUNCE_CN;
+static int long_press_B1_delay_count = DELAY_PRESS_CN;
+static int long_press_B2_delay_count = DELAY_PRESS_CN;
 
 
 
@@ -81,10 +90,14 @@ static int long_press_delay_count = DELAY_PRESS_CN;
 
 
 static void configure_pwm_generator (void);
+
 void regular_routine (void);
-void cycle_pwm_duty (void);
+void cycle_pwm_motor (void);
 void turn_led_on (void);
-bool is_button_pressed (void);
+void cycle_pwm_led(void);
+
+bool is_button_one_pressed(void);
+bool is_button_two_pressed(void);
 
 
 
@@ -321,103 +334,87 @@ static void configure_pwm_generator (void)
 }
 
 
-
-
-/*
-comment is_button_pressed for pwm led routine - 7/9
-
-
-*/
-
-
-// button 1, pa 14
-
-//bool is_button_pressed (void)
-//{
-//
-	//if (!port_pin_get_input_level (SW0_PIN))
-	//{
-		//BUTTON_PRESS_STATUS = true;
-		//press_delay_count--;
-		//long_press_delay_count--;
-		//
-	//}else
-	//{
-		//BUTTON_PRESS_STATUS = false;
-		//press_delay_count = DELAY_DEBOUNCE_CN;
-		//long_press_delay_count = DELAY_PRESS_CN;
-		//
-	//}
-	//
-	//// long press delay logic
-	//if (long_press_delay_count <= 0){
-		//LongPressFlag = true;
-		//long_press_delay_count = 0 ;
-	//}
-	//
-	//// debounce logic
-	//if (press_delay_count <= 0)
-	//{
-		//BUTTON_RELEASE_STATUS = false;
-		//press_delay_count = 0;
-		//return true;
-//
-	//}
-	//else
-	//{
-		//BUTTON_RELEASE_STATUS = true;
-		//return false;
-	//}
-//}
-
-
-
-bool is_button_pressed (void)
+bool is_button_one_pressed (void)
 {
 
-	if (!port_pin_get_input_level (PIN_PA15))
+	if (!port_pin_get_input_level (BUTTON_1))
 	{
-		BUTTON_PRESS_STATUS = true;
-		press_delay_count--;
-		long_press_delay_count--;
+		BUTTON_ONE_PRESS_STATUS = true;
+		press_B1_delay_count--;
+		long_press_B1_delay_count--;
 		
 	}else
 	{
-		BUTTON_PRESS_STATUS = false;
-		press_delay_count = DELAY_DEBOUNCE_CN;
-		long_press_delay_count = DELAY_PRESS_CN;
+		BUTTON_ONE_PRESS_STATUS = false;
+		press_B1_delay_count = DELAY_DEBOUNCE_CN;
+		long_press_B1_delay_count = DELAY_PRESS_CN;
 		
 	}
 	
 	// long press delay logic
-	if (long_press_delay_count <= 0){
-		LongPressFlag = true;
-		long_press_delay_count = 0 ;
+	if (long_press_B1_delay_count <= 0){
+		LongPressB1Flag = true;
+		long_press_B1_delay_count = 0 ;
 	}
 	
 	// debounce logic
-	if (press_delay_count <= 0)
+	if (press_B1_delay_count <= 0)
 	{
-		BUTTON_RELEASE_STATUS = false;
-		press_delay_count = 0;
+		BUTTON_ONE_RELEASE_STATUS = false;
+		press_B1_delay_count = 0;
 		return true;
 
 	}
 	else
 	{
-		BUTTON_RELEASE_STATUS = true;
+		BUTTON_ONE_RELEASE_STATUS = true;
 		return false;
 	}
 }
 
 
+bool is_button_two_pressed (void)
+{
 
+	if (!port_pin_get_input_level (BUTTON_2))
+	{
+		BUTTON_TWO_PRESS_STATUS = true;
+		press_B2_delay_count--;
+		long_press_B2_delay_count--;
+		
+	}else
+	{
+		BUTTON_TWO_PRESS_STATUS = false;
+		press_B2_delay_count = DELAY_DEBOUNCE_CN;
+		long_press_B2_delay_count = DELAY_PRESS_CN;
+		
+	}
+	
+	// long press delay logic
+	if (long_press_B2_delay_count <= 0){
+		LongPressB2Flag = true;
+		long_press_B2_delay_count = 0 ;
+	}
+	
+	// debounce logic
+	if (press_B2_delay_count <= 0)
+	{
+		BUTTON_TWO_RELEASE_STATUS = false;
+		press_B2_delay_count = 0;
+		return true;
 
-void pwm_motor_cleanup(void);
+	}
+	else
+	{
+		BUTTON_TWO_RELEASE_STATUS = true;
+		return false;
+	}
+}
+
 
 void pwm_motor_cleanup(void){
 	PULSATING_MOTOR_ROUTINE = false;
-	toggle_count = 0;
+	motor_toggle_count = 0;
 	tc_set_compare_value (&pwm_generator_instance,
 	TC_COMPARE_CAPTURE_CHANNEL_0,
 	INITIAL_DUTY_CYCLE);
@@ -427,98 +424,135 @@ void pwm_motor_cleanup(void){
 }
 
 
-void regular_routine (void)
+void cycle_pwm_led(void) {
+	switch (pwm_led_toggle_count) {
+		case 1:
+		set_pwm_red();
+		set_color_red();
+		break;
+		case 2:
+		set_pwm_green();
+		set_color_green();
+		break;
+		case 3:
+		set_pwm_blue();
+		set_color_blue();
+		break;
+		case 4:
+		set_pwm_yellow();
+		set_color_yellow();
+		break;
+		case 5:
+		set_pwm_purple();
+		set_color_purple();
+		break;
+		case 6:
+		set_pwm_cyan();
+		set_color_cyan();
+		break;
+		case 7:
+		set_pwm_white();
+		set_color_white();
+		break;
+		default:
+		pwm_led_toggle_count = 0; // Reset to 1 for red
+		break;
+	}
+}
+
+
+void cycle_pwm_motor (void)
 {
-	static bool motor_status_changed = false;
-	
-	if (is_button_pressed()){
-		if (LongPressFlag){
+	{
+		if (PWM_RUNNING)
+		{
 			
+			if (motor_toggle_count == 2)
+			{
+				tc_set_compare_value (&pwm_generator_instance,
+				TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
+				set_color_red();
+
+			}
+			else if (motor_toggle_count == 3)
+			{
+				tc_set_compare_value (&pwm_generator_instance,
+				TC_COMPARE_CAPTURE_CHANNEL_0,
+				SECOND_DUTY_CYCLE);
+				set_color_cyan();
+
+			}
+			
+			else if (motor_toggle_count == 4)
+			{
+				set_color_purple();
+				PULSATING_MOTOR_ROUTINE = true;
+				tc_set_compare_value (&pwm_generator_instance,
+				TC_COMPARE_CAPTURE_CHANNEL_0,
+				SECOND_DUTY_CYCLE);
+				
+			}
+			
+			else if (motor_toggle_count > 4)
+			{
+				pwm_motor_cleanup();
+			}
+		}
+	}
+
+}
+
+
+void regular_routine(void) {
+	static bool motor_status_changed = false;
+	static bool led_button_status_changed = false;
+
+	//-------------------------------------------------------------
+
+	if (is_button_one_pressed()) {
+		if (LongPressB1Flag) {
 			LED_On(LED0_PIN);
 			pwm_motor_cleanup();
-			
-			/*
-			DO 2 second shutdown routine
-			*/
-			
 			} else {
-			
 			// routine for motor (regular)
-			if (!motor_status_changed)
-			{
-				toggle_count++;
+			if (!motor_status_changed) {
+				motor_toggle_count++;
 				motor_status_changed = true;
-				if (!PWM_RUNNING)
-				{
+				if (!PWM_RUNNING) {
 					PWM_RUNNING = true;
-					tc_enable (&pwm_generator_instance);
-					port_pin_set_output_level(MOTOR_NSLEEP_PIN,HIGH);
-				}
-				else
-				{
-					cycle_pwm_duty ();
+					tc_enable( & pwm_generator_instance);
+					port_pin_set_output_level(MOTOR_NSLEEP_PIN, HIGH);
+					} else {
+					cycle_pwm_motor();
 				}
 			}
 		}
-		
 	}
-
-	if (BUTTON_RELEASE_STATUS)
-	{
+		
+	if (BUTTON_ONE_RELEASE_STATUS) {
 		motor_status_changed = false;
 	}
-}
 
+	//-------------------------------------------------------
 
-
-
-
-
-void cycle_pwm_duty (void)
-{
-	if (PWM_RUNNING)
-	{
-		
-		if (toggle_count == 2)
-		{
-			tc_set_compare_value (&pwm_generator_instance,
-			TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
-			
-			set_color_purple();
-			
-			//set_pwm_red();
-			//set_pwm_green();
-			//set_pwm_blue();
-			//set_pwm_white();
-			
-			
-		}
-		else if (toggle_count == 3)
-		{
-			tc_set_compare_value (&pwm_generator_instance,
-			TC_COMPARE_CAPTURE_CHANNEL_0,
-			SECOND_DUTY_CYCLE);	
-			
-			set_color_cyan();
-			
-		}
-		
-		else if (toggle_count == 4)
-		{
-			PULSATING_MOTOR_ROUTINE = true;
-			tc_set_compare_value (&pwm_generator_instance,
-			TC_COMPARE_CAPTURE_CHANNEL_0,
-			SECOND_DUTY_CYCLE);
-			
-			set_color_yellow();
-		}
-		
-		else if (toggle_count > 4)
-		{
+	if (is_button_two_pressed()) {
+		if (LongPressB2Flag) {
+			LED_On(LED0_PIN);
 			pwm_motor_cleanup();
+			} else {
+			if (!led_button_status_changed) {
+				pwm_led_toggle_count++;
+				led_button_status_changed = true;
+				cycle_pwm_led();
+			}
 		}
 	}
+	if (BUTTON_TWO_RELEASE_STATUS) {
+		led_button_status_changed = false;
+	}
 }
+
+//------------------------------------------------------------------
 
 
 
@@ -623,7 +657,7 @@ void display_battery_state(void){
 		set_color_red();
 	}	
 	else if (BATTERY_CHARGED){
-		set_color_purple();
+		set_color_green();
 	}	
 	else if (BATTERY_CHARGING){
 		set_battery_charge_routine();
@@ -672,7 +706,6 @@ void system_logic(void);
 void system_logic(void){
 	if (!VBUS_STATE){
 		configure_pwm_generator();					// Enable Motor PWM
-		set_color_cyan();
 	}
 	else{				
 		if (!CHARGN_ON_STATE){
@@ -685,6 +718,7 @@ void system_logic(void){
 		}		
 	}
 	
+	//configure_pwm_generator();					// Enable Motor PWM
 
 	
 	

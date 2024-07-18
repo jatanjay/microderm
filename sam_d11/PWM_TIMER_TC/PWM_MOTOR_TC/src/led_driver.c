@@ -35,7 +35,7 @@ static uint8_t buffer_set_low_routine_trise_tfall[DATA_LENGTH_PRIMARY]		=	{0x02,
 
 void set_color_green(void){
 	
-	reset_battery_charge_routine();
+
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
 		.data_length = DATA_LENGTH_PRIMARY,
@@ -44,13 +44,12 @@ void set_color_green(void){
 	
 	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
 	{
-		int i;
 	}
 	
 }
 
 void set_color_red(void){
-		reset_battery_charge_routine();
+
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
 		.data_length = DATA_LENGTH_PRIMARY,
@@ -63,7 +62,6 @@ void set_color_red(void){
 }
 
 void set_color_blue(void){
-		reset_battery_charge_routine();
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
 		.data_length = DATA_LENGTH_PRIMARY,
@@ -76,7 +74,7 @@ void set_color_blue(void){
 }
 
 void set_color_yellow(void){
-		reset_battery_charge_routine();
+
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
 		.data_length = DATA_LENGTH_PRIMARY,
@@ -89,7 +87,7 @@ void set_color_yellow(void){
 }
 
 void set_color_purple(void){
-		reset_battery_charge_routine();
+
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
 		.data_length = DATA_LENGTH_PRIMARY,
@@ -102,7 +100,7 @@ void set_color_purple(void){
 }
 
 void set_color_cyan(void){
-		reset_battery_charge_routine();
+
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
 		.data_length = DATA_LENGTH_PRIMARY,
@@ -115,7 +113,7 @@ void set_color_cyan(void){
 }
 
 void set_color_white(void){
-		reset_battery_charge_routine();
+
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
 		.data_length = DATA_LENGTH_PRIMARY,
@@ -128,7 +126,6 @@ void set_color_white(void){
 }
 
 void reset_chip(void){
-	
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
 		.data_length = DATA_LENGTH_PRIMARY,
@@ -142,7 +139,7 @@ void reset_chip(void){
 
 
 void set_battery_charge_routine(void){
-		reset_battery_charge_routine();
+
 	// Enable PWM GREEN
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
@@ -181,7 +178,7 @@ void set_battery_charge_routine(void){
 }
 
 void reset_battery_charge_routine(void){
-	//reset_chip();
+
 	// Enable PWM GREEN
 	struct i2c_master_packet packet = {
 		.address = KTD2026_DEVICE_ADDRESS,
@@ -221,8 +218,7 @@ void reset_battery_charge_routine(void){
 
 
 void set_battery_low_routine(void){
-		reset_chip();
-	
+
 	// Enable PWM RED
 	
 	struct i2c_master_packet packet = {

@@ -7,16 +7,45 @@
 
 #include "pwm_led.h"
 
-void set_pwm_color_channel(uint8_t channel, bool enable) {	
-	//tcc_reset(&tcc_instance);
+void set_pwm_color_channel(uint8_t channel, bool enable) {
 	
-	config_tcc.pins.enable_wave_out_pin[channel] = enable;
+	//config_tcc.compare.match[RED_CHANNEL]	= ZERO_DUTY_CYCLE;
+	//config_tcc.compare.match[GREEN_CHANNEL]	= ZERO_DUTY_CYCLE;
+	//config_tcc.compare.match[BLUE_CHANNEL]	= ZERO_DUTY_CYCLE;
+	//config_tcc.compare.match[WHITE_CHANNEL]	= ZERO_DUTY_CYCLE;
 	
-	tcc_init(&tcc_instance, CONF_PWM_MODULE, &config_tcc);
-	tcc_enable(&tcc_instance);
+	//tcc_set_compare_value(&tcc_instance,
+							//RED_CHANNEL,
+							//ZERO_DUTY_CYCLE);
+							//
+	//tcc_set_compare_value(&tcc_instance,
+	//GREEN_CHANNEL,
+	//ZERO_DUTY_CYCLE);
+	//
+	//tcc_set_compare_value(&tcc_instance,
+	//BLUE_CHANNEL,
+	//ZERO_DUTY_CYCLE);
+	//
+	//tcc_set_compare_value(&tcc_instance,
+	//WHITE_CHANNEL,
+	//ZERO_DUTY_CYCLE);
+	
+	if (enable){
+		tcc_set_compare_value(&tcc_instance,
+		channel,
+		0x2FF);
+	}else{
+		tcc_set_compare_value(&tcc_instance,
+		channel,
+		ZERO_DUTY_CYCLE);
+	}
+	
+	tcc_force_double_buffer_update(&tcc_instance);
+	
+	//config_tcc.pins.enable_wave_out_pin[channel] = enable;
+	//tcc_init(&tcc_instance, CONF_PWM_MODULE, &config_tcc);
+	//tcc_enable(&tcc_instance);
 }
-
-
 
 
 
@@ -26,8 +55,14 @@ void turn_off_all(void) {
 
 
 void set_pwm_color(int color) {
-	turn_off_all();  
-
+	//turn_off_all();  // Turn off all channels
+	
+	set_pwm_color_channel(RED_CHANNEL, false);
+	set_pwm_color_channel(BLUE_CHANNEL, false);
+	set_pwm_color_channel(GREEN_CHANNEL, false);
+	set_pwm_color_channel(WHITE_CHANNEL, false);
+		
+	
 	switch (color) {
 		case 0:  // Red
 		set_pwm_color_channel(RED_CHANNEL, true);
@@ -49,12 +84,15 @@ void set_pwm_color(int color) {
 		set_pwm_color_channel(RED_CHANNEL, true);
 		set_pwm_color_channel(BLUE_CHANNEL, true);
 		break;
-		case 6:  // Cyan (Green + Blue)
-		set_pwm_color_channel(GREEN_CHANNEL, true);
+		case 6:  // Cyan (Blue + Green)
 		set_pwm_color_channel(BLUE_CHANNEL, true);
+		set_pwm_color_channel(GREEN_CHANNEL, true);
+		break;
+		default:
 		break;
 	}
 }
+
 
 void configure_pwm_tcc(void)
 {
@@ -67,33 +105,31 @@ void configure_pwm_tcc(void)
 	config_tcc.compare.match[WHITE_CHANNEL]								= CONF_DEFAULT_MATCH_COMPARE;
 
 
-	//config_tcc.compare.wave_polarity[RED_CHANNEL] = 1;
-	//config_tcc.compare.wave_polarity[BLUE_CHANNEL] = 1;
-	//config_tcc.compare.wave_polarity[GREEN_CHANNEL] = 1;
-	//config_tcc.compare.wave_polarity[WHITE_CHANNEL] = 1;
-
 	config_tcc.counter.period											= CONF_DEFAULT_PERIOD;
 	
 	
 	config_tcc.pins.wave_out_pin[RED_CHANNEL]							= PIN_PA04F_TCC0_WO0;		// RED
 	config_tcc.pins.wave_out_pin_mux[RED_CHANNEL]						= MUX_PA04F_TCC0_WO0;
-	config_tcc.compare.match[RED_CHANNEL]											= 0x2FF;
-
+	config_tcc.compare.match[RED_CHANNEL]								= ZERO_DUTY_CYCLE;
+	config_tcc.pins.enable_wave_out_pin[RED_CHANNEL] =					true;
+	
 	config_tcc.pins.wave_out_pin[GREEN_CHANNEL]							= PIN_PA05F_TCC0_WO1;		// GREEN
 	config_tcc.pins.wave_out_pin_mux[GREEN_CHANNEL]						= MUX_PA05F_TCC0_WO1;
-	config_tcc.compare.match[GREEN_CHANNEL]											= 0XFFF;
+	config_tcc.compare.match[GREEN_CHANNEL]								= ZERO_DUTY_CYCLE;
+	config_tcc.pins.enable_wave_out_pin[GREEN_CHANNEL] = true;
 
 	config_tcc.pins.wave_out_pin[BLUE_CHANNEL]							= PIN_PA08E_TCC0_WO2;		// BLUE
 	config_tcc.pins.wave_out_pin_mux[BLUE_CHANNEL]						= MUX_PA08E_TCC0_WO2;
-	config_tcc.compare.match[BLUE_CHANNEL]											= 0x2FF;
+	config_tcc.compare.match[BLUE_CHANNEL]								= ZERO_DUTY_CYCLE;
+	config_tcc.pins.enable_wave_out_pin[BLUE_CHANNEL] = true;
 
 	config_tcc.pins.wave_out_pin[WHITE_CHANNEL]							= PIN_PA09E_TCC0_WO3;		// WHITE
 	config_tcc.pins.wave_out_pin_mux[WHITE_CHANNEL]						= MUX_PA09E_TCC0_WO3;
-	//config_tcc.compare.match[WHITE_CHANNEL]											= 0xFFF;
+	config_tcc.compare.match[WHITE_CHANNEL]								= ZERO_DUTY_CYCLE;
+	config_tcc.pins.enable_wave_out_pin[WHITE_CHANNEL] = true;
 	
 	tcc_init(&tcc_instance, CONF_PWM_MODULE, &config_tcc);
 	tcc_enable(&tcc_instance);
-	tcc_restart_counter(&tcc_instance);
 	
 }
 
