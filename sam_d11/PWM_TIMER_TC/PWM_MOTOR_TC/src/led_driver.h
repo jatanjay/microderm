@@ -26,7 +26,6 @@ void set_color_cyan(void);
 void set_color_white(void);
 void reset_chip(void);
 void set_battery_charge_routine(void);
-void reset_battery_charge_routine(void);
 void set_battery_low_routine(void);
 void i2c_master_setup(void);
 

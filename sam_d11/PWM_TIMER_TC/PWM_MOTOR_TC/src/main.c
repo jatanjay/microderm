@@ -7,12 +7,10 @@
 
 #include <asf.h>
 #include "conf_example.h"
-#include "string.h"
 #include "led_driver.h"
 #include "pwm_led.h"
 
-struct tc_module
-system_timer_instance; // instance for system timer counter (TC1)
+struct tc_module system_timer_instance; // instance for system timer counter (TC1)
 struct tc_module pwm_generator_instance; // instance for PWM Motor Control (TC0)
 
 #define SYSTEM_TC														TC1
@@ -89,15 +87,15 @@ static int long_press_B2_delay_count = DELAY_PRESS_CN;
 
 
 
-static void configure_pwm_generator (void);
+ void configure_pwm_generator (void);
 
-void regular_routine (void);
-void cycle_pwm_motor (void);
-void turn_led_on (void);
-void cycle_pwm_led(void);
+ void regular_routine (void);
+ void cycle_pwm_motor (void);
+ void cycle_pwm_led(void);
+ void pwm_motor_cleanup(void);
 
-bool is_button_one_pressed(void);
-bool is_button_two_pressed(void);
+ bool is_button_one_pressed(void);
+ bool is_button_two_pressed(void);
 
 
 
@@ -134,9 +132,9 @@ bool is_button_two_pressed(void);
 /* GPIO - PIN SETUP														*/
 /************************************************************************/
 
-void configure_port_pins(void);
+ void configure_port_pins(void);
 
-void configure_port_pins(void)
+ void configure_port_pins(void)
 {
 	struct port_config config_port_pin;
 	port_get_config_defaults(&config_port_pin);
@@ -219,11 +217,11 @@ void configure_port_pins(void)
 /* TC - TIMER CODE START												*/
 /************************************************************************/
 
-void configure_system_tc (void);
-void system_tc_callbacks (void);
-void sys_tc_callback (struct tc_module *const module_inst);
+ void configure_system_tc (void);
+ void system_tc_callbacks (void);
+ void sys_tc_callback (struct tc_module *const module_inst);
 
-void sys_tc_callback(struct tc_module *const module_inst)
+ void sys_tc_callback(struct tc_module *const module_inst)
 {
 	static int tick_count_1ms;
 	static int tick_count_10ms;
@@ -279,7 +277,7 @@ void sys_tc_callback(struct tc_module *const module_inst)
 	
 }
 
-void configure_system_tc (void)
+ void configure_system_tc (void)
 {
 	struct tc_config config_tc;
 	tc_get_config_defaults (&config_tc);
@@ -296,7 +294,7 @@ void configure_system_tc (void)
 	tc_enable (&system_timer_instance);
 }
 
-void system_tc_callbacks (void)
+ void system_tc_callbacks (void)
 {
 	tc_register_callback (&system_timer_instance, sys_tc_callback,
 	TC_CALLBACK_OVERFLOW);
@@ -308,7 +306,7 @@ void system_tc_callbacks (void)
 /************************************************************************/
 
 
-static void configure_pwm_generator (void)
+ void configure_pwm_generator (void)
 {
 	struct tc_config config_tc;
 	tc_get_config_defaults (&config_tc);
@@ -334,7 +332,7 @@ static void configure_pwm_generator (void)
 }
 
 
-bool is_button_one_pressed (void)
+ bool is_button_one_pressed (void)
 {
 
 	if (!port_pin_get_input_level (BUTTON_1))
@@ -373,7 +371,7 @@ bool is_button_one_pressed (void)
 }
 
 
-bool is_button_two_pressed (void)
+ bool is_button_two_pressed (void)
 {
 
 	if (!port_pin_get_input_level (BUTTON_2))
@@ -455,7 +453,9 @@ void cycle_pwm_led(void) {
 		set_color_white();
 		break;
 		default:
-		pwm_led_toggle_count = 0; // Reset to 1 for red
+		case 8:
+		turn_off_all();							// Reset to 1 for red
+		pwm_led_toggle_count = 0;
 		break;
 	}
 }
@@ -471,7 +471,7 @@ void cycle_pwm_motor (void)
 			{
 				tc_set_compare_value (&pwm_generator_instance,
 				TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
-				set_color_red();
+
 
 			}
 			else if (motor_toggle_count == 3)
@@ -479,18 +479,17 @@ void cycle_pwm_motor (void)
 				tc_set_compare_value (&pwm_generator_instance,
 				TC_COMPARE_CAPTURE_CHANNEL_0,
 				SECOND_DUTY_CYCLE);
-				set_color_cyan();
 
 			}
 			
 			else if (motor_toggle_count == 4)
 			{
-				set_color_purple();
+
 				PULSATING_MOTOR_ROUTINE = true;
 				tc_set_compare_value (&pwm_generator_instance,
 				TC_COMPARE_CAPTURE_CHANNEL_0,
 				SECOND_DUTY_CYCLE);
-				
+
 			}
 			
 			else if (motor_toggle_count > 4)
@@ -511,10 +510,8 @@ void regular_routine(void) {
 
 	if (is_button_one_pressed()) {
 		if (LongPressB1Flag) {
-			LED_On(LED0_PIN);
 			pwm_motor_cleanup();
 			} else {
-			// routine for motor (regular)
 			if (!motor_status_changed) {
 				motor_toggle_count++;
 				motor_status_changed = true;
@@ -537,7 +534,6 @@ void regular_routine(void) {
 
 	if (is_button_two_pressed()) {
 		if (LongPressB2Flag) {
-			LED_On(LED0_PIN);
 			pwm_motor_cleanup();
 			} else {
 			if (!led_button_status_changed) {
@@ -562,32 +558,32 @@ void regular_routine(void) {
 /************************************************************************/
 
 
-void get_vbus_state(void);
+ void get_vbus_state(void);
 
-void get_vbus_state(void){
+ void get_vbus_state(void){
 	VBUS_STATE = port_pin_get_input_level(VBUS_PIN);
 }
 
 
 
-void get_charging_on_status_state(void);
+ void get_charging_on_status_state(void);
 
-void get_charging_on_status_state(void){
+ void get_charging_on_status_state(void){
 	CHARGN_ON_STATE = port_pin_get_input_level(CHARGN_ON_PIN);
 }
 
 
 
-void get_charging_off_status_state(void);
+ void get_charging_off_status_state(void);
 
-void get_charging_off_status_state(void){
+ void get_charging_off_status_state(void){
 	CHARGN_OFF_STATE = port_pin_get_input_level(CHARGN_OFF_PIN);
 }
 
 
-void update_battery_states(void);
+ void update_battery_states(void);
 
-void update_battery_states(void){
+ void update_battery_states(void){
 	
 	/*
 	Update Global Var based on state (using VBUS & CHRGHN)
@@ -601,33 +597,14 @@ void update_battery_states(void){
 }
 
 
-void sample_battery_states(void);
-
-
-void sample_battery_states(void){
-
-	/*
-	
-	When unplugged,
-	Sample from ADC, spit out 1/0 based on math
-	
-	
-	1. read from ADC
-	2. do math to bring in Voltage (V)
-	3. based on threshold, set global flags
-	
-	*/
-}
-
-
 
 /************************************************************************/
 /* Indication LED Control                                               */
 /************************************************************************/
 
-void display_battery_state(void);
+ void display_battery_state(void);
 
-void display_battery_state(void){
+ void display_battery_state(void){
 	
 	/*
 	LED charging indicator light:
@@ -660,25 +637,23 @@ void display_battery_state(void){
 		set_color_green();
 	}	
 	else if (BATTERY_CHARGING){
-		set_battery_charge_routine();
+		//set_battery_charge_routine();
 	}
 	
 }
 
 
-void toggle_nsleep(void);
+ void toggle_nsleep(void);
 
-void toggle_nsleep(void){
+ void toggle_nsleep(void){
 	static bool PULSATING_MOTOR = false;
 	if (PULSATING_MOTOR_ROUTINE){
 		if (PULSATING_MOTOR){
 			port_pin_set_output_level(MOTOR_NSLEEP_PIN,LOW);
-			LED_Off(LED0_PIN);
 			PULSATING_MOTOR = false;
 			}else{
 			PULSATING_MOTOR = true;
 			port_pin_set_output_level(MOTOR_NSLEEP_PIN,HIGH);
-			LED_On(LED0_PIN);
 		}
 	}
 }
@@ -688,11 +663,10 @@ void toggle_nsleep(void){
 /* STATE MACHINE		                                                */
 /************************************************************************/
 
-void system_state(void);
+ void system_state(void);
 
-void system_state(void){
+ void system_state(void){
 	update_battery_states();
-	sample_battery_states();
 	display_battery_state();
 }
 
@@ -701,16 +675,17 @@ void system_state(void){
 /* LOGIC MACHINE		                                                */
 /************************************************************************/
 
-void system_logic(void);
+ void system_logic(void);
 
-void system_logic(void){
+ void system_logic(void){
 	if (!VBUS_STATE){
 		configure_pwm_generator();					// Enable Motor PWM
 	}
 	else{				
 		if (!CHARGN_ON_STATE){
 			BATTERY_CHARGING = true;
-			BATTERY_CHARGED = false;			
+			BATTERY_CHARGED = false;
+				
 		}
 		else{
 			BATTERY_CHARGING = false;
@@ -718,7 +693,6 @@ void system_logic(void){
 		}		
 	}
 	
-	//configure_pwm_generator();					// Enable Motor PWM
 
 	
 	
@@ -748,6 +722,7 @@ void system_logic(void){
 	}
 
 
+
 }
 
 
@@ -755,9 +730,9 @@ void system_logic(void){
 /* Start Up Configurations                                              */
 /************************************************************************/
 
-void startup_default_pin_state(void);
+ void startup_default_pin_state(void);
 
-void startup_default_pin_state(void){
+ void startup_default_pin_state(void){
 	port_pin_set_output_level(MOTOR_NSLEEP_PIN,LOW);
 	port_pin_set_output_level(SWITCH_OFF_PIN,LOW);
 	port_pin_set_output_level(BUTTON_2,LOW);
@@ -786,16 +761,14 @@ void startup_sys_configs(void){
 
 int main (void)
 {
-	startup_sys_configs ();
-			
-			
+	startup_sys_configs ();	
 	while (true)
 	{
-		
 		system_state();								// Get latest system_state
 		system_logic();								// Invoke System Logic
 	}
 }
+
 
 
 

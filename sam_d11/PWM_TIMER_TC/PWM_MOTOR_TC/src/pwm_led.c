@@ -33,7 +33,7 @@ void set_pwm_color_channel(uint8_t channel, bool enable) {
 	if (enable){
 		tcc_set_compare_value(&tcc_instance,
 		channel,
-		0x2FF);
+		0x3FF);
 	}else{
 		tcc_set_compare_value(&tcc_instance,
 		channel,
@@ -50,7 +50,10 @@ void set_pwm_color_channel(uint8_t channel, bool enable) {
 
 
 void turn_off_all(void) {
-	tcc_disable(&tcc_instance);
+	set_pwm_color_channel(RED_CHANNEL, false);
+	set_pwm_color_channel(BLUE_CHANNEL, false);
+	set_pwm_color_channel(GREEN_CHANNEL, false);
+	set_pwm_color_channel(WHITE_CHANNEL, false);
 }
 
 
