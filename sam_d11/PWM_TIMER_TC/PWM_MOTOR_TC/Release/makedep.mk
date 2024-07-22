@@ -2,21 +2,19 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\pwm_led.c
+
 src\ASF\common2\services\delay\sam0\systick_counter.c
 
 src\ASF\common\utils\interrupt\interrupt_sam_nvic.c
 
 src\ASF\sam0\boards\samd11_xplained_pro\board_init.c
 
-src\ASF\sam0\drivers\events\events_hooks.c
-
-src\ASF\sam0\drivers\events\events_sam_d_r_h\events.c
-
-src\ASF\sam0\drivers\extint\extint_callback.c
-
-src\ASF\sam0\drivers\extint\extint_sam_d_r_h\extint.c
-
 src\ASF\sam0\drivers\port\port.c
+
+src\ASF\sam0\drivers\sercom\i2c\i2c_sam0\i2c_master.c
+
+src\ASF\sam0\drivers\sercom\i2c\i2c_sam0\i2c_master_interrupt.c
 
 src\ASF\sam0\drivers\sercom\sercom.c
 
@@ -53,6 +51,8 @@ src\ASF\sam0\utils\stdio\read.c
 src\ASF\sam0\utils\stdio\write.c
 
 src\ASF\sam0\utils\syscalls\gcc\syscalls.c
+
+src\led_driver.c
 
 src\main.c
 

@@ -33,7 +33,7 @@ enum ColorChannel {
 
 
 
-void turn_off_all(void);
+void pwm_led_system_cleanup(void);
 void configure_pwm_tcc(void);
 void set_pwm_color(int color);
 void set_pwm_color_channel(uint8_t channel, bool enable);
@@ -47,7 +47,6 @@ void set_pwm_white(void);
 void set_pwm_yellow(void);
 void set_pwm_purple(void);
 void set_pwm_cyan(void);
-
 
 
 

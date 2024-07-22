@@ -10,8 +10,8 @@
 #include "led_driver.h"
 #include "pwm_led.h"
 
-struct tc_module system_timer_instance; // instance for system timer counter (TC1)
-struct tc_module pwm_generator_instance; // instance for PWM Motor Control (TC0)
+struct tc_module system_timer_instance;									// instance for system timer counter (TC1)
+struct tc_module pwm_generator_instance;								// instance for PWM Motor Control (TC0)
 
 #define SYSTEM_TC														TC1
 #define PWM_GENERATOR													TC2
@@ -66,7 +66,6 @@ static bool BATTERY_CHARGED;
 static bool BATTERY_LOW;
 static bool BATTERY_LOWEST;
 static bool PULSATING_MOTOR_ROUTINE = false;
-
 
 
 static bool SYS_TICK_10MS;
@@ -454,12 +453,19 @@ void cycle_pwm_led(void) {
 		break;
 		default:
 		case 8:
-		turn_off_all();							// Reset to 1 for red
+		pwm_led_system_cleanup();							// Reset to 1 for red
 		pwm_led_toggle_count = 0;
 		break;
 	}
 }
 
+
+void system_shutdown(void);
+
+void system_shutdown(void){
+	pwm_motor_cleanup();									// shutdown pwm motor
+	pwm_led_system_cleanup();								// shutdown illumination led
+}
 
 void cycle_pwm_motor (void)
 {
@@ -510,7 +516,8 @@ void regular_routine(void) {
 
 	if (is_button_one_pressed()) {
 		if (LongPressB1Flag) {
-			pwm_motor_cleanup();
+			system_shutdown();
+			LongPressB1Flag = false;		// ALLOW IT TO CYCLE AGAIN
 			} else {
 			if (!motor_status_changed) {
 				motor_toggle_count++;
@@ -534,7 +541,8 @@ void regular_routine(void) {
 
 	if (is_button_two_pressed()) {
 		if (LongPressB2Flag) {
-			pwm_motor_cleanup();
+			system_shutdown();
+			LongPressB2Flag = false;			// ALLOW IT TO CYCLE AGAIN
 			} else {
 			if (!led_button_status_changed) {
 				pwm_led_toggle_count++;
@@ -591,6 +599,7 @@ void regular_routine(void) {
 	
 	get_vbus_state();
 	get_charging_on_status_state();
+	get_charging_off_status_state();
 	
 	
 	
@@ -613,17 +622,6 @@ void regular_routine(void) {
 	2. Steady red light when device has a low battery
 	3. Blinking green light when device is charging
 	4. Steady green light when the device is at least 100% charged.
-	
-	
-	algorithm:
-	
-	1. Sense VBUS level
-	2. Map to following states and call led_control()
-	
-	a. level_lowest				: set_battery_low_routine();
-	a. level_low				: set_color_red();
-	a. level_charging			: set_battery_charge_routine();
-	a. level_charged			: set_color_green();
 	*/
 	
 	
@@ -634,10 +632,10 @@ void regular_routine(void) {
 		set_color_red();
 	}	
 	else if (BATTERY_CHARGED){
-		set_color_green();
+		set_color_green();					// set_color_green(); (currently flipped hence,)
 	}	
 	else if (BATTERY_CHARGING){
-		//set_battery_charge_routine();
+		set_battery_charge_routine();
 	}
 	
 }
@@ -659,6 +657,12 @@ void regular_routine(void) {
 }
 
 
+
+
+
+
+
+
 /************************************************************************/
 /* STATE MACHINE		                                                */
 /************************************************************************/
@@ -671,6 +675,13 @@ void regular_routine(void) {
 }
 
 
+
+
+
+
+
+
+
 /************************************************************************/
 /* LOGIC MACHINE		                                                */
 /************************************************************************/
@@ -679,37 +690,21 @@ void regular_routine(void) {
 
  void system_logic(void){
 	if (!VBUS_STATE){
-		configure_pwm_generator();					// Enable Motor PWM
+		reset_chip();			
+		configure_pwm_generator();			// Enable Motor PWM
 	}
-	else{				
-		if (!CHARGN_ON_STATE){
-			BATTERY_CHARGING = true;
-			BATTERY_CHARGED = false;
-				
+	else{	
+		system_shutdown();			
+		
+		if (!CHARGN_ON_STATE){				// battery charging (plugged in)
+			BATTERY_CHARGING = true;		// show battery charge routine
+			BATTERY_CHARGED = false;		
 		}
-		else{
-			BATTERY_CHARGING = false;
+		else if (!CHARGN_OFF_STATE){
+			BATTERY_CHARGING = false;		
 			BATTERY_CHARGED = true;
 		}		
 	}
-	
-
-	
-	
-	// get low , and lowest logic
-	
-	//if (VBUS_STATE && CHARGN_ON_STATE){
-		//BATTERY_CHARGING = true;
-	//}
-	//
-		//
-	//if (VBUS_STATE && CHARGN_ON_STATE){
-		//BATTERY_CHARGING = true;
-	//}
-	//
-	//
-	
-	
 	
 	if (SYS_TICK_10MS){
 		SYS_TICK_10MS = false;

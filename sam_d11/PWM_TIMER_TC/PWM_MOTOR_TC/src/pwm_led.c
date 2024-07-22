@@ -9,26 +9,6 @@
 
 void set_pwm_color_channel(uint8_t channel, bool enable) {
 	
-	//config_tcc.compare.match[RED_CHANNEL]	= ZERO_DUTY_CYCLE;
-	//config_tcc.compare.match[GREEN_CHANNEL]	= ZERO_DUTY_CYCLE;
-	//config_tcc.compare.match[BLUE_CHANNEL]	= ZERO_DUTY_CYCLE;
-	//config_tcc.compare.match[WHITE_CHANNEL]	= ZERO_DUTY_CYCLE;
-	
-	//tcc_set_compare_value(&tcc_instance,
-							//RED_CHANNEL,
-							//ZERO_DUTY_CYCLE);
-							//
-	//tcc_set_compare_value(&tcc_instance,
-	//GREEN_CHANNEL,
-	//ZERO_DUTY_CYCLE);
-	//
-	//tcc_set_compare_value(&tcc_instance,
-	//BLUE_CHANNEL,
-	//ZERO_DUTY_CYCLE);
-	//
-	//tcc_set_compare_value(&tcc_instance,
-	//WHITE_CHANNEL,
-	//ZERO_DUTY_CYCLE);
 	
 	if (enable){
 		tcc_set_compare_value(&tcc_instance,
@@ -41,15 +21,11 @@ void set_pwm_color_channel(uint8_t channel, bool enable) {
 	}
 	
 	tcc_force_double_buffer_update(&tcc_instance);
-	
-	//config_tcc.pins.enable_wave_out_pin[channel] = enable;
-	//tcc_init(&tcc_instance, CONF_PWM_MODULE, &config_tcc);
-	//tcc_enable(&tcc_instance);
 }
 
 
 
-void turn_off_all(void) {
+void pwm_led_system_cleanup(void) {
 	set_pwm_color_channel(RED_CHANNEL, false);
 	set_pwm_color_channel(BLUE_CHANNEL, false);
 	set_pwm_color_channel(GREEN_CHANNEL, false);
@@ -57,8 +33,8 @@ void turn_off_all(void) {
 }
 
 
+
 void set_pwm_color(int color) {
-	//turn_off_all();  // Turn off all channels
 	
 	set_pwm_color_channel(RED_CHANNEL, false);
 	set_pwm_color_channel(BLUE_CHANNEL, false);
