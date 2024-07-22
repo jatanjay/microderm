@@ -52,6 +52,10 @@
  * running the ASF driver selector tool. Any changes will be discarded.
  */
 
+// From module: ADC - Analog-to-Digital Converter (Callback APIs)
+#include <adc.h>
+#include <adc_callback.h>
+
 // From module: Common SAM0 compiler driver
 #include <compiler.h>
 #include <status_codes.h>
@@ -113,8 +117,8 @@
 // From module: TCC - Timer Counter for Control Applications (Callback APIs)
 #include <tcc.h>
 #include <tcc_callback.h>
-#include <math.h>
+
 // From module: USART - Serial interface- SAM implementation for devices with only USART
 #include <serial.h>
-
+#include <math.h>
 #endif // ASF_H

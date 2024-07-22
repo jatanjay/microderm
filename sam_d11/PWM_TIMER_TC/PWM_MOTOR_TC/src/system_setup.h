@@ -24,8 +24,10 @@
 #define SWITCH_OFF_PIN													PIN_PA07
 #define CHARGN_ON_PIN													PIN_PA11
 #define CHARGN_OFF_PIN													PIN_PA03
+#define SAMPLE_ADC_PIN													PIN_PA02
 #define BUTTON_2														PIN_PA15
 #define BUTTON_1														SW0_PIN
+
 
 
 /************************************************************************/

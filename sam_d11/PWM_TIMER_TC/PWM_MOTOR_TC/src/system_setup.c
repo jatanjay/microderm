@@ -90,7 +90,13 @@ bool SYS_TICK_200MS = false;
 	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;							// START AT PULL DOWN.
 	port_pin_set_config(CHARGN_OFF_PIN, &config_port_pin);
 	
+	/*
+	SAMPLE ADC PIN
+	*/
 	
+	config_port_pin.direction  = PORT_PIN_DIR_INPUT;
+	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;							// START AT PULL DOWN.
+	port_pin_set_config(SAMPLE_ADC_PIN, &config_port_pin);
 	
 }
 
@@ -193,7 +199,7 @@ void sys_tc_callback(struct tc_module *const module_inst)
 	 port_pin_set_output_level(BUTTON_2,LOW);
 	 port_pin_set_output_level(CHARGN_ON_PIN,LOW);
 	 port_pin_set_output_level(CHARGN_OFF_PIN,HIGH);
-	 
+	 port_pin_set_output_level(SAMPLE_ADC_PIN,LOW);
  }
 
 
