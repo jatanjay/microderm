@@ -13,15 +13,16 @@
 
 #include "asf.h"
 #include "conf_example.h"
+
 struct tcc_config config_tcc;
 struct tcc_module tcc_instance;
 
 #define CONF_PWM_MODULE             TCC0
 #define CONF_DEFAULT_PERIOD         0xFFF
 #define CONF_DEFAULT_MATCH_COMPARE  0x000
-
 #define ZERO_DUTY_CYCLE				0x000
 
+extern uint8_t pwm_led_toggle_count;
 
 enum ColorChannel {
 	RED_CHANNEL = TCC_CHANNEL_NUM_0,
@@ -48,6 +49,6 @@ void set_pwm_yellow(void);
 void set_pwm_purple(void);
 void set_pwm_cyan(void);
 
-
+void cycle_pwm_led(void);
 
 #endif /* PWM_LED_H_ */

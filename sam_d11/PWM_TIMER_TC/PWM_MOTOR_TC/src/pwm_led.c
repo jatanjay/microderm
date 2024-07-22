@@ -7,6 +7,9 @@
 
 #include "pwm_led.h"
 
+uint8_t pwm_led_toggle_count = 0;
+
+
 void set_pwm_color_channel(uint8_t channel, bool enable) {
 	
 	
@@ -157,4 +160,36 @@ void set_pwm_purple(void){
 void set_pwm_cyan(void){
 	set_pwm_color(6);
 	
+}
+
+
+void cycle_pwm_led(void) {
+switch (pwm_led_toggle_count) {
+	case 1:
+	set_pwm_red();
+	break;
+	case 2:
+	set_pwm_green();
+	break;
+	case 3:
+	set_pwm_blue();
+	break;
+	case 4:
+	set_pwm_yellow();
+	break;
+	case 5:
+	set_pwm_purple();
+	break;
+	case 6:
+	set_pwm_cyan();
+	break;
+	case 7:
+	set_pwm_white();
+	break;
+	default:
+	case 8:
+	pwm_led_system_cleanup();							// Reset to 1 for red
+	pwm_led_toggle_count = 0;
+	break;
+}
 }

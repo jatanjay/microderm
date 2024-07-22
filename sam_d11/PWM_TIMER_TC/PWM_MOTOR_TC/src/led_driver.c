@@ -10,7 +10,7 @@
 struct i2c_master_module i2c_master_instance;
 
 static uint8_t buffer_disable_green_channel[DATA_LENGTH_PRIMARY]						=	{0x04,0x00};
-static uint8_t buffer_disable_flash_period[DATA_LENGTH_PRIMARY]						=	{0x01,0x00};
+static uint8_t buffer_disable_flash_period[DATA_LENGTH_PRIMARY]							=	{0x01,0x00};
 static uint8_t buffer_disable_trise_tfall[DATA_LENGTH_PRIMARY]							=	{0x05,0x00};
 static uint8_t buffer_disable_pwm1_timer[DATA_LENGTH_PRIMARY]							=	{0x02,0x00};
 
@@ -161,18 +161,7 @@ void reset_chip(void){
 	};
 
 
-	//while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	//{
-	//}
 
-	//
-	//while ((i2c_master_write_packet_wait(&i2c_master_instance, &disable_ramp)) != STATUS_OK)
-	//{
-	//}
-	//
-	//while ((i2c_master_write_packet_wait(&i2c_master_instance, &disable_trise_tfall)) != STATUS_OK)
-	//{
-	//}
 
 	while ((i2c_master_write_packet_wait(&i2c_master_instance, &disable_PWM1_timer)) != STATUS_OK)
 	{

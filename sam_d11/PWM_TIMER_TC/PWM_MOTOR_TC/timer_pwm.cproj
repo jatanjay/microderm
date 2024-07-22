@@ -674,10 +674,40 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\button.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\button.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\pwm_led.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\pwm_led.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\pwm_motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\pwm_motor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\system_logic.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\system_logic.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\system_setup.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\system_setup.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\system_state.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\system_state.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\asf.h">
