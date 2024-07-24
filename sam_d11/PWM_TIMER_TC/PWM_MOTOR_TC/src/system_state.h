@@ -12,13 +12,12 @@
 #include <asf.h>
 #include <system_setup.h>
 
-extern bool VBUS_STATE;
-extern bool CHARGN_ON_STATE;
-extern bool CHARGN_OFF_STATE;
-extern bool BATTERY_CHARGING;
-extern bool BATTERY_CHARGED;
-extern bool BATTERY_LOW;
-extern bool BATTERY_LOWEST;
+//extern bool VBUS_STATE;
+//extern bool CHARGN_ON_STATE;
+//extern bool CHARGN_OFF_STATE;
+
+
+
 
 
 void get_vbus_state(void);

@@ -2,6 +2,12 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\adc_sample.c
+
+src\ASF\common2\services\delay\sam0\systick_counter.c
+
+src\ASF\sam0\drivers\adc\adc_sam_d_r_h\adc.c
+
 src\button.c
 
 src\pwm_led.c
@@ -13,8 +19,6 @@ src\system_logic.c
 src\system_setup.c
 
 src\system_state.c
-
-src\ASF\common2\services\delay\sam0\systick_counter.c
 
 src\ASF\common\utils\interrupt\interrupt_sam_nvic.c
 

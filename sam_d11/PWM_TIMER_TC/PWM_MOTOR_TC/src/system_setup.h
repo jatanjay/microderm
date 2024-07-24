@@ -13,8 +13,8 @@
 #include "asf.h"
 #include "led_driver.h"
 #include "pwm_led.h"
-
-
+#include "adc_sample.h"
+#include "pwm_motor.h"
 /************************************************************************/
 /* SYSTEM GPIO/PIN DEFINITIONS                                          */
 /************************************************************************/
@@ -22,12 +22,14 @@
 #define VBUS_PIN														PIN_PA27
 #define MOTOR_NSLEEP_PIN												PIN_PA06
 #define SWITCH_OFF_PIN													PIN_PA07
-#define CHARGN_ON_PIN													PIN_PA11
-#define CHARGN_OFF_PIN													PIN_PA03
+
+#define CHARGING_PIN													PIN_PA11	
+#define CHARGN_OFF_PIN													PIN_PA03		//TELLING BATTERY TO SHUTOFF
+
 #define SAMPLE_ADC_PIN													PIN_PA02
 #define BUTTON_2														PIN_PA15
 #define BUTTON_1														SW0_PIN
-
+#define XPLAINED_LED													PIN_PA16
 
 
 /************************************************************************/
@@ -48,16 +50,8 @@ extern bool SYS_TICK_10MS;
 extern bool SYS_TICK_50MS;
 extern bool SYS_TICK_100MS;
 extern bool SYS_TICK_200MS;
-
-
-
-
-
-
-
-
-
-
+//extern bool SYS_TICK_500MS;
+//extern bool SYS_TICK_1000MS;
 
 
 /************************************************************************/

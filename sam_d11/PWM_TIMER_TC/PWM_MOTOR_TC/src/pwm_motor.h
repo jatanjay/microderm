@@ -1,4 +1,4 @@
-/*
+ /*
  * pwm_motor.h
  *
  * Created: 7/22/2024 3:45:54 PM
@@ -12,7 +12,7 @@
 #include "asf.h"
 #include "conf_example.h"
 #include "system_setup.h"
-
+#include "math.h"
 
 struct tc_module pwm_generator_instance;								// instance for PWM Motor Control (TC0)
 
@@ -37,8 +37,8 @@ struct tc_module pwm_generator_instance;								// instance for PWM Motor Contro
 /* MOTOR CONTROL Variables                                          */
 /************************************************************************/
 extern uint8_t motor_toggle_count;
-extern bool PWM_RUNNING;
-extern bool PULSATING_MOTOR_ROUTINE;
+extern bool motor_running;
+extern bool pulsating_motor_routine;
 
 
 /************************************************************************/
@@ -46,9 +46,9 @@ extern bool PULSATING_MOTOR_ROUTINE;
 /************************************************************************/
 void configure_pwm_generator(void);
 void cycle_pwm_motor (void);
-void pwm_motor_cleanup(void);
+void motor_disable(void);
 void toggle_nsleep(void);
-
+void motor_enable(void);
 
 
 #endif /* PWM_MOTOR_H_ */

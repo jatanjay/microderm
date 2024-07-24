@@ -3,275 +3,161 @@
  *
  * Created: 7/9/2024 4:31:23 PM
  *  Author: jatan
- */ 
+ */
 
 #include "led_driver.h"
 
 struct i2c_master_module i2c_master_instance;
-
-static uint8_t buffer_disable_green_channel[DATA_LENGTH_PRIMARY]						=	{0x04,0x00};
-static uint8_t buffer_disable_flash_period[DATA_LENGTH_PRIMARY]							=	{0x01,0x00};
-static uint8_t buffer_disable_trise_tfall[DATA_LENGTH_PRIMARY]							=	{0x05,0x00};
-static uint8_t buffer_disable_pwm1_timer[DATA_LENGTH_PRIMARY]							=	{0x02,0x00};
+struct i2c_master_packet packet = {KTD2026_DEVICE_ADDRESS, DATA_LENGTH_PRIMARY};
 
 
 
 
+#define BUFFER_RESET_CHIP								{0x00, 0x07}
 
+#define BUFFER_DISABLE_PWM1_TIMER						{0x02, 0x00}
+#define BUFFER_SET_COLOR_GREEN							{0x04, 0x04}
+#define BUFFER_SET_COLOR_RED							{0x04, 0x01}
+#define BUFFER_SET_COLOR_BLUE							{0x04, 0x10}
+#define BUFFER_SET_COLOR_YELLOW							{0x04, 0x05}
+#define BUFFER_SET_COLOR_PURPLE							{0x04, 0x11}
+#define BUFFER_SET_COLOR_CYAN							{0x04, 0x14}
+#define BUFFER_SET_COLOR_WHITE							{0x04, 0x15}
 
-static uint8_t buffer_set_color_green[DATA_LENGTH_PRIMARY]						=	{0x04,0x04};
-static uint8_t buffer_set_color_red[DATA_LENGTH_PRIMARY]						=	{0x04,0x01};
-static uint8_t buffer_set_color_blue[DATA_LENGTH_PRIMARY]						=	{0x04,0x10};
-static uint8_t buffer_set_color_yellow[DATA_LENGTH_PRIMARY]						=	{0x04,0x05};
-static uint8_t buffer_set_color_purple[DATA_LENGTH_PRIMARY]						=	{0x04,0x11};
-static uint8_t buffer_set_color_cyan[DATA_LENGTH_PRIMARY]						=	{0x04,0x14};
-static uint8_t buffer_set_color_white[DATA_LENGTH_PRIMARY]						=	{0x04,0x15};
-
-
-
-static uint8_t buffer_set_color_green_PWM[DATA_LENGTH_PRIMARY]					=	{0x04,0x08};
-static uint8_t buffer_set_charge_routine_flash_period[DATA_LENGTH_PRIMARY]		=	{0x01,0x25};
-static uint8_t buffer_set_charge_routine_trise_tfall[DATA_LENGTH_PRIMARY]		=	{0x05,0xEF};
-static uint8_t buffer_set_charge_routine_PWM1_timer[DATA_LENGTH_PRIMARY]		=	{0x02,0x1C};
-
-
-
-
-
-static uint8_t buffer_set_color_red_PWM[DATA_LENGTH_PRIMARY]					=	{0x04,0x02};
-static uint8_t buffer_set_low_routine_flash_period[DATA_LENGTH_PRIMARY]			=	{0x05,0x21};
-static uint8_t buffer_set_low_routine_trise_tfall[DATA_LENGTH_PRIMARY]			=	{0x02,0x2D};
-	
+#define BUFFER_SET_COLOR_GREEN_PWM						{0x04, 0x08}
+#define BUFFER_SET_CHARGE_ROUTINE_FLASH_PERIOD			{0x01, 0x25}
+#define BUFFER_SET_CHARGE_ROUTINE_TRISE_TFALL			{0x05, 0xEF}
+#define BUFFER_SET_CHARGE_ROUTINE_PWM1_TIMER			{0x02, 0x1C}
+#define BUFFER_SET_COLOR_RED_PWM						{0x04, 0x02}
+#define BUFFER_SET_LOW_ROUTINE_FLASH_PERIOD				{0x05, 0x21}
+#define BUFFER_SET_LOW_ROUTINE_TRISE_TFALL				{0x02, 0x2D}
 
 
 
-void set_color_green(void){	
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_color_green,
-	};
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	{
-	}
-	
+
+void set_color_green(void) {
+  uint8_t buffer_set_color_green[DATA_LENGTH_PRIMARY] = BUFFER_SET_COLOR_GREEN;
+  packet.data = buffer_set_color_green;
+  packet.address = KTD2026_DEVICE_ADDRESS;
+  packet.data_length = DATA_LENGTH_PRIMARY;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+         STATUS_OK) {
+  }
 }
 
-void set_color_red(void){
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_color_red,
-	};
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	{
-	}
+void set_color_red(void) {
+  uint8_t buffer_set_color_red[DATA_LENGTH_PRIMARY] = BUFFER_SET_COLOR_RED;
+  packet.data = buffer_set_color_red;
+  packet.address = KTD2026_DEVICE_ADDRESS;
+  packet.data_length = DATA_LENGTH_PRIMARY;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+         STATUS_OK) {
+  }
 }
 
-void set_color_blue(void){
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_color_blue,
-	};
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	{
-	}
+void set_color_blue(void) {
+  uint8_t buffer_set_color_blue[DATA_LENGTH_PRIMARY] = BUFFER_SET_COLOR_BLUE;
+  packet.data = buffer_set_color_blue;
+  packet.address = KTD2026_DEVICE_ADDRESS;
+  packet.data_length = DATA_LENGTH_PRIMARY;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+         STATUS_OK) {
+  }
 }
 
-void set_color_yellow(void){
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_color_yellow,
-	};
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	{
-	}
-}
+void set_color_yellow(void) {
+	uint8_t buffer_set_color_yellow[DATA_LENGTH_PRIMARY] = BUFFER_SET_COLOR_YELLOW;
+	packet.data = buffer_set_color_yellow;
+	packet.address = KTD2026_DEVICE_ADDRESS;
+	packet.data_length = DATA_LENGTH_PRIMARY;
 
-void set_color_purple(void){
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_color_purple,
-	};
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	{
-	}
-}
-
-void set_color_cyan(void){
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_color_cyan,
-	};
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	{
-	}
-}
-
-void set_color_white(void){
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_color_white,
-	};
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	{
-	}
-}
-
-void reset_chip(void){
-	// Disable PWM GREEN
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_disable_green_channel,
-	};
-	
-	// Disable Ramp (flash)
-	struct i2c_master_packet disable_ramp = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_disable_flash_period,
-	};
-	
-
-	// Disable Pulse
-	struct i2c_master_packet disable_trise_tfall = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_disable_trise_tfall,
-	};
-
-	// Disable pwm's timer
-	struct i2c_master_packet disable_PWM1_timer = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_disable_pwm1_timer,
-	};
-
-
-
-
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &disable_PWM1_timer)) != STATUS_OK)
-	{
+	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+	STATUS_OK) {
 	}
 }
 
 
+void set_color_cyan(void) {
+	uint8_t buffer_set_color_cyan[DATA_LENGTH_PRIMARY] = BUFFER_SET_COLOR_CYAN;
+	packet.data = buffer_set_color_cyan;
+	packet.address = KTD2026_DEVICE_ADDRESS;
+	packet.data_length = DATA_LENGTH_PRIMARY;
 
-
-
-
-void set_battery_charge_routine(void){
-
-	// Enable PWM GREEN
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_color_green_PWM,
-	};
-	
-	// Enable Ramp (flash)
-	struct i2c_master_packet set_ramp = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_charge_routine_flash_period,
-	};
-	
-
-	// Enable Pulse
-	struct i2c_master_packet set_trise_tfall = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_charge_routine_trise_tfall,
-	};
-
-	// Enable pwm's timer
-	struct i2c_master_packet set_PWM1_timer = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_charge_routine_PWM1_timer,
-	};
-
-
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	{
+	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+	STATUS_OK) {
 	}
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &set_ramp)) != STATUS_OK)
-	{
-	}
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &set_trise_tfall)) != STATUS_OK)
-	{
-	}
-
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &set_PWM1_timer)) != STATUS_OK)
-	{
-	}
-	
-	
-}
-
-void set_battery_low_routine(void){
-
-	// Enable PWM RED
-	struct i2c_master_packet packet = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_color_red_PWM,
-	};
-	
-	// Enable Ramp (flash)
-	struct i2c_master_packet set_ramp = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_low_routine_flash_period,
-	};
-	
-	// Enable Pulse
-	struct i2c_master_packet set_trise_tfall = {
-		.address = KTD2026_DEVICE_ADDRESS,
-		.data_length = DATA_LENGTH_PRIMARY,
-		.data = buffer_set_low_routine_trise_tfall,
-	};
-
-
-
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) != STATUS_OK)
-	{
-	}
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &set_ramp)) != STATUS_OK)
-	{
-	}
-	
-	while ((i2c_master_write_packet_wait(&i2c_master_instance, &set_trise_tfall)) != STATUS_OK)
-	{
-	}
-	
 }
 
 
+void reset_chip(void) {
+  uint8_t buffer_disable_pwm1_timer[DATA_LENGTH_PRIMARY] = BUFFER_DISABLE_PWM1_TIMER;
+  uint8_t buffer_reset_chip[DATA_LENGTH_PRIMARY] = BUFFER_RESET_CHIP;
 
 
+  packet.data = buffer_reset_chip;
+  packet.address = KTD2026_DEVICE_ADDRESS;
+  packet.data_length = DATA_LENGTH_PRIMARY;
 
-void i2c_master_setup(void){
-	struct i2c_master_config config_i2c_master;
-	i2c_master_get_config_defaults(&config_i2c_master);
-	config_i2c_master.buffer_timeout = 10000;
-	i2c_master_init(&i2c_master_instance, MASTER_MODULE, &config_i2c_master);
-	i2c_master_enable(&i2c_master_instance);
-	
+  while ((i2c_master_write_packet_wait(&i2c_master_instance,
+                                       &packet)) != STATUS_OK) {
+  }
+}
+
+void set_battery_charge_routine(void) {
+
+  uint8_t buffer_set_color_green_PWM[DATA_LENGTH_PRIMARY] = BUFFER_SET_COLOR_GREEN_PWM;
+  uint8_t buffer_set_charge_routine_flash_period[DATA_LENGTH_PRIMARY] = BUFFER_SET_CHARGE_ROUTINE_FLASH_PERIOD;
+  uint8_t buffer_set_charge_routine_trise_tfall[DATA_LENGTH_PRIMARY] = BUFFER_SET_CHARGE_ROUTINE_TRISE_TFALL;
+  uint8_t buffer_set_charge_routine_PWM1_timer[DATA_LENGTH_PRIMARY] = BUFFER_SET_CHARGE_ROUTINE_PWM1_TIMER;
+
+  packet.address = KTD2026_DEVICE_ADDRESS;
+  packet.data_length = DATA_LENGTH_PRIMARY;
+
+  packet.data = buffer_set_color_green_PWM;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+         STATUS_OK) {
+  }
+  packet.data = buffer_set_charge_routine_flash_period;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+         STATUS_OK) {
+  }
+  packet.data = buffer_set_charge_routine_trise_tfall;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance,
+                                       &packet)) != STATUS_OK) {
+  }
+  packet.data = buffer_set_charge_routine_PWM1_timer;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance,
+                                       &packet)) != STATUS_OK) {
+  }
+}
+
+void set_battery_low_routine(void) {
+
+  uint8_t buffer_set_color_red_PWM[DATA_LENGTH_PRIMARY] = BUFFER_SET_COLOR_RED_PWM;
+  uint8_t buffer_set_low_routine_flash_period[DATA_LENGTH_PRIMARY] = BUFFER_SET_LOW_ROUTINE_FLASH_PERIOD;
+  uint8_t buffer_set_low_routine_trise_tfall[DATA_LENGTH_PRIMARY] = BUFFER_SET_LOW_ROUTINE_TRISE_TFALL;
+
+  packet.address = KTD2026_DEVICE_ADDRESS;
+  packet.data_length = DATA_LENGTH_PRIMARY;
+
+  packet.data = buffer_set_color_red_PWM;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+         STATUS_OK) {
+  }
+  packet.data = buffer_set_low_routine_flash_period;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+         STATUS_OK) {
+  }
+  packet.data = buffer_set_low_routine_trise_tfall;
+  while ((i2c_master_write_packet_wait(&i2c_master_instance,
+                                       &packet)) != STATUS_OK) {
+  }
+}
+
+void i2c_master_setup(void) {
+  struct i2c_master_config config_i2c_master;
+  i2c_master_get_config_defaults(&config_i2c_master);
+  config_i2c_master.buffer_timeout = 10000;
+  i2c_master_init(&i2c_master_instance, MASTER_MODULE, &config_i2c_master);
+  i2c_master_enable(&i2c_master_instance);
 }

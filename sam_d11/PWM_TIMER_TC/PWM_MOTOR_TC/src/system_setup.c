@@ -13,6 +13,12 @@ bool SYS_TICK_10MS = false;
 bool SYS_TICK_50MS = false;
 bool SYS_TICK_100MS = false;
 bool SYS_TICK_200MS = false;
+//bool SYS_TICK_500MS = false;
+//bool SYS_TICK_1000MS = false;
+
+
+
+
 
  /************************************************************************/
 /* GPIO - PIN SETUP														*/
@@ -44,7 +50,7 @@ bool SYS_TICK_200MS = false;
 	*/
 	
 	config_port_pin.direction  = PORT_PIN_DIR_OUTPUT;
-	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;						// START AT PULL DOWN.
+	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;							// START AT PULL DOWN.
 	port_pin_set_config(MOTOR_NSLEEP_PIN, &config_port_pin);
 	
 	
@@ -56,7 +62,7 @@ bool SYS_TICK_200MS = false;
 	*/
 	
 	config_port_pin.direction  = PORT_PIN_DIR_OUTPUT;
-	config_port_pin.input_pull = PORT_PIN_PULL_UP;							// START AT PULL UP.
+	config_port_pin.input_pull = PORT_PIN_PULL_UP;								// START AT PULL UP.
 	port_pin_set_config(SWITCH_OFF_PIN, &config_port_pin);
 	
 	
@@ -71,15 +77,13 @@ bool SYS_TICK_200MS = false;
 	port_pin_set_config(BUTTON_2, &config_port_pin);
 	
 	
-	
-
 	/*
 	GET_CHARGING_STATUS
 	*/
 	
 	config_port_pin.direction  = PORT_PIN_DIR_INPUT;
 	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;							// START AT PULL DOWN.
-	port_pin_set_config(CHARGN_ON_PIN, &config_port_pin);
+	port_pin_set_config(CHARGING_PIN, &config_port_pin);
 	
 	
 	/*
@@ -98,7 +102,22 @@ bool SYS_TICK_200MS = false;
 	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;							// START AT PULL DOWN.
 	port_pin_set_config(SAMPLE_ADC_PIN, &config_port_pin);
 	
+
+
+	/* Configure LEDs as outputs, turn them off */
+	config_port_pin.direction  = PORT_PIN_DIR_OUTPUT;
+	port_pin_set_config(XPLAINED_LED, &config_port_pin);
+
+	///* Set buttons as inputs */
+	config_port_pin.direction  = PORT_PIN_DIR_INPUT;
+	config_port_pin.input_pull = PORT_PIN_PULL_UP;
+	port_pin_set_config(BUTTON_1, &config_port_pin);
+
+
 }
+
+
+
 
  /************************************************************************/
  /* SYSTEM TC TICK - SETUP												*/
@@ -142,8 +161,9 @@ void sys_tc_callback(struct tc_module *const module_inst)
 	static int tick_count_50ms;
 	static int tick_count_100ms;
 	static int tick_count_200ms;
-	
-	
+	//static int tick_count_500ms;
+	//static int tick_count_1000ms;
+
 	tick_count_1ms++;
 	
 	
@@ -185,6 +205,23 @@ void sys_tc_callback(struct tc_module *const module_inst)
 		SYS_TICK_200MS = true;									// Flag for 200ms interval
 		//port_pin_toggle_output_level (LED0_PIN);				// visually check sys clock on PA16
 	}
+
+	//if (tick_count_200ms >= 2)
+	//{
+		//tick_count_500ms++;
+		//tick_count_200ms = 0;
+		//SYS_TICK_500MS = true;                                  // Flag for 500ms interval
+		////port_pin_toggle_output_level (LED0_PIN);               // visually check sys clock on PA16
+	//}
+	 //
+	//// Check for 1000ms interval
+	//if (tick_count_500ms >= 2)
+	//{
+		//tick_count_1000ms++;
+		//tick_count_500ms = 0;
+		//SYS_TICK_1000MS = true;                                 // Flag for 1000ms interval
+		////port_pin_toggle_output_level (LED0_PIN);               // visually check sys clock on PA16
+	//}
 	
 }
 
@@ -197,7 +234,7 @@ void sys_tc_callback(struct tc_module *const module_inst)
 	 port_pin_set_output_level(MOTOR_NSLEEP_PIN,LOW);
 	 port_pin_set_output_level(SWITCH_OFF_PIN,LOW);
 	 port_pin_set_output_level(BUTTON_2,LOW);
-	 port_pin_set_output_level(CHARGN_ON_PIN,LOW);
+	 port_pin_set_output_level(CHARGING_PIN,LOW);
 	 port_pin_set_output_level(CHARGN_OFF_PIN,HIGH);
 	 port_pin_set_output_level(SAMPLE_ADC_PIN,LOW);
  }
@@ -214,5 +251,7 @@ void startup_sys_configs(void){
 	configure_system_tc();							// System Clock
 	system_tc_callbacks();							// System Clock Callback
 	i2c_master_setup();								// Startup I2C
-	configure_pwm_tcc();							// Startup PWM
+	//configure_pwm_tcc();							// Startup PWM
+	configure_adc();
+	configure_pwm_generator();
 }

@@ -91,7 +91,7 @@ enum adc_reference {
 	/** 1/1.48V<SUB>CC</SUB> reference */
 	ADC_REFERENCE_INTVCC0 = ADC_REFCTRL_REFSEL_INTVCC0,
 	/** 1/2V<SUB>CC</SUB> (only for internal V<SUB>CC</SUB> > 2.1V) */
-	ADC_REFERENCE_INTVCC1 = ADC_REFCTRL_REFSEL_INTVCC1,
+	ADC_REFERENCE_INTVCC1 = ADC_REFCTRL_REFSEL_INTVCC1, 
 	/** External reference A */
 	ADC_REFERENCE_AREFA   = ADC_REFCTRL_REFSEL_AREFA,
 	/** External reference B */

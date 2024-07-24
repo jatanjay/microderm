@@ -23,9 +23,29 @@
 
 #include "system_state.h"
 
+#include "adc_sample.h"
+
+
+
+typedef enum {
+	BATTERY_STATE_LOWEST,
+	BATTERY_STATE_LOW,
+	BATTERY_STATE_CHARGED,
+} BatteryState;
+
+extern bool BATTERY_CHARGING;
+extern bool BATTERY_CHARGED;
+extern bool BATTERY_LOW;
+extern bool BATTERY_LOWEST;
 
 void regular_routine(void);
-void system_shutdown(void);
+void system_inactive(void);
 void system_logic(void);
+void get_battery_level(void);
+
+
+#define VOLTAGE_THRESH_MAX		0x0E8F
+#define VOLTAGE_THRESH_LOW		0x0D2C
+#define VOLTAGE_THRESH_LOWEST	0x0C7A //0x0D00//0x0C7A
 
 #endif /* SYSTEM_LOGIC_H_ */

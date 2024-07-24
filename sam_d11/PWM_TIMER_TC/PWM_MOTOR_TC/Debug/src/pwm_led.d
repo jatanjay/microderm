@@ -1,5 +1,6 @@
 src/pwm_led.d src/pwm_led.o: ../src/pwm_led.c ../src/pwm_led.h \
- ../src/asf.h ../src/ASF/sam0/utils/compiler.h \
+ ../src/asf.h ../src/ASF/sam0/drivers/adc/adc.h \
+ ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
@@ -100,19 +101,20 @@ src/pwm_led.d src/pwm_led.o: ../src/pwm_led.c ../src/pwm_led.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
  ../src/ASF/common/utils/interrupt.h \
  ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h \
- ../src/ASF/common2/services/delay/delay.h \
- ../src/ASF/common2/services/delay/sam0/systick_counter.h \
+ ../src/ASF/sam0/drivers/system/system.h \
  ../src/ASF/sam0/drivers/system/clock/clock.h \
  ../src/ASF/sam0/drivers/system/clock/gclk.h \
  ../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_feature.h \
+ ../src/ASF/sam0/drivers/system/pinmux/pinmux.h \
+ ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h \
+ ../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h \
+ ../src/ASF/common2/services/delay/delay.h \
+ ../src/ASF/common2/services/delay/sam0/systick_counter.h \
+ ../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h \
  ../src/ASF/common/boards/board.h \
  ../src/ASF/sam0/boards/samd11_xplained_pro/samd11_xplained_pro.h \
  ../src/config/conf_board.h ../src/ASF/sam0/drivers/port/port.h \
- ../src/ASF/sam0/drivers/system/pinmux/pinmux.h \
  ../src/ASF/sam0/drivers/sercom/sercom.h \
- ../src/ASF/sam0/drivers/system/system.h \
- ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h \
- ../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h \
  ../src/ASF/sam0/drivers/system/interrupt/system_interrupt.h \
  ../src/ASF/sam0/drivers/system/interrupt/system_interrupt_samd10_d11/system_interrupt_features.h \
  ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
@@ -133,13 +135,14 @@ src/pwm_led.d src/pwm_led.o: ../src/pwm_led.c ../src/pwm_led.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/ASF/sam0/drivers/tcc/tcc.h \
  ../src/ASF/sam0/drivers/tcc/tcc_callback.h \
- ../src/ASF/sam0/drivers/tcc/tcc.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- ../src/conf_example.h
+ ../src/ASF/sam0/drivers/tcc/tcc.h ../src/conf_example.h \
+ ../src/led_driver.h
 
 ../src/pwm_led.h:
 
 ../src/asf.h:
+
+../src/ASF/sam0/drivers/adc/adc.h:
 
 ../src/ASF/sam0/utils/compiler.h:
 
@@ -345,15 +348,25 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h:
 
-../src/ASF/common2/services/delay/delay.h:
-
-../src/ASF/common2/services/delay/sam0/systick_counter.h:
+../src/ASF/sam0/drivers/system/system.h:
 
 ../src/ASF/sam0/drivers/system/clock/clock.h:
 
 ../src/ASF/sam0/drivers/system/clock/gclk.h:
 
 ../src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock_feature.h:
+
+../src/ASF/sam0/drivers/system/pinmux/pinmux.h:
+
+../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h:
+
+../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h:
+
+../src/ASF/common2/services/delay/delay.h:
+
+../src/ASF/common2/services/delay/sam0/systick_counter.h:
+
+../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h:
 
 ../src/ASF/common/boards/board.h:
 
@@ -363,15 +376,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/port/port.h:
 
-../src/ASF/sam0/drivers/system/pinmux/pinmux.h:
-
 ../src/ASF/sam0/drivers/sercom/sercom.h:
-
-../src/ASF/sam0/drivers/system/system.h:
-
-../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h:
-
-../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h:
 
 ../src/ASF/sam0/drivers/system/interrupt/system_interrupt.h:
 
@@ -417,6 +422,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/tcc/tcc.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
-
 ../src/conf_example.h:
+
+../src/led_driver.h:

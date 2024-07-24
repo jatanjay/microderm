@@ -8,9 +8,9 @@
  #include "pwm_motor.h"
 
 
-bool PULSATING_MOTOR_ROUTINE = false;
+bool pulsating_motor_routine = false;
 uint8_t motor_toggle_count = 0;
-bool PWM_RUNNING = false;
+bool motor_running = false;
 
 void configure_pwm_generator (void)
 {
@@ -37,16 +37,24 @@ void configure_pwm_generator (void)
 
 
 
+void motor_enable(void){
+	tc_enable(&pwm_generator_instance);
+	port_pin_set_output_level(MOTOR_NSLEEP_PIN, HIGH);
+	motor_running = true;
 
-void pwm_motor_cleanup(void){
-	PULSATING_MOTOR_ROUTINE = false;
+}
+
+
+void motor_disable(void){
+	pulsating_motor_routine = false;
 	motor_toggle_count = 0;
-	tc_set_compare_value (&pwm_generator_instance,
-	TC_COMPARE_CAPTURE_CHANNEL_0,
-	INITIAL_DUTY_CYCLE);
-	PWM_RUNNING = false;
+
+	tc_set_compare_value (&pwm_generator_instance,TC_COMPARE_CAPTURE_CHANNEL_0,INITIAL_DUTY_CYCLE);
+	
+
 	tc_disable (&pwm_generator_instance);
 	port_pin_set_output_level(MOTOR_NSLEEP_PIN,LOW);
+	motor_running = false;
 }
 
 
@@ -54,15 +62,13 @@ void pwm_motor_cleanup(void){
 void cycle_pwm_motor (void)
 {
 	{
-		if (PWM_RUNNING)
+		if (motor_running)
 		{
 			
 			if (motor_toggle_count == 2)
 			{
 				tc_set_compare_value (&pwm_generator_instance,
 				TC_COMPARE_CAPTURE_CHANNEL_0, FIRST_DUTY_CYCLE);
-
-
 			}
 			else if (motor_toggle_count == 3)
 			{
@@ -75,7 +81,7 @@ void cycle_pwm_motor (void)
 			else if (motor_toggle_count == 4)
 			{
 
-				PULSATING_MOTOR_ROUTINE = true;
+				pulsating_motor_routine = true;
 				tc_set_compare_value (&pwm_generator_instance,
 				TC_COMPARE_CAPTURE_CHANNEL_0,
 				SECOND_DUTY_CYCLE);
@@ -84,7 +90,9 @@ void cycle_pwm_motor (void)
 			
 			else if (motor_toggle_count > 4)
 			{
-				pwm_motor_cleanup();
+
+					motor_disable();
+				
 			}
 		}
 	}
@@ -95,7 +103,7 @@ void cycle_pwm_motor (void)
 
  void toggle_nsleep(void){
 	 static bool PULSATING_MOTOR = false;
-	 if (PULSATING_MOTOR_ROUTINE){
+	 if (pulsating_motor_routine){
 		 if (PULSATING_MOTOR){
 			 port_pin_set_output_level(MOTOR_NSLEEP_PIN,LOW);
 			 PULSATING_MOTOR = false;

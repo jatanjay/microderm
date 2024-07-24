@@ -21,6 +21,8 @@
 
 #include "system_logic.h"
 
+#include "adc_sample.h"
+
 
 int main(void) {
   startup_sys_configs();

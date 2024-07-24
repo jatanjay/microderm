@@ -7,9 +7,10 @@
 
  #include "system_state.h"
  
-bool VBUS_STATE;
-bool CHARGN_ON_STATE;
-bool CHARGN_OFF_STATE;
+bool Vbus_State;
+bool Charged_State;
+bool Chargn_Off_State;
+
 bool BATTERY_CHARGING;
 bool BATTERY_CHARGED;
 bool BATTERY_LOW;
@@ -21,24 +22,16 @@ bool BATTERY_LOWEST;
 /************************************************************************/
 
 
-void get_vbus_state(void) {
-  VBUS_STATE = port_pin_get_input_level(VBUS_PIN);
-}
+#define VBUS_STATE port_pin_get_input_level(VBUS_PIN)
+#define CHARGED_STATE port_pin_get_input_level(CHARGING_PIN)
+//#define CHARGN_OFF_STATE port_pin_get_input_level(CHARGN_OFF_PIN)
 
-void get_charging_on_status_state(void) {
-  CHARGN_ON_STATE = port_pin_get_input_level(CHARGN_ON_PIN);
-}
-
-void get_charging_off_status_state(void) {
-  CHARGN_OFF_STATE = port_pin_get_input_level(CHARGN_OFF_PIN);
-}
 
 void update_battery_states(void) {
-  get_vbus_state();
-  get_charging_on_status_state();
-  get_charging_off_status_state();
-
+  Vbus_State = VBUS_STATE;
+  Charged_State = CHARGED_STATE;
 }
+
 
 /************************************************************************/
 /* Indication LED Control                                               */
@@ -55,15 +48,24 @@ void display_battery_state(void) {
   4. Steady green light when the device is at least 100% charged.
   */
 
-  if (BATTERY_LOWEST) {
-    set_battery_low_routine();
-  } else if (BATTERY_LOW) {
-    set_color_red();
-  } else if (BATTERY_CHARGED) {
-    set_color_cyan(); // set_color_green(); (currently flipped hence,)
-  } else if (BATTERY_CHARGING) {
-    set_battery_charge_routine();
+  if (Vbus_State) {
+	  if (BATTERY_CHARGING) {
+		  set_color_yellow();
+		  } else {
+		  set_color_green();
+		  }
+	  } else {
+	  if (BATTERY_LOWEST) {
+		  set_color_cyan();
+		  } else if (BATTERY_LOW) {
+		  set_color_red();
+		  } else if (BATTERY_CHARGED) {
+		  set_color_green();
+	  }
   }
+
+        
+ 
 
 }
 
