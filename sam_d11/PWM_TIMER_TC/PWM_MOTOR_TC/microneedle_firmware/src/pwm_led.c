@@ -16,7 +16,7 @@ void set_pwm_color_channel(uint8_t channel, bool enable) {
 	if (enable){
 		tcc_set_compare_value(&tcc_instance,
 		channel,
-		INDICATION_LED_DUTY_CYCLE);
+		0x3FF);
 	}else{
 		tcc_set_compare_value(&tcc_instance,
 		channel,
@@ -110,10 +110,10 @@ void cycle_pwm_led(void) {
 	switch (pwm_led_toggle_count) {
 		case 1:
 		SET_RED;
-		set_color_red_indication();
+		set_color_red();
 		break;
 		case 2:
-		set_color_blue_indication();
+		set_color_blue();
 		SET_GRN;
 		break;
 		case 3:

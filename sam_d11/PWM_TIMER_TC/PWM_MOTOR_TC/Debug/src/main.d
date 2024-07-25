@@ -139,8 +139,8 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/adc_sample.h ../src/asf.h ../src/pwm_motor.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
- ../src/button.h ../src/system_setup.h ../src/system_state.h \
- ../src/system_logic.h
+ ../src/system_logic.h ../src/button.h ../src/system_setup.h \
+ ../src/system_state.h
 
 ../src/asf.h:
 
@@ -442,10 +442,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
 
+../src/system_logic.h:
+
 ../src/button.h:
 
 ../src/system_setup.h:
 
 ../src/system_state.h:
-
-../src/system_logic.h:

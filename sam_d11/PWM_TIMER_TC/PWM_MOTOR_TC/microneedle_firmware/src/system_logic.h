@@ -42,17 +42,10 @@ void regular_routine(void);
 void system_inactive(void);
 void system_logic(void);
 void get_battery_level(void);
+void bink_leds(void);
 
 #define VOLTAGE_THRESH_MAX		0x0E8F
 #define VOLTAGE_THRESH_LOW		0x0D2C
-#define VOLTAGE_THRESH_LOWEST	0x0C7A
-
-/*
-0x0C7A (3194.88) -- Calculated (3.6v)
-
-0x0D2C (3372.37) -- LWO THRESHOLD (3.8)
-0x0D1E (3358.00) -- Close to low threshold for testing
-*/
-
+#define VOLTAGE_THRESH_LOWEST	0x0C7A // 0x0D00 //0x0C7A
 
 #endif /* SYSTEM_LOGIC_H_ */

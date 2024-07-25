@@ -17,35 +17,18 @@
 #define DATA_LENGTH_PRIMARY				2
 #define DATA_LENGTH_SECONDARY			8
 
-void set_color_green_indication(void);
-void set_color_red_indication(void);
-void set_color_blue_indication(void);
-void set_color_yellow_indication(void);
-void set_color_cyan_indication(void);
-void set_color_white_indication(void);
-
-//void set_color_purple(void);
-
-
-void set_motor_speed_1_indication(void);
-void set_motor_speed_2_indication(void);
-void set_motor_speed_3_indication(void);
-void set_motor_pulsating_indication(void);
-
-
-
-
-
-
-
-
-
-
-
-
+void set_color_green(void);
+void set_color_red(void);
+void set_color_blue(void);
+void set_color_yellow(void);
+void set_color_purple(void);
+void set_color_cyan(void);
+void set_color_white(void);
 void reset_chip(void);
 void set_battery_charge_routine(void);
 void set_battery_low_routine(void);
 void i2c_master_setup(void);
+
+void  toggle_red_led(void);
 
 #endif /* LED_DRIVER_H_ */
