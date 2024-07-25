@@ -138,7 +138,9 @@ src/system_setup.d src/system_setup.o: ../src/system_setup.c \
  ../src/ASF/sam0/drivers/tcc/tcc.h ../src/led_driver.h ../src/pwm_led.h \
  ../src/conf_example.h ../src/adc_sample.h ../src/asf.h \
  ../src/pwm_motor.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
+ ../src/system_logic.h ../src/button.h ../src/system_setup.h \
+ ../src/system_state.h
 
 ../src/system_setup.h:
 
@@ -437,3 +439,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/pwm_motor.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
+../src/system_logic.h:
+
+../src/button.h:
+
+../src/system_setup.h:
+
+../src/system_state.h:

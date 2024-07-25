@@ -33,9 +33,25 @@ void update_battery_states(void) {
 }
 
 
+
+
+
+
 /************************************************************************/
 /* Indication LED Control                                               */
 /************************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
 
 void display_battery_state(void) {
 
@@ -50,15 +66,15 @@ void display_battery_state(void) {
 
   if (Vbus_State) {
 	  if (BATTERY_CHARGING) {
-		  set_color_yellow();
+		  set_color_green();  //  blink
 		  } else {
 		  set_color_green();
 		  }
 	  } else {
 	  if (BATTERY_LOWEST) {
-		  set_color_cyan();
+		  //set_color_red();	//  blink
 		  } else if (BATTERY_LOW) {
-		  set_color_red();
+		  //set_color_red();
 		  } else if (BATTERY_CHARGED) {
 		  set_color_green();
 	  }

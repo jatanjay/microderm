@@ -42,10 +42,10 @@ void regular_routine(void);
 void system_inactive(void);
 void system_logic(void);
 void get_battery_level(void);
-
+void bink_leds(void);
 
 #define VOLTAGE_THRESH_MAX		0x0E8F
 #define VOLTAGE_THRESH_LOW		0x0D2C
-#define VOLTAGE_THRESH_LOWEST	0x0C7A //0x0D00//0x0C7A
+#define VOLTAGE_THRESH_LOWEST	0x0C7A // 0x0D00 //0x0C7A
 
 #endif /* SYSTEM_LOGIC_H_ */

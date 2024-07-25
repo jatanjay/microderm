@@ -13,7 +13,7 @@
 #include "conf_example.h"
 #include "system_setup.h"
 #include "math.h"
-
+#include "system_logic.h"
 struct tc_module pwm_generator_instance;								// instance for PWM Motor Control (TC0)
 
 

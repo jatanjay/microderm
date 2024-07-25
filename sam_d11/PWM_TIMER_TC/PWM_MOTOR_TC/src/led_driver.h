@@ -29,6 +29,6 @@ void set_battery_charge_routine(void);
 void set_battery_low_routine(void);
 void i2c_master_setup(void);
 
-
+void  toggle_red_led(void);
 
 #endif /* LED_DRIVER_H_ */

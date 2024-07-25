@@ -11,9 +11,8 @@ struct i2c_master_module i2c_master_instance;
 struct i2c_master_packet packet = {KTD2026_DEVICE_ADDRESS, DATA_LENGTH_PRIMARY};
 
 
-
-
-#define BUFFER_RESET_CHIP								{0x00, 0x07}
+#define BUFFER_TURN_OFF_MAIN_DIGITAL					{0x04, 0x00}
+//#define BUFFER_TURN_OFF_MAIN_DIGITAL					{0x04, 0x00}
 
 #define BUFFER_DISABLE_PWM1_TIMER						{0x02, 0x00}
 #define BUFFER_SET_COLOR_GREEN							{0x04, 0x04}
@@ -89,18 +88,57 @@ void set_color_cyan(void) {
 }
 
 
+
+void set_color_white(void) {
+	uint8_t buffer_set_color_white[DATA_LENGTH_PRIMARY] = BUFFER_SET_COLOR_WHITE;
+	packet.data = buffer_set_color_white;
+	packet.address = KTD2026_DEVICE_ADDRESS;
+	packet.data_length = DATA_LENGTH_PRIMARY;
+
+	while ((i2c_master_write_packet_wait(&i2c_master_instance, &packet)) !=
+	STATUS_OK) {
+	}
+}
+
+
 void reset_chip(void) {
-  uint8_t buffer_disable_pwm1_timer[DATA_LENGTH_PRIMARY] = BUFFER_DISABLE_PWM1_TIMER;
-  uint8_t buffer_reset_chip[DATA_LENGTH_PRIMARY] = BUFFER_RESET_CHIP;
 
 
-  packet.data = buffer_reset_chip;
+  uint8_t buffer_reset_green_red_channel[DATA_LENGTH_PRIMARY] = BUFFER_TURN_OFF_MAIN_DIGITAL;
+
+
+  packet.data = buffer_reset_green_red_channel;
   packet.address = KTD2026_DEVICE_ADDRESS;
   packet.data_length = DATA_LENGTH_PRIMARY;
 
   while ((i2c_master_write_packet_wait(&i2c_master_instance,
                                        &packet)) != STATUS_OK) {
   }
+}
+
+void  toggle_red_led(void){
+	static bool led_on = false;
+	uint8_t buffer_reset_green_red_channel[DATA_LENGTH_PRIMARY] = BUFFER_TURN_OFF_MAIN_DIGITAL;
+
+	if(led_on)
+	{
+		led_on = false;
+		buffer_reset_green_red_channel[1] = 0x00;
+	}
+	else
+	{
+		led_on = true;
+		buffer_reset_green_red_channel[1] = 0x01;
+	}
+
+	packet.data = buffer_reset_green_red_channel;
+	packet.address = KTD2026_DEVICE_ADDRESS;
+	packet.data_length = DATA_LENGTH_PRIMARY;
+
+	while ((i2c_master_write_packet_wait(&i2c_master_instance,
+	&packet)) != STATUS_OK) {
+	}
+
 }
 
 void set_battery_charge_routine(void) {
@@ -153,6 +191,12 @@ void set_battery_low_routine(void) {
                                        &packet)) != STATUS_OK) {
   }
 }
+
+
+
+
+
+
 
 void i2c_master_setup(void) {
   struct i2c_master_config config_i2c_master;

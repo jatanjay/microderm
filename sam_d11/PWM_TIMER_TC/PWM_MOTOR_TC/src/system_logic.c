@@ -163,19 +163,34 @@ void get_battery_level(void) {
  /* LOGIC MACHINE		                                                */
  /************************************************************************/
 
+
+
+ 
+
+
+
+  void blink_leds(void){
+	  if (BATTERY_LOW || BATTERY_CHARGING){
+		  toggle_red_led();
+	  }
+  }
+
  void system_logic(void) {
 
 	 
 	 if (SYS_TICK_10MS) {
 		 SYS_TICK_10MS = false;
+		 system_state();						// Get latest system_state
 		 regular_routine();
 
 	 }
+
 	 if (SYS_TICK_200MS) {
 		 SYS_TICK_200MS = false;
 		 toggle_nsleep();
 		 sample_adc();
 		 get_battery_level();
+		 blink_leds();
 	 }
 
 

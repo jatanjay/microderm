@@ -27,4 +27,5 @@ void get_charging_off_status_state(void);
 void display_battery_state(void);
 void system_state(void);
 
+
 #endif /* SYSTEM_STATE_H_ */
