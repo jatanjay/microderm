@@ -248,9 +248,11 @@ void startup_sys_configs(void){
 	system_interrupt_enable_global();				// System Interrupts
 	configure_port_pins();							// System PORTs
 	startup_default_pin_state();
+	i2c_master_setup();								// Startup I2C
+
+
 	configure_system_tc();							// System Clock
 	system_tc_callbacks();							// System Clock Callback
-	i2c_master_setup();								// Startup I2C
 	//configure_pwm_tcc();							// Startup PWM
 	configure_adc();
 	configure_pwm_generator();

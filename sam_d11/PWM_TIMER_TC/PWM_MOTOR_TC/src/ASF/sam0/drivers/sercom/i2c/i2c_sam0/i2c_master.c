@@ -150,7 +150,7 @@ static enum status_code _i2c_master_set_config(
 	if (config->slave_scl_low_extend_timeout) {
 		tmp_ctrla |= SERCOM_I2CM_CTRLA_SEXTTOEN;
 	}
-
+	
 	/* Check and set master SCL low extend timeout. */
 	if (config->master_scl_low_extend_timeout) {
 		tmp_ctrla |= SERCOM_I2CM_CTRLA_MEXTTOEN;
@@ -171,15 +171,24 @@ static enum status_code _i2c_master_set_config(
 	tmp_baud = (int32_t)(div_ceil(
 			fgclk - fscl * (10 + (fgclk * 0.000000001)* trise), 2 * fscl));
 	
+	
+	tmp_baud = 35; // forced value to reduce size, playing with optimization
+
 	/* For High speed mode, set the SCL ratio of high:low to 1:2. */
 	if (config->transfer_speed == I2C_MASTER_SPEED_HIGH_SPEED) {
 		tmp_baudlow_hs = (int32_t)((fgclk * 2.0) / (3.0 * fscl_hs) - 1);
 		if (tmp_baudlow_hs) {
 			tmp_baud_hs = (int32_t)(fgclk / fscl_hs) - 2 - tmp_baudlow_hs;
-		} else {
+			} else {
 			tmp_baud_hs = (int32_t)(div_ceil(fgclk, 2 * fscl_hs)) - 1;
 		}
 	}
+
+	tmp_baud_hs = 0;	// forced value to reduce size, playing with optimization
+	tmp_baudlow_hs = 0; // forced value to reduce size, playing with optimization 
+	
+	// jatan p 7/30
+
 
 	/* Check that baudrate is supported at current speed. */
 	if (tmp_baud > 255 || tmp_baud < 0 || tmp_baud_hs > 255 || tmp_baud_hs < 0) {

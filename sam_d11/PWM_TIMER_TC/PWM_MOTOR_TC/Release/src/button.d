@@ -110,6 +110,9 @@ src/button.d src/button.o: ../src/button.c ../src/button.h ../src/asf.h \
  ../src/ASF/common2/services/delay/delay.h \
  ../src/ASF/common2/services/delay/sam0/systick_counter.h \
  ../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h \
+ ../src/ASF/sam0/drivers/extint/extint.h \
+ ../src/ASF/sam0/drivers/extint/extint_callback.h \
+ ../src/ASF/sam0/drivers/extint/extint_callback.h \
  ../src/ASF/common/boards/board.h \
  ../src/ASF/sam0/boards/samd11_xplained_pro/samd11_xplained_pro.h \
  ../src/config/conf_board.h ../src/ASF/sam0/drivers/port/port.h \
@@ -369,6 +372,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/common2/services/delay/sam0/systick_counter.h:
 
 ../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h:
+
+../src/ASF/sam0/drivers/extint/extint.h:
+
+../src/ASF/sam0/drivers/extint/extint_callback.h:
+
+../src/ASF/sam0/drivers/extint/extint_callback.h:
 
 ../src/ASF/common/boards/board.h:
 

@@ -7,10 +7,10 @@
 
  #include <system_logic.h>
 
- bool BATTERY_CHARGING = false;
- bool BATTERY_CHARGED = false;
- bool BATTERY_LOW = false;
- bool BATTERY_LOWEST = false;
+bool BATTERY_CHARGING = false;
+bool BATTERY_CHARGED = false;
+bool BATTERY_LOW = false;
+bool BATTERY_LOWEST = false;
 
 
 bool Vbus_State;

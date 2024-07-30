@@ -7,10 +7,8 @@
 
 #include <button.h>
 
-
-
 /************************************************************************/
-/* BUTTON 1 LOGIC FLAGS	                                            */
+/* BUTTON 1 LOGIC FLAGS												    */
 /************************************************************************/
  bool BUTTON_ONE_PRESS_STATUS = false;
  bool BUTTON_ONE_RELEASE_STATUS = false;

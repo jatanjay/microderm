@@ -6,10 +6,7 @@
  */ 
 
 
- #include <adc_sample.h>
-
-
-
+#include <adc_sample.h>
 
 uint16_t adc_result;
 
@@ -17,8 +14,6 @@ void configure_adc(void)
 {
 	struct adc_config config_adc;
 	adc_get_config_defaults(&config_adc);
-	
-
 	adc_init(&adc_instance, ADC, &config_adc);
 	adc_enable(&adc_instance);
 }

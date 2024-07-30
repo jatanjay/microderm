@@ -49,7 +49,6 @@ void get_battery_level(void);
 
 /*
 0x0C7A (3194.88) -- Calculated (3.6v)
-
 0x0D2C (3372.37) -- LWO THRESHOLD (3.8)
 0x0D1E (3358.00) -- Close to low threshold for testing
 */

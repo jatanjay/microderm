@@ -32,13 +32,14 @@
       <framework-data>
         <options>
           <option id="common.boards" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="common2.services.delay" value="Add" config="systick" content-id="Atmel.ASF" />
           <option id="sam0.drivers.adc" value="Add" config="polled" content-id="Atmel.ASF" />
           <option id="sam0.drivers.port" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam0.drivers.sercom.i2c.master" value="Add" config="callback" content-id="Atmel.ASF" />
           <option id="sam0.drivers.tc" value="Add" config="callback" content-id="Atmel.ASF" />
           <option id="sam0.drivers.tcc" value="Add" config="callback" content-id="Atmel.ASF" />
           <option id="sam0.utils.stdio.stdio_serial" value="Add" config="" content-id="Atmel.ASF" />
-          <option id="common2.services.delay" value="Add" config="systick" content-id="Atmel.ASF" />
+          <option id="sam0.drivers.extint" value="Add" config="callback" content-id="Atmel.ASF" />
           <option id="common.utils" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam0.applications.tcc_features" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam0.utils" value="Add" config="" content-id="Atmel.ASF" />
@@ -60,7 +61,7 @@
           <file path="src/config/conf_board.h" framework="" version="" source="sam0/applications/tcc_features_example/samd11_xplained_pro/conf_board.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/config/conf_clocks.h" framework="" version="" source="sam0/applications/tcc_features_example/samd11_xplained_pro/conf_clocks.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/conf_example.h" framework="" version="" source="sam0/applications/tcc_features_example/samd11_xplained_pro/conf_example.h" changed="False" content-id="Atmel.ASF" />
-          <file path="src/config/conf_extint.h" framework="" version="" source="sam0/applications/tcc_features_example/samd11_xplained_pro/conf_extint.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/Config/conf_extint.h" framework="" version="3.52.0" source="sam0\drivers\extint\module_config\conf_extint.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam0/boards/samd11_xplained_pro/board_init.c" framework="" version="" source="sam0/boards/samd11_xplained_pro/board_init.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam0/boards/samd11_xplained_pro/samd11_xplained_pro.h" framework="" version="" source="sam0/boards/samd11_xplained_pro/samd11_xplained_pro.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam0/drivers/events/events.h" framework="" version="3.52.0" source="sam0\drivers\events\events.h" changed="False" content-id="Atmel.ASF" />
@@ -68,10 +69,10 @@
           <file path="src/ASF/sam0/drivers/events/events_hooks.c" framework="" version="3.52.0" source="sam0\drivers\events\events_hooks.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam0/drivers/events/events_hooks.h" framework="" version="3.52.0" source="sam0\drivers\events\events_hooks.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam0/drivers/events/events_sam_d_r_h/events.c" framework="" version="3.52.0" source="sam0\drivers\events\events_sam_d_r_h\events.c" changed="False" content-id="Atmel.ASF" />
-          <file path="src/ASF/sam0/drivers/extint/extint.h" framework="" version="" source="sam0/drivers/extint/extint.h" changed="False" content-id="Atmel.ASF" />
-          <file path="src/ASF/sam0/drivers/extint/extint_callback.c" framework="" version="" source="sam0/drivers/extint/extint_callback.c" changed="False" content-id="Atmel.ASF" />
-          <file path="src/ASF/sam0/drivers/extint/extint_callback.h" framework="" version="" source="sam0/drivers/extint/extint_callback.h" changed="False" content-id="Atmel.ASF" />
-          <file path="src/ASF/sam0/drivers/extint/extint_sam_d_r_h/extint.c" framework="" version="" source="sam0/drivers/extint/extint_sam_d_r_h/extint.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/extint/extint.h" framework="" version="3.52.0" source="sam0\drivers\extint\extint.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/extint/extint_callback.c" framework="" version="3.52.0" source="sam0\drivers\extint\extint_callback.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/extint/extint_callback.h" framework="" version="3.52.0" source="sam0\drivers\extint\extint_callback.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/extint/extint_sam_d_r_h/extint.c" framework="" version="3.52.0" source="sam0\drivers\extint\extint_sam_d_r_h\extint.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam0/drivers/port/port.c" framework="" version="" source="sam0/drivers/port/port.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam0/drivers/port/port.h" framework="" version="" source="sam0/drivers/port/port.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam0/drivers/port/quick_start/qs_port_basic.h" framework="" version="" source="sam0/drivers/port/quick_start/qs_port_basic.h" changed="False" content-id="Atmel.ASF" />
@@ -289,6 +290,7 @@
       <Value>I2C_MASTER_CALLBACK_MODE=true</Value>
       <Value>ADC_CALLBACK_MODE=false</Value>
       <Value>SYSTICK_MODE</Value>
+      <Value>EXTINT_CALLBACK_MODE=true</Value>
     </ListValues>
   </armgcc.compiler.symbols.DefSymbols>
   <armgcc.compiler.directories.IncludePaths>
@@ -330,6 +332,8 @@
       <Value>../src/ASF/sam0/drivers/adc/adc_sam_d_r_h</Value>
       <Value>../src/ASF/common2/services/delay</Value>
       <Value>../src/ASF/common2/services/delay/sam0</Value>
+      <Value>../src/ASF/sam0/drivers/extint</Value>
+      <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -395,9 +399,11 @@
       <Value>../src/ASF/sam0/drivers/adc/adc_sam_d_r_h</Value>
       <Value>../src/ASF/common2/services/delay</Value>
       <Value>../src/ASF/common2/services/delay/sam0</Value>
+      <Value>../src/ASF/sam0/drivers/extint</Value>
+      <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
-  <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBOARD=SAMD11_XPLAINED_PRO -DTCC_ASYNC=true -DUSART_CALLBACK_MODE=true -D__SAMD11D14AM__ -DTC_ASYNC=true -DI2C_MASTER_CALLBACK_MODE=true -DADC_CALLBACK_MODE=false -DSYSTICK_MODE</armgcc.preprocessingassembler.general.AssemblerFlags>
+  <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBOARD=SAMD11_XPLAINED_PRO -DTCC_ASYNC=true -DUSART_CALLBACK_MODE=true -D__SAMD11D14AM__ -DTC_ASYNC=true -DI2C_MASTER_CALLBACK_MODE=true -DADC_CALLBACK_MODE=false -DSYSTICK_MODE -DEXTINT_CALLBACK_MODE=true</armgcc.preprocessingassembler.general.AssemblerFlags>
   <armgcc.preprocessingassembler.general.IncludePaths>
     <ListValues>
       <Value>../src/ASF/sam0/boards</Value>
@@ -437,6 +443,8 @@
       <Value>../src/ASF/sam0/drivers/adc/adc_sam_d_r_h</Value>
       <Value>../src/ASF/common2/services/delay</Value>
       <Value>../src/ASF/common2/services/delay/sam0</Value>
+      <Value>../src/ASF/sam0/drivers/extint</Value>
+      <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -462,6 +470,7 @@
       <Value>I2C_MASTER_CALLBACK_MODE=true</Value>
       <Value>ADC_CALLBACK_MODE=false</Value>
       <Value>SYSTICK_MODE</Value>
+      <Value>EXTINT_CALLBACK_MODE=true</Value>
     </ListValues>
   </armgcc.compiler.symbols.DefSymbols>
   <armgcc.compiler.directories.IncludePaths>
@@ -503,9 +512,11 @@
       <Value>../src/ASF/sam0/drivers/adc/adc_sam_d_r_h</Value>
       <Value>../src/ASF/common2/services/delay</Value>
       <Value>../src/ASF/common2/services/delay/sam0</Value>
+      <Value>../src/ASF/sam0/drivers/extint</Value>
+      <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
-  <armgcc.compiler.optimization.level>Optimize debugging experience (-Og)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.EnableUnsafeMatchOptimizations>True</armgcc.compiler.optimization.EnableUnsafeMatchOptimizations>
   <armgcc.compiler.optimization.EnableFastMath>True</armgcc.compiler.optimization.EnableFastMath>
@@ -571,10 +582,12 @@
       <Value>../src/ASF/sam0/drivers/adc/adc_sam_d_r_h</Value>
       <Value>../src/ASF/common2/services/delay</Value>
       <Value>../src/ASF/common2/services/delay/sam0</Value>
+      <Value>../src/ASF/sam0/drivers/extint</Value>
+      <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
-  <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBOARD=SAMD11_XPLAINED_PRO -DTCC_ASYNC=true -DUSART_CALLBACK_MODE=true -D__SAMD11D14AM__ -DTC_ASYNC=true -DI2C_MASTER_CALLBACK_MODE=true -DADC_CALLBACK_MODE=false -DSYSTICK_MODE</armgcc.preprocessingassembler.general.AssemblerFlags>
+  <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBOARD=SAMD11_XPLAINED_PRO -DTCC_ASYNC=true -DUSART_CALLBACK_MODE=true -D__SAMD11D14AM__ -DTC_ASYNC=true -DI2C_MASTER_CALLBACK_MODE=true -DADC_CALLBACK_MODE=false -DSYSTICK_MODE -DEXTINT_CALLBACK_MODE=true</armgcc.preprocessingassembler.general.AssemblerFlags>
   <armgcc.preprocessingassembler.general.IncludePaths>
     <ListValues>
       <Value>../src/ASF/sam0/boards</Value>
@@ -614,6 +627,8 @@
       <Value>../src/ASF/sam0/drivers/adc/adc_sam_d_r_h</Value>
       <Value>../src/ASF/common2/services/delay</Value>
       <Value>../src/ASF/common2/services/delay/sam0</Value>
+      <Value>../src/ASF/sam0/drivers/extint</Value>
+      <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -640,6 +655,8 @@
     <Folder Include="src\ASF\sam0\drivers\" />
     <Folder Include="src\ASF\sam0\drivers\adc\" />
     <Folder Include="src\ASF\sam0\drivers\adc\adc_sam_d_r_h\" />
+    <Folder Include="src\ASF\sam0\drivers\extint\" />
+    <Folder Include="src\ASF\sam0\drivers\extint\extint_sam_d_r_h\" />
     <Folder Include="src\ASF\sam0\drivers\port\" />
     <Folder Include="src\ASF\sam0\drivers\port\quick_start\" />
     <Folder Include="src\ASF\sam0\drivers\sercom\" />
@@ -725,6 +742,18 @@
     <None Include="src\ASF\sam0\drivers\adc\adc_sam_d_r_h\adc_feature.h">
       <SubType>compile</SubType>
     </None>
+    <None Include="src\ASF\sam0\drivers\extint\extint.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\sam0\drivers\extint\extint_callback.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam0\drivers\extint\extint_callback.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\sam0\drivers\extint\extint_sam_d_r_h\extint.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\button.c">
       <SubType>compile</SubType>
     </Compile>
@@ -741,6 +770,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\pwm_motor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\state_machine.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\state_machine.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\system_logic.c">

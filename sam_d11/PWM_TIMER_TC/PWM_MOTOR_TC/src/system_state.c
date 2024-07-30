@@ -49,9 +49,9 @@ void display_battery_state(void) {
 
   if (Vbus_State) {
 	  if (BATTERY_CHARGING) {
-		  set_battery_charge_routine();				//  blink
+		 // set_battery_charge_routine();				//  blink
 		  } else {
-		  set_color_green_indication();
+		  //set_color_green_indication();
 		  }
 	  } else {
 	  if (!motor_running){
